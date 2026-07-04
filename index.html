@@ -366,7 +366,7 @@
 /* ============ MINI BASKET v1 — standalone, localStorage ============ */
 
 /* --- DONATION CONFIG: udskift med dit rigtige MobilePay-nummer/box --- */
-var MOBILEPAY_NUMBER = "XXXXXX";           // fx "123456" (dit MobilePay-boxnr eller telefonnr uden +45)
+var MOBILEPAY_NUMBER = "8447ZA";            // MobilePay MyShop boks-kode
 var MOBILEPAY_NAME   = "Mini Basket";       // vises i MobilePay-kommentar
 /* -------------------------------------------------------------------- */
 
@@ -658,13 +658,11 @@ document.getElementById('coffee-cancel').addEventListener('click',function(){ do
 document.getElementById('coffee-amounts').addEventListener('click',function(e){ var b=e.target.closest('[data-amt]'); if(!b)return; coffeeAmt=+b.dataset.amt; document.querySelectorAll('.coffee-amt').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); updateCoffeeNote(); });
 function updateCoffeeNote(){
   var note=document.getElementById('coffee-note');
-  if(MOBILEPAY_NUMBER==='XXXXXX'){ note.innerHTML='⚠︎ MobilePay-nummer ikke sat endnu.<br>Redigér MOBILEPAY_NUMBER i index.html.'; }
-  else { note.innerHTML='MobilePay '+esc(MOBILEPAY_NUMBER)+' · '+coffeeAmt+' kr'; }
+  note.innerHTML='MobilePay-boks '+esc(MOBILEPAY_NUMBER)+' · '+coffeeAmt+' kr';
 }
 document.getElementById('coffee-send').addEventListener('click',function(){
-  if(MOBILEPAY_NUMBER==='XXXXXX'){ toast('Sæt dit MobilePay-nummer først'); return; }
-  var url='mobilepay://send?phone='+encodeURIComponent(MOBILEPAY_NUMBER)+'&amount='+coffeeAmt+'&comment='+encodeURIComponent(MOBILEPAY_NAME+' kaffe');
-  window.location.href=url;
+  var url='https://mobilepay.dk/erhverv/betalingslink/betalingslink-svar?phone='+encodeURIComponent(MOBILEPAY_NUMBER)+'&amount='+coffeeAmt+'&comment='+encodeURIComponent(MOBILEPAY_NAME+' kaffe');
+  window.open(url,'_blank');
   setTimeout(function(){ toast('Åbner MobilePay…'); },200);
 });
 
