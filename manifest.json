@@ -1,0 +1,15 @@
+{
+  "name": "Mini Basket — Spilfordeling",
+  "short_name": "Mini Basket",
+  "description": "Fair spilletid, planlagt fra lommen. Rotationsplanlægger til børne- og ungdomshold.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#e30613",
+  "lang": "da",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
