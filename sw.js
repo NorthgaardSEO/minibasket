@@ -1,6 +1,6 @@
 /* Mini Basket service worker — network-first, offline fallback */
-const CACHE = 'minibasket-v1';
-const ASSETS = ['./', './index.html', './manifest.json', './icon.svg'];
+const CACHE = 'minibasket-v2';
+const ASSETS = ['./', './index.html', './app.js', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
