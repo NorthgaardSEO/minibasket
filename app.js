@@ -133,6 +133,7 @@ async function loadTeams(){
 async function selectTeam(teamId){
   curTeam = teamId; curSession = null;
   const t = teams.find(x=>x.id===teamId);
+  applyTeamColors(t);
   $("team-title").textContent = t ? t.name : "Rotation";
   renderTeamTabs();
   const [{data:pl},{data:se}] = await Promise.all([
@@ -156,6 +157,28 @@ async function selectSession(sid){
 
 function curSess(){ return sessions.find(s=>s.id===curSession); }
 function activePlayers(){ return players.filter(p=>!p.injured); }
+
+/* ---------------- TEAM COLORS ---------------- */
+const DEFAULT_D = "#6e1526", DEFAULT_S = "#c39b41";
+const PALETTE_D = ["#6e1526","#d0342c","#1f5fbf","#2e7d46","#e0a92b","#1a1a1a","#6d3b9e","#e2711d"];
+const PALETTE_S = ["#c39b41","#e0a92b","#9aa0a6","#7fb3e0","#e08fb0","#2e7d46","#d0342c","#1a1a1a"];
+function applyTeamColors(t){
+  const r = document.documentElement.style;
+  const d = (t && t.color_d) || DEFAULT_D, s = (t && t.color_s) || DEFAULT_S;
+  r.setProperty('--wine', d); r.setProperty('--wine-2', d); r.setProperty('--wine-dark', d);
+  r.setProperty('--gold', s); r.setProperty('--gold-2', s);
+}
+function renderAdminTeams(){
+  const el=$("admin-teams"); if(!el) return;
+  if(!teams.length){ el.innerHTML='<div class="rc-sub" style="padding:4px 2px">Opret et hold ovenfor, så kan du vælge holdfarver.</div>'; return; }
+  el.innerHTML = teams.map(t=>{
+    const d=t.color_d||DEFAULT_D, s=t.color_s||DEFAULT_S;
+    const row=(pal,slot,cur)=>pal.map(c=>'<button class="swatch-btn'+(c.toLowerCase()===cur.toLowerCase()?' sel':'')+'" style="background:'+c+'" data-tc="'+t.id+'|'+slot+'|'+c+'" title="'+c+'"></button>').join('');
+    return '<div class="adm-team-card"><div class="tn"><span class="tn-dot" style="background:'+esc(d)+'"></span><span class="tn-dot" style="background:'+esc(s)+'"></span>'+esc(t.name)+'</div>'+
+      '<div class="lbl">Primær · forsvar (D)</div><div class="swrow">'+row(PALETTE_D,"d",d)+'</div>'+
+      '<div class="lbl">Sekundær · spil (S)</div><div class="swrow">'+row(PALETTE_S,"s",s)+'</div></div>';
+  }).join('');
+}
 
 /* ---------------- POLLING (light sync) ---------------- */
 function startPolling(){ if(poll) clearInterval(poll); poll = setInterval(refreshQuiet, 9000); }
@@ -400,6 +423,7 @@ async function renderLog(){
 
 /* ---------------- ADMIN ---------------- */
 async function renderAdmin(){
+  renderAdminTeams();
   const el=$("admin-coaches"); el.innerHTML='<div class="loading">Henter…</div>';
   const [{data:coaches},{data:ct}] = await Promise.all([
     sb.from("mb_coaches").select("*").order("created_at"),
@@ -426,6 +450,13 @@ $("add-team-btn").addEventListener("click", async ()=>{
 
 /* admin delegated clicks */
 $("view-admin").addEventListener("click", async (e)=>{
+  const tc=e.target.closest("[data-tc]");
+  if(tc){ const [tid,slot,hex]=tc.dataset.tc.split("|"); const col = slot==="d"?"color_d":"color_s";
+    const team=teams.find(x=>x.id===tid); if(team){ team[col]=hex; }
+    renderAdminTeams(); renderTeamTabs();
+    if(tid===curTeam){ applyTeamColors(team); if(view==="kamp") renderGrid(); }
+    try{ await sb.from("mb_teams").update({[col]:hex}).eq("id",tid); }catch(err){ toast("Kunne ikke gemme farve"); }
+    return; }
   const r=e.target.closest("[data-role]");
   if(r){ const [cid,role]=r.dataset.role.split("|"); await sb.from("mb_coaches").update({role}).eq("id",cid); renderAdmin(); toast("Rolle opdateret"); return; }
   const a=e.target.closest("[data-assign]");
@@ -473,6 +504,10 @@ $("coffee-open").addEventListener("click", ()=>$("modal-coffee").classList.add("
 $("coffee-cancel").addEventListener("click", ()=>$("modal-coffee").classList.remove("open"));
 $("coffee-amts").addEventListener("click", e=>{ const b=e.target.closest("[data-amt]"); if(!b) return; coffeeAmt=+b.dataset.amt; document.querySelectorAll(".coffee-amt").forEach(x=>x.classList.toggle("sel",x===b)); });
 $("coffee-send").addEventListener("click", ()=>{ const url="https://mobilepay.dk/erhverv/betalingslink/betalingslink-svar?phone="+encodeURIComponent(MOBILEPAY_BOX)+"&amount="+coffeeAmt+"&comment="+encodeURIComponent("Mini Basket kaffe"); window.open(url,"_blank"); toast("Åbner MobilePay…"); });
+
+/* ---------------- LINKS ---------------- */
+$("links-open").addEventListener("click", ()=>$("modal-links").classList.add("open"));
+$("links-close").addEventListener("click", ()=>$("modal-links").classList.remove("open"));
 
 document.querySelectorAll(".backdrop").forEach(b=> b.addEventListener("click", e=>{ if(e.target===b) b.classList.remove("open"); }));
 

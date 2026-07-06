@@ -246,6 +246,20 @@
   .toast{position:fixed;bottom:calc(128px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(14px);background:var(--dark);color:var(--gold-soft);padding:10px 18px;border-radius:var(--r-pill);font-size:13px;font-weight:600;z-index:2000;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;}
   .toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
   .loading{text-align:center;padding:60px 20px;color:var(--ink-soft);font-family:var(--mono);font-size:12px;}
+  /* useful links */
+  .links-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+  .links-list a{display:flex;align-items:center;gap:10px;padding:12px 13px;background:var(--card);border:1.4px solid var(--line);border-radius:var(--r-md);color:var(--ink);text-decoration:none;font-weight:600;font-size:14px;}
+  .links-list a:active{transform:translateY(1px);}
+  .links-list a .ic{width:22px;text-align:center;}
+  .links-list a .arw{margin-left:auto;color:var(--ink-faint);font-family:var(--mono);}
+  /* team color pickers */
+  .adm-team-card{background:var(--card);border:1.4px solid var(--line);border-radius:var(--r-md);padding:12px;margin-bottom:9px;}
+  .adm-team-card .tn{font-weight:800;font-size:15px;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+  .tn-dot{width:16px;height:16px;border-radius:50%;border:1.4px solid var(--line);}
+  .adm-team-card .lbl{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft);}
+  .swrow{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 10px;}
+  .swatch-btn{width:30px;height:30px;border-radius:8px;border:2px solid var(--line);cursor:pointer;padding:0;}
+  .swatch-btn.sel{outline:2px solid var(--ink);outline-offset:2px;}
 </style>
 </head>
 <body>
@@ -299,6 +313,7 @@
   <div class="whoami">
     <span class="name" id="who-name">—</span>
     <span class="badge" id="who-role">coach</span>
+    <button class="coffee-btn" id="links-open" style="background:var(--paper-2)">🔗 Links</button>
     <button class="coffee-btn" id="coffee-open">☕ Kaffe</button>
     <span class="logout" id="logout">log ud</span>
   </div>
@@ -369,6 +384,8 @@
       <span class="eyebrow">Opret hold</span>
       <div class="addrow"><input class="name" id="add-team" placeholder="Holdnavn, fx SISU 2016" maxlength="40"><button id="add-team-btn">+</button></div>
     </div>
+    <span class="eyebrow">Hold &amp; farver</span>
+    <div id="admin-teams" style="margin-bottom:16px"></div>
     <span class="eyebrow">Trænere</span>
     <div id="admin-coaches"><div class="loading">Henter…</div></div>
   </div>
@@ -414,6 +431,22 @@
   <div class="m-sub">Mini Basket er gratis. En kaffe holder projektet kørende — tak!</div>
   <div class="coffee-amts" id="coffee-amts"><button class="coffee-amt" data-amt="25">25 kr</button><button class="coffee-amt sel" data-amt="50">50 kr</button><button class="coffee-amt" data-amt="100">100 kr</button></div>
   <div class="m-actions"><button class="m-cancel" id="coffee-cancel">Luk</button><button class="m-save" id="coffee-send">Åbn MobilePay</button></div>
+</div></div>
+
+<!-- LINKS MODAL -->
+<div class="backdrop" id="modal-links"><div class="modal"><div class="grip"></div>
+  <div class="m-title">Nyttige links 🔗</div>
+  <div class="m-sub">Regler, koncepter og materialer fra Danmarks Basketball Forbund.</div>
+  <div class="links-list">
+    <a href="https://basket.dk/Børneregler" target="_blank" rel="noopener"><span class="ic">📋</span>Børneregler (U8–U12)<span class="arw">↗</span></a>
+    <a href="https://basket.dk/wp-content/uploads/2025/10/Boerneregler-samlet-august-2025.pdf" target="_blank" rel="noopener"><span class="ic">📄</span>Børneregler 2025-26 (PDF)<span class="arw">↗</span></a>
+    <a href="https://basket.dk/vare/aldersrelateret-traeningkoncept/" target="_blank" rel="noopener"><span class="ic">🏀</span>ATK – Aldersrelateret træning<span class="arw">↗</span></a>
+    <a href="https://basket.dk/wp-content/uploads/2023/05/DBBF-ATK_A4-1.pdf" target="_blank" rel="noopener"><span class="ic">📄</span>ATK-hæfte (PDF)<span class="arw">↗</span></a>
+    <a href="https://basket.dk/basketball-for-alle/" target="_blank" rel="noopener"><span class="ic">🌱</span>Basketball for alle<span class="arw">↗</span></a>
+    <a href="https://basket.dk/regler/" target="_blank" rel="noopener"><span class="ic">⚖️</span>Regler &amp; dommermateriale<span class="arw">↗</span></a>
+    <a href="https://basket.dk/" target="_blank" rel="noopener"><span class="ic">🔗</span>DBBF – basket.dk<span class="arw">↗</span></a>
+  </div>
+  <div class="m-actions"><button class="m-cancel" id="links-close">Luk</button></div>
 </div></div>
 
 <div class="toast" id="toast"></div>
