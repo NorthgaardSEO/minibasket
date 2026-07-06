@@ -16,6 +16,7 @@ let teams = [], players = [], sessions = [], rot = {}; // rot[playerId] = {perio
 let curTeam = null, curSession = null, view = "kamp";
 let timer = { remaining:0, running:false, iv:null, lenMin:5, period:0 };
 let poll = null;
+let lastWrite = 0; // guards polling from clobbering in-progress local edits
 
 /* ---------------- AUTH ---------------- */
 let authMode = "login";
@@ -111,10 +112,21 @@ async function loadTeams(){
   if(teams.length){
     if(!curTeam || !teams.find(t=>t.id===curTeam)) curTeam = teams[0].id;
     await selectTeam(curTeam);
+  } else if(me.role==="admin"){
+    // First-run onboarding: give a brand-new admin a working team + game immediately
+    const { data:t } = await sb.from("mb_teams").insert({ name:"Mit hold", sort:0 }).select().single();
+    if(t){
+      await sb.from("mb_sessions").insert({ team_id:t.id, name:"Kamp 1", sort:0 });
+      teams=[t]; renderTeamTabs(); await selectTeam(t.id);
+      toast("Velkommen! Dit hold er klar — tilføj spillere under Trup ✨");
+    } else {
+      $("team-title").textContent="Mini Basket"; $("team-sub").textContent="opret et hold under Admin";
+      $("session-tabs").innerHTML=""; $("grid-wrap").innerHTML='<div class="empty"><div class="big">Intet hold</div><div class="mono">Gå til Admin og opret et hold</div></div>';
+    }
   } else {
     $("team-title").textContent = "Mini Basket";
-    $("team-sub").textContent = me.role==="admin" ? "opret et hold under Admin" : "du er ikke tildelt et hold endnu";
-    $("session-tabs").innerHTML=""; $("grid-wrap").innerHTML='<div class="empty"><div class="big">Intet hold</div>'+(me.role==="admin"?'<div class="mono">Gå til Admin og opret et hold</div>':'<div class="mono">Bed din admin om at tildele dig et hold</div>')+'</div>';
+    $("team-sub").textContent = "du er ikke tildelt et hold endnu";
+    $("session-tabs").innerHTML=""; $("grid-wrap").innerHTML='<div class="empty"><div class="big">Intet hold</div><div class="mono">Bed din admin om at tildele dig et hold</div></div>';
   }
 }
 
@@ -138,8 +150,7 @@ async function selectSession(sid){
   const { data } = await sb.from("mb_rotations").select("*").eq("session_id",sid);
   rot = {};
   (data||[]).forEach(r=>{ (rot[r.player_id]=rot[r.player_id]||{})[r.period]=r.role||"D"; });
-  const s = sessions.find(x=>x.id===sid);
-  if(s){ timer.lenMin = timer.lenMin||5; }
+  timer.running=false; if(timer.iv) clearInterval(timer.iv); timer.remaining=0; timer.period=0;
   renderSessionTabs(); renderAll();
 }
 
@@ -151,6 +162,7 @@ function startPolling(){ if(poll) clearInterval(poll); poll = setInterval(refres
 document.addEventListener("visibilitychange", ()=>{ if(!document.hidden) refreshQuiet(); });
 async function refreshQuiet(){
   if(!curTeam || document.hidden) return;
+  if(Date.now() - lastWrite < 4500) return; // don't overwrite recent local edits
   try{
     if(curSession && (view==="kamp"||view==="tid")){
       const [{data:se},{data:rt}] = await Promise.all([
@@ -247,6 +259,7 @@ function renderBalance(){
 /* cell click: cycle empty -> D -> S -> empty */
 async function cycleCell(pid,per){
   const s=curSess(); if(!s||s.locked) return;
+  lastWrite = Date.now();
   const cur = cellRole(pid,per);
   let next = cur==null ? "D" : (cur==="D" ? "S" : null);
   if(next){ (rot[pid]=rot[pid]||{})[per]=next; } else { if(rot[pid]) delete rot[pid][per]; }
@@ -285,7 +298,7 @@ async function clearPeriod(){
 
 /* ---------------- SESSION ops ---------------- */
 async function updateSession(patch){
-  const s=curSess(); if(!s) return; Object.assign(s,patch);
+  const s=curSess(); if(!s) return; lastWrite = Date.now(); Object.assign(s,patch);
   renderSegs(); renderGrid(); renderScorePill();
   try{ await sb.from("mb_sessions").update(patch).eq("id",s.id); }catch(e){}
 }
@@ -408,7 +421,7 @@ $("add-team-btn").addEventListener("click", async ()=>{
   const name=$("add-team").value.trim(); if(!name){ toast("Skriv holdnavn"); return; }
   const { data, error } = await sb.from("mb_teams").insert({ name, sort:teams.length }).select().single();
   if(error){ toast("Fejl: "+error.message); return; }
-  teams.push(data); $("add-team").value=""; logEvent("team","Oprettede hold "+name); renderTeamTabs(); renderAdmin(); toast("Hold oprettet");
+  teams.push(data); $("add-team").value=""; logEvent("team","Oprettede hold "+name); renderTeamTabs(); renderAdmin(); await selectTeam(data.id); toast("Hold oprettet — tilføj spillere under Trup");
 });
 
 /* admin delegated clicks */
@@ -424,7 +437,7 @@ $("view-admin").addEventListener("click", async (e)=>{
 
 /* ---------------- SCORE ---------------- */
 $("view-tid").addEventListener("click", async (e)=>{
-  const b=e.target.closest("[data-sc]"); if(!b) return; const s=curSess(); if(!s) return;
+  const b=e.target.closest("[data-sc]"); if(!b) return; const s=curSess(); if(!s){ toast("Opret en kamp først"); return; } lastWrite = Date.now();
   const [side,d]=b.dataset.sc.split(","); const key=side==="us"?"score_us":"score_them";
   s[key]=Math.max(0,(s[key]||0)+(+d)); $(side==="us"?"sc-us":"sc-them").textContent=s[key]; renderScorePill();
   try{ await sb.from("mb_sessions").update({[key]:s[key]}).eq("id",s.id); }catch(e){}
