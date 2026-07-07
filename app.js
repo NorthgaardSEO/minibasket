@@ -1,7 +1,7 @@
 /* ============ MINI BASKET — Supabase-backed app ============ */
 const SUPABASE_URL = "https://bemngqxfwunfihvfgkrt.supabase.co";
 const SUPABASE_KEY = "sb_publishable_mK-BfAEcmVyuEeAQhswPgQ_31-DldiK";
-const MOBILEPAY_BOX = "8447ZA";
+const MOBILEPAY_LINK = "https://qr.mobilepay.dk/box/1ebdcc50-6d0b-4969-884c-9589e199e3c1/pay-in";
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = (id) => document.getElementById(id);
@@ -557,7 +557,7 @@ let coffeeAmt=50;
 $("coffee-open").addEventListener("click", ()=>$("modal-coffee").classList.add("open"));
 $("coffee-cancel").addEventListener("click", ()=>$("modal-coffee").classList.remove("open"));
 $("coffee-amts").addEventListener("click", e=>{ const b=e.target.closest("[data-amt]"); if(!b) return; coffeeAmt=+b.dataset.amt; document.querySelectorAll(".coffee-amt").forEach(x=>x.classList.toggle("sel",x===b)); });
-$("coffee-send").addEventListener("click", ()=>{ const url="https://mobilepay.dk/erhverv/betalingslink/betalingslink-svar?phone="+encodeURIComponent(MOBILEPAY_BOX)+"&amount="+coffeeAmt+"&comment="+encodeURIComponent("Mini Basket kaffe"); window.open(url,"_blank"); toast("Åbner MobilePay…"); });
+$("coffee-send").addEventListener("click", ()=>{ window.open(MOBILEPAY_LINK,"_blank"); toast("Åbner MobilePay…"); });
 
 /* ---------------- COFFEE (ekstra knap i Links-visning) ---------------- */
 const _co2=$("coffee-open2"); if(_co2) _co2.addEventListener("click", ()=>$("modal-coffee").classList.add("open"));
