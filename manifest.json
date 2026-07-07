@@ -1,7 +1,7 @@
 {
   "name": "Mini Basket — Spilfordeling",
   "short_name": "Mini Basket",
-  "description": "Fair spilletid, planlagt fra lommen. Rotationsplanlægger til børne- og ungdomshold.",
+  "description": "Nemt at fordele spilletid. Rotationsplanlægger til børne- og ungdomshold.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

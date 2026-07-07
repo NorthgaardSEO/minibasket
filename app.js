@@ -207,11 +207,13 @@ const DEFAULT_D = "#6e1526", DEFAULT_S = "#c39b41";
 const PALETTE_D = ["#6e1526","#d0342c","#1f5fbf","#2e7d46","#e0a92b","#1a1a1a","#6d3b9e","#ffffff"];
 const PALETTE_S = ["#c39b41","#e0a92b","#9aa0a6","#7fb3e0","#e08fb0","#2e7d46","#d0342c","#ffffff"];
 function textOn(hex){ const c=(hex||"").replace('#',''); if(c.length<6) return '#ffffff'; const r=parseInt(c.substr(0,2),16),g=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16); return (0.299*r+0.587*g+0.114*b)>150 ? '#1a1a1a' : '#ffffff'; }
+function darkenHex(hex,f){ const c=(hex||"").replace('#',''); if(c.length<6) return hex; const p=i=>parseInt(c.substr(i,2),16), h=x=>('0'+Math.max(0,Math.round(x*(1-f))).toString(16)).slice(-2); return '#'+h(p(0))+h(p(2))+h(p(4)); }
 function applyTeamColors(t){
   const r = document.documentElement.style;
   const d = (t && t.color_d) || DEFAULT_D, s = (t && t.color_s) || DEFAULT_S;
-  r.setProperty('--wine', d); r.setProperty('--wine-2', d); r.setProperty('--wine-dark', d); r.setProperty('--wine-text', textOn(d));
+  r.setProperty('--wine', d); r.setProperty('--wine-2', d); r.setProperty('--wine-dark', darkenHex(d,0.25)); r.setProperty('--wine-text', textOn(d));
   r.setProperty('--gold', s); r.setProperty('--gold-2', s); r.setProperty('--gold-text', textOn(s));
+  r.setProperty('--dark', darkenHex(d,0.52)); r.setProperty('--dark-2', darkenHex(d,0.44));
 }
 function renderAdminTeams(){
   const el=$("admin-teams"); if(!el) return;
@@ -256,8 +258,14 @@ function renderTeamTabs(){
 }
 function renderSessionTabs(){
   const el=$("session-tabs"); el.innerHTML="";
-  sessions.forEach(s=>{ const b=document.createElement("button"); b.className="chip session"+(s.id===curSession?" active":""); b.textContent=s.name; b.onclick=()=>selectSession(s.id); el.appendChild(b); });
+  sessions.forEach(s=>{ const b=document.createElement("button"); b.className="chip session"+(s.id===curSession?" active":""); b.textContent=s.name; b.onclick=()=>{ if(s.id===curSession) renameSession(s); else selectSession(s.id); }; el.appendChild(b); });
   if(curTeam){ const a=document.createElement("button"); a.className="chip add"; a.textContent="+ Kamp"; a.onclick=openNewSession; el.appendChild(a); }
+}
+async function renameSession(s){
+  const name = prompt("Nyt navn til kampen:", s.name);
+  if(name===null) return; const n=name.trim(); if(!n || n===s.name) return;
+  s.name=n; lastWrite=Date.now(); renderSessionTabs(); $("session-title").textContent=n;
+  try{ await sb.from("mb_sessions").update({name:n}).eq("id",s.id); logEvent("session","Omdøbte kamp til "+n); }catch(e){ toast("Kunne ikke gemme navn"); }
 }
 
 /* ---------------- RENDER: KAMP GRID ---------------- */
@@ -551,9 +559,8 @@ $("coffee-cancel").addEventListener("click", ()=>$("modal-coffee").classList.rem
 $("coffee-amts").addEventListener("click", e=>{ const b=e.target.closest("[data-amt]"); if(!b) return; coffeeAmt=+b.dataset.amt; document.querySelectorAll(".coffee-amt").forEach(x=>x.classList.toggle("sel",x===b)); });
 $("coffee-send").addEventListener("click", ()=>{ const url="https://mobilepay.dk/erhverv/betalingslink/betalingslink-svar?phone="+encodeURIComponent(MOBILEPAY_BOX)+"&amount="+coffeeAmt+"&comment="+encodeURIComponent("Mini Basket kaffe"); window.open(url,"_blank"); toast("Åbner MobilePay…"); });
 
-/* ---------------- LINKS ---------------- */
-$("links-open").addEventListener("click", ()=>$("modal-links").classList.add("open"));
-$("links-close").addEventListener("click", ()=>$("modal-links").classList.remove("open"));
+/* ---------------- COFFEE (ekstra knap i Links-visning) ---------------- */
+const _co2=$("coffee-open2"); if(_co2) _co2.addEventListener("click", ()=>$("modal-coffee").classList.add("open"));
 
 document.querySelectorAll(".backdrop").forEach(b=> b.addEventListener("click", e=>{ if(e.target===b) b.classList.remove("open"); }));
 
