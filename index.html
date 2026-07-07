@@ -55,7 +55,7 @@
 
   /* ===== HEADER ===== */
   .header{display:flex;align-items:center;gap:12px;padding:4px 0 12px;}
-  .logo{width:46px;height:46px;border-radius:50%;background:var(--dark);display:grid;place-items:center;flex-shrink:0;font-family:var(--serif);font-weight:700;color:var(--gold-soft);font-size:17px;}
+  .logo{width:46px;height:46px;flex-shrink:0;}
   .header-text{flex:1;min-width:0;}
   .header-title{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:-.6px;line-height:1;}
   .header-sub{font-size:11px;color:var(--ink-soft);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -322,7 +322,16 @@
 <!-- ===== APP ===== -->
 <div class="app hidden" id="app">
   <div class="header">
-    <div class="logo">MB</div>
+    <svg class="logo" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" fill="#d47c40" stroke="#8f4c22" stroke-width="1.4"/>
+      <g stroke="#7c4020" stroke-width="1.6" fill="none" stroke-linecap="round">
+        <line x1="7" y1="50" x2="93" y2="50"/><line x1="50" y1="5" x2="50" y2="95"/>
+        <ellipse cx="50" cy="50" rx="17" ry="45"/>
+      </g>
+      <circle cx="41" cy="45" r="3.4" fill="#161616"/>
+      <path d="M56 46 q4.2 -3.6 8.4 0" stroke="#161616" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+      <path d="M39.5 61 q10.5 9.5 21 0" stroke="#161616" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
     <div class="header-text">
       <div class="header-title" id="team-title">Rotation</div>
       <div class="header-sub" id="team-sub">vælg et hold</div>
