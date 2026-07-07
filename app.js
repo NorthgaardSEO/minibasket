@@ -148,25 +148,70 @@ async function selectTeam(teamId){
 
 async function selectSession(sid){
   curSession = sid;
-  const { data } = await sb.from("mb_rotations").select("*").eq("session_id",sid);
-  rot = {};
-  (data||[]).forEach(r=>{ (rot[r.player_id]=rot[r.player_id]||{})[r.period]=r.role||"D"; });
   timer.running=false; if(timer.iv) clearInterval(timer.iv); timer.remaining=0; timer.period=0;
+  await loadDayRotations();
   renderSessionTabs(); renderAll();
 }
 
 function curSess(){ return sessions.find(s=>s.id===curSession); }
 function activePlayers(){ return players.filter(p=>!p.injured); }
 
+/* ---------------- DAY (flere kampe samme dag) ---------------- */
+let dayRot = {}; // dayRot[sessionId][playerId][period] = role
+function dayGames(){ const s=curSess(); if(!s) return []; const d=s.game_date; return sessions.filter(x=>x.team_id===s.team_id && x.game_date===d).sort((a,b)=>(a.sort-b.sort)||(((a.created_at||"")<(b.created_at||""))?-1:1)); }
+function dayCellRole(gid,pid,per){ return dayRot[gid] && dayRot[gid][pid] && dayRot[gid][pid][per]; }
+function dayPlayerTotal(pid){ let t=0; dayGames().forEach(g=>{ for(let i=0;i<g.periods;i++) if(dayCellRole(g.id,pid,i)) t++; }); return t; }
+function dayTotalSlots(){ return dayGames().reduce((a,g)=>a+g.oncourt*g.periods,0); }
+async function loadDayRotations(){
+  const day = dayGames(); const ids = day.map(g=>g.id); dayRot = {};
+  if(ids.length){
+    const { data } = await sb.from("mb_rotations").select("*").in("session_id", ids);
+    (data||[]).forEach(r=>{ const g=(dayRot[r.session_id]=dayRot[r.session_id]||{}); (g[r.player_id]=g[r.player_id]||{})[r.period]=r.role||"D"; });
+  }
+  day.forEach(g=>{ if(!dayRot[g.id]) dayRot[g.id]={}; });
+  rot = dayRot[curSession] || (dayRot[curSession]={});
+}
+async function balanceDay(){
+  const day=dayGames(); const ps=activePlayers();
+  if(!day.length) return; if(!ps.length){ toast("Ingen aktive spillere"); return; }
+  if(day.some(g=>g.locked)){ toast("Lås kampene op først"); return; }
+  lastWrite=Date.now();
+  await sb.from("mb_rotations").delete().in("session_id", day.map(g=>g.id));
+  dayRot={}; day.forEach(g=>dayRot[g.id]={});
+  const counts={}; ps.forEach(p=>counts[p.id]=0); const rows=[];
+  day.forEach(g=>{ for(let per=0;per<g.periods;per++){
+    const order=ps.slice().sort((a,b)=>counts[a.id]-counts[b.id]||Math.random()-0.5);
+    order.slice(0,Math.min(g.oncourt,order.length)).forEach(p=>{ const role=p.role==="S"?"S":"D"; (dayRot[g.id][p.id]=dayRot[g.id][p.id]||{})[per]=role; counts[p.id]++; rows.push({session_id:g.id,player_id:p.id,period:per,role}); });
+  }});
+  rot = dayRot[curSession]||{}; renderGrid();
+  try{ if(rows.length) await sb.from("mb_rotations").insert(rows); logEvent("balance","Balancerede dagen ("+day.length+" kampe)"); toast(day.length>1?"Dagen balanceret ⚡ ("+day.length+" kampe)":"Balanceret ⚡"); }catch(e){ toast("Fejl ved gem"); }
+}
+async function lockAllDay(){
+  const day=dayGames(); if(!day.length) return; const lock = day.some(g=>!g.locked);
+  day.forEach(g=>g.locked=lock); lastWrite=Date.now(); renderAll();
+  try{ await sb.from("mb_sessions").update({locked:lock}).in("id", day.map(g=>g.id)); logEvent("lock",(lock?"Låste ":"Åbnede ")+"alle "+day.length+" kampe"); }catch(e){}
+  toast(lock?"Alle kampe låst 🔒":"Alle kampe åbnet");
+}
+function renderDayPanel(){
+  const el=$("day-panel"); if(!el) return; const day=dayGames();
+  if(day.length<2){ el.innerHTML=""; return; }
+  const ps=activePlayers();
+  const chips=ps.map(p=>'<div class="daychip"><span class="dn">'+esc(p.number||p.name)+'</span><b>'+dayPlayerTotal(p.id)+'</b></div>').join('');
+  el.innerHTML='<div class="day-card"><div class="day-head"><div><span class="eyebrow">I dag · '+day.length+' kampe</span><div class="day-sub">'+dayTotalSlots()+' perioder i alt · balancér fordeler på tværs</div></div>'+
+    '<button class="mini-act" id="lock-all-btn">'+(day.every(g=>g.locked)?"🔓 Lås op":"🔒 Lås alle")+'</button></div><div class="daychips">'+chips+'</div></div>';
+  const b=$("lock-all-btn"); if(b) b.onclick=lockAllDay;
+}
+
 /* ---------------- TEAM COLORS ---------------- */
 const DEFAULT_D = "#6e1526", DEFAULT_S = "#c39b41";
-const PALETTE_D = ["#6e1526","#d0342c","#1f5fbf","#2e7d46","#e0a92b","#1a1a1a","#6d3b9e","#e2711d"];
-const PALETTE_S = ["#c39b41","#e0a92b","#9aa0a6","#7fb3e0","#e08fb0","#2e7d46","#d0342c","#1a1a1a"];
+const PALETTE_D = ["#6e1526","#d0342c","#1f5fbf","#2e7d46","#e0a92b","#1a1a1a","#6d3b9e","#ffffff"];
+const PALETTE_S = ["#c39b41","#e0a92b","#9aa0a6","#7fb3e0","#e08fb0","#2e7d46","#d0342c","#ffffff"];
+function textOn(hex){ const c=(hex||"").replace('#',''); if(c.length<6) return '#ffffff'; const r=parseInt(c.substr(0,2),16),g=parseInt(c.substr(2,2),16),b=parseInt(c.substr(4,2),16); return (0.299*r+0.587*g+0.114*b)>150 ? '#1a1a1a' : '#ffffff'; }
 function applyTeamColors(t){
   const r = document.documentElement.style;
   const d = (t && t.color_d) || DEFAULT_D, s = (t && t.color_s) || DEFAULT_S;
-  r.setProperty('--wine', d); r.setProperty('--wine-2', d); r.setProperty('--wine-dark', d);
-  r.setProperty('--gold', s); r.setProperty('--gold-2', s);
+  r.setProperty('--wine', d); r.setProperty('--wine-2', d); r.setProperty('--wine-dark', d); r.setProperty('--wine-text', textOn(d));
+  r.setProperty('--gold', s); r.setProperty('--gold-2', s); r.setProperty('--gold-text', textOn(s));
 }
 function renderAdminTeams(){
   const el=$("admin-teams"); if(!el) return;
@@ -238,6 +283,7 @@ function renderSegs(){
 
 function renderGrid(){
   const wrap=$("grid-wrap"); const s=curSess();
+  renderDayPanel();
   if(!s){ wrap.innerHTML='<div class="empty"><div class="big">Ingen kamp</div><div class="mono">Tryk “+ Kamp” for at oprette en</div></div>'; renderBalance(); return; }
   if(!players.length){ wrap.innerHTML='<div class="empty"><div class="big">Ingen spillere</div><div class="mono">Gå til Trup og tilføj din trup</div></div>'; renderBalance(); return; }
   const cols = "minmax(96px,1.3fr) repeat("+s.periods+",1fr) 46px";
@@ -487,7 +533,7 @@ function setView(v){
   if(v==="admin") renderAdmin();
 }
 $("tabbar").addEventListener("click", e=>{ const b=e.target.closest(".tb"); if(b) setView(b.dataset.view); });
-$("btn-auto").addEventListener("click", autoBalance);
+$("btn-auto").addEventListener("click", balanceDay);
 $("btn-clear").addEventListener("click", clearPeriod);
 
 /* global delegated: grid cells + player edits + injure */
