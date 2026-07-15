@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import { appUrl } from '../lib/site';
+
+const faq = [
+  {
+    q: 'Hvor gammelt skal et barn være for at spille basketball?',
+    a: 'De fleste danske klubber tager imod børn fra 5–6-årsalderen på U6-hold, og mange starter først som 8- eller 10-årige uden problemer. Der findes ingen "for sent" i børnebasket — hold i U8–U12 optager løbende nye spillere hele sæsonen.',
+  },
+  {
+    q: 'Hvad koster det at gå til basketball?',
+    a: 'Kontingentet ligger typisk mellem nogle få hundrede og omkring tusind kroner pr. halvsæson afhængigt af klub og kommune. Derudover skal barnet bruge indendørssko og almindeligt idrætstøj — klubben stiller bolde til rådighed til træning.',
+  },
+  {
+    q: 'Hvilken boldstørrelse skal børn bruge?',
+    a: 'Børn i minibasket spiller med boldstørrelse 4 eller 5 — mindre og lettere end voksnes størrelse 6 og 7. De yngste bruger størrelse 4, og fra omkring U12 spilles der typisk med størrelse 5. Klubben fortæller jer, hvad jeres årgang bruger.',
+  },
+  {
+    q: 'Skal barnet kunne noget i forvejen?',
+    a: 'Nej. Børnetræning i minibasket er bygget op om leg og mange boldberøringer, og alt læres fra bunden. Kan barnet løbe og har lyst til at lege med en bold, er det klar til første træning — de fleste klubber tilbyder et par gratis prøvetræninger.',
+  },
+];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Basketball for børn — sådan kommer I i gang',
+  description:
+    'Forældreguide til basketball for børn: hvilken alder man kan starte, hvad minibasket er, hvordan I finder en klub, hvad det koster, og hvad I kan forvente.',
+  inLanguage: 'da',
+  datePublished: '2026-07-15',
+  dateModified: '2026-07-15',
+  author: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
+  publisher: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
+  mainEntityOfPage: 'https://minibasket.dk/basketball-for-boern/',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<Base
+  title="Basketball for børn: alder, klub, udstyr og første træning"
+  description="Vil dit barn spille basketball? Her er forældreguiden: hvilken alder man kan starte, hvad minibasket er, hvordan I finder en klub, og hvad det kræver."
+  ogType="article"
+  schema={[articleSchema, faqSchema]}
+>
+  <article class="prose">
+    <span class="eyebrow">Forældreguide · børnebasket</span>
+    <h1>Basketball for børn — sådan kommer I i gang</h1>
+    <p class="updated">Opdateret juli 2026</p>
+    <p class="lede">
+      Vil dit barn gerne spille basketball? Godt valg: børnebasket i Danmark er bygget op om
+      leg, udvikling og at alle skal spille. Her er hele guiden til jer som forældre —
+      alder, klub, pris, udstyr og hvad I kan forvente af træning og kampe.
+    </p>
+
+    <h2 id="alder">Hvornår kan børn starte til basketball?</h2>
+    <p>
+      De fleste klubber tager imod børn fra <strong>5–6-årsalderen</strong>, og børnebasket er
+      organiseret i aldersgrupper: <strong>U6, U8, U10 og U12</strong> — hvor tallet angiver
+      den ældste årgang på holdet. Men der er ingen grund til at stresse over en "rigtig"
+      startalder: børn, der begynder som 9- eller 10-årige, indhenter hurtigt de andre, fordi
+      alt i minibasket alligevel handler om grundlæggende motorik og boldvanthed.
+    </p>
+    <p>
+      På de yngste hold er træningen mest leg med bold; fra U10–U12 kommer der gradvist mere
+      rigtig basketball ind — men stadig uden pres på resultater.
+    </p>
+
+    <h2 id="minibasket">Hvad er minibasket?</h2>
+    <p>
+      Minibasket er dansk børnebasket op til og med U12 — basketball skaleret til børn:
+      <strong>lavere kurve</strong> (fx 2,60 meter i stedet for voksnes 3,05, afhængigt af
+      årgang), <strong>mindre bolde</strong>, færre spillere på banen og kortere kampe.
+      Vigtigst for jer som forældre: børnereglerne kræver, at <strong>alle børn skal
+      spille</strong> — ingen må parkeres på bænken for at vinde en kamp.
+    </p>
+    <p>
+      Vil du forstå tankegangen bag reglerne, så læs
+      <a href="/traenerguides/minibasket-regler-for-nye-traenere/">minibasket-reglerne forklaret</a>
+      (skrevet til trænere, men fin forældrelæsning) — og de almindelige voksenregler står i
+      <a href="/basketball-regler/">basketball-reglerne enkelt forklaret</a>.
+    </p>
+
+    <h2 id="klub">Sådan finder I en klub</h2>
+    <p>
+      Danmarks Basketball Forbund har en klubfinder på
+      <a href="https://basket.dk" rel="noopener">basket.dk</a>, hvor I kan søge på jeres by.
+      Skriv eller ring til klubben og spørg efter et hold i barnets årgang — næsten alle
+      klubber tilbyder <strong>gratis prøvetræninger</strong>, før I melder jer ind.
+    </p>
+    <h3>Hvad sker der til en typisk børnetræning?</h3>
+    <p>
+      En børnetræning varer typisk 60–90 minutter og består af boldlege og småspil: opvarmning
+      med hver sin bold, drible- og skudlege, og til sidst kampe på små hold, så alle rører
+      bolden meget. Forvent ikke taktiktavler og løbetræning — god børnetræning ligner leg,
+      fordi det er sådan, børn lærer. Forældre må ofte gerne se på, især i starten.
+    </p>
+
+    <h2 id="pris">Hvad koster det, og hvad skal barnet have med?</h2>
+    <ul>
+      <li><strong>Kontingent:</strong> typisk fra nogle få hundrede kroner til omkring tusind kroner pr. halvsæson — spørg klubben.</li>
+      <li><strong>Indendørssko:</strong> det eneste udstyr, der betyder noget. Almindelige indendørs idrætssko er fint til at starte med; deciderede basketsko kan vente.</li>
+      <li><strong>Tøj og drikkedunk:</strong> almindeligt idrætstøj. Spilletrøje til kampe står klubben oftest for.</li>
+      <li><strong>Bold derhjemme (valgfrit):</strong> vil barnet øve hjemme, så køb <strong>størrelse 4</strong> til de yngste og <strong>størrelse 5</strong> fra omkring U12 — ikke en voksenbold.</li>
+    </ul>
+
+    <h2 id="hjemme">Hvad kan I lave derhjemme?</h2>
+    <p>
+      Ingenting er påkrævet — men har barnet lyst, er der masser af lege, der kan laves i
+      indkørslen eller stuen med en blød bold. Prøv fx disse fra vores øvelsesbank (skrevet
+      til trænere, men lette at bruge som forælder):
+    </p>
+    <ul>
+      <li><a href="/basketoevelser/boldgymnastik/">Boldgymnastik</a> — fem minutters boldvanthed, kan laves i stuen.</li>
+      <li><a href="/basketoevelser/trafiklys-dribling/">Trafiklys-dribling</a> — I styrer "lyskrydset", barnet dribler.</li>
+      <li><a href="/basketoevelser/haletagfat-med-bold/">Haletagfat med bold</a> — perfekt til haven med søskende.</li>
+      <li><a href="/basketoevelser/foelg-lederen/">Følg lederen</a> — skiftes til at bestemme bevægelserne.</li>
+    </ul>
+    <p>
+      Flere idéer: se hele <a href="/basketoevelser/">øvelsesbanken</a> og filtrér på U6 eller U8.
+    </p>
+
+    <h2 id="spilletid">Spilletid — hvad må I forvente som forældre?</h2>
+    <p>
+      Det hyppigste forældrespørgsmål i børnebasket handler om spilletid. Her er den korte
+      version: de danske børneregler er indrettet, så <strong>alle børn skal på banen</strong> —
+      og en god børnetræner fordeler spilletiden, så ingen spiller for meget, og ingen bliver
+      glemt. I praksis er det et svært regnestykke for en frivillig træner med ti børn og en
+      larmende hal, især på stævnedage med flere kampe. Læs baggrunden i guiden om
+      <a href="/traenerguides/fair-spilletid-boernebasket/">fair spilletid i børnebasket</a> —
+      den forklarer også, hvad I med rimelighed kan forvente, og hvordan I tager snakken med
+      træneren på en god måde.
+    </p>
+
+    <aside class="cta-box">
+      <div>
+        <span class="cta-eyebrow">Gratis værktøj · vis den til jeres træner</span>
+        <strong>Bliver dit barn glemt på bænken?</strong>
+        <p>
+          Vis træneren Mini Basket-appen — den fordeler spilletiden mellem alle børn og giver
+          fuldt overblik, også over flere kampe samme dag. Gratis, og virker på alle telefoner.
+        </p>
+      </div>
+      <a class="btn btn-gold" href={appUrl('foraeldre')}>Se appen</a>
+    </aside>
+    <p style="font-size:14px;color:var(--ink-soft);">
+      Synes du om projektet? Mini Basket er gratis og reklamefrit — du kan
+      <a href="/stoet/">give en kaffe via MobilePay</a>.
+    </p>
+
+    <h2 id="faq">Ofte stillede spørgsmål</h2>
+    {faq.map((f) => (
+      <div class="faq-item">
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </div>
+    ))}
+
+    <h2>Læs også</h2>
+    <ul>
+      <li><a href="/basketball-regler/">Basketball-regler — enkelt forklaret</a></li>
+      <li><a href="/traenerguides/minibasket-regler-for-nye-traenere/">Minibasket-regler forklaret for nye trænere</a></li>
+      <li><a href="/basketoevelser/">Basketball-øvelser til børn (U6–U12)</a></li>
+    </ul>
+  </article>
+</Base>

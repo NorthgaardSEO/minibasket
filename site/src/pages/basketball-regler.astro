@@ -1,0 +1,267 @@
+---
+import Base from '../layouts/Base.astro';
+import CtaBox from '../components/CtaBox.astro';
+import { appUrl } from '../lib/site';
+
+const faq = [
+  {
+    q: 'Hvor lang tid tager en basketballkamp?',
+    a: 'En basketballkamp efter FIBA-reglerne (som bruges i Danmark) varer 4 perioder à 10 minutter effektiv spilletid. Fordi uret stoppes ved fløjt, straffekast og timeouts, tager en kamp reelt 1½–2 timer. I NBA spilles 4 × 12 minutter.',
+  },
+  {
+    q: 'Hvor mange skridt må man tage i basketball?',
+    a: 'Du må tage to skridt, efter du har samlet bolden op fra din sidste dribling — til et stop, et skud eller en aflevering. Tager du flere, dømmes skridt (travelling), og modstanderne får bolden. Står du stille med bolden, må du pivotere på ét ben.',
+  },
+  {
+    q: 'Hvor mange point giver en scoring?',
+    a: 'En kurv giver 2 point, hvis skuddet tages inden for 3-pointslinjen, og 3 point bag den. Et straffekast giver 1 point. Der findes ikke scoringer, der giver mere end 3 point.',
+  },
+  {
+    q: 'Hvor mange spillere er der på et basketballhold?',
+    a: 'Der er altid 5 spillere på banen fra hvert hold. En kamptrup består typisk af op til 12 spillere, og der må skiftes frit ud, hver gang spillet er stoppet. I minibasket spilles der med færre spillere på banen i de yngste rækker.',
+  },
+  {
+    q: 'Hvor høj er en basketballkurv?',
+    a: 'En basketballkurv sidder 3,05 meter over gulvet — samme højde i FIBA og NBA. I børnebasket (minibasket) bruges lavere kurve, så børnene kan skyde med rigtig teknik. Se vores guide til minibasket-reglerne for detaljerne.',
+  },
+  {
+    q: 'Gælder de samme regler for børn?',
+    a: 'Nej. Dansk børnebasket (minibasket) spilles med lavere kurve, mindre bolde, færre spillere på banen og et krav om, at alle børn skal spille. De præcise børneregler pr. årgang står hos Danmarks Basketball Forbund på basket.dk.',
+  },
+];
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Basketball-regler — enkelt forklaret',
+  description:
+    'Alle basketballregler forklaret på dansk: skridtregler, point, kamplængde, tidsregler og fouls — og forskellen på FIBA, NBA og børnebasket.',
+  inLanguage: 'da',
+  datePublished: '2026-07-15',
+  dateModified: '2026-07-15',
+  author: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
+  publisher: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
+  mainEntityOfPage: 'https://minibasket.dk/basketball-regler/',
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+<Base
+  title="Basketball-regler: skridt, point, kamplængde og fouls"
+  description="Alle basketballregler forklaret på dansk: skridtregler, point, hvor lang en kamp er, fouls — og forskellen på FIBA, NBA og børnebasket. Opdateret 2026."
+  ogType="article"
+  schema={[articleSchema, faqSchema]}
+>
+  <article class="prose">
+    <span class="eyebrow">Regler · forklaret på dansk</span>
+    <h1>Basketball-regler — enkelt forklaret</h1>
+    <p class="updated">Opdateret juli 2026</p>
+    <p class="lede">
+      Basketball spilles 5 mod 5, en kamp varer 4 × 10 minutter effektiv spilletid, en kurv
+      giver 1, 2 eller 3 point — og du må tage to skridt efter din sidste dribling. Her får du
+      alle de vigtigste regler i basketball forklaret på dansk, uden paragraf-jungle. Vi følger
+      FIBA-reglerne, som dansk basketball spilles efter; de officielle og fuldstændige regler
+      finder du hos Danmarks Basketball Forbund på
+      <a href="https://basket.dk" rel="noopener">basket.dk</a>.
+    </p>
+
+    <nav class="toc" aria-label="Indhold">
+      <span class="toc-title">På denne side</span>
+      <ul>
+        <li><a href="#grundregler">De grundlæggende regler</a></li>
+        <li><a href="#point">Point: 1, 2 og 3 point</a></li>
+        <li><a href="#skridtregler">Skridtregler</a></li>
+        <li><a href="#dribling">Dribling og dobbeltdribling</a></li>
+        <li><a href="#kamplaengde">Hvor lang er en kamp?</a></li>
+        <li><a href="#tidsregler">Tidsregler: 24, 8, 5 og 3 sek.</a></li>
+        <li><a href="#fouls">Fouls og frikast</a></li>
+        <li><a href="#nba-fiba">FIBA, NBA og dansk basketball</a></li>
+        <li><a href="#boerneregler">Regler for børn</a></li>
+        <li><a href="#faq">Ofte stillede spørgsmål</a></li>
+      </ul>
+    </nav>
+
+    <h2 id="grundregler">De grundlæggende regler</h2>
+    <p>
+      Basketball spilles af to hold med <strong>5 spillere på banen</strong> fra hvert hold og
+      typisk op til 12 spillere i truppen. Målet er enkelt: score i modstanderens kurv og
+      forhindre modstanderen i at score i jeres.
+    </p>
+    <ul>
+      <li><strong>Banen</strong> er 28 × 15 meter med en kurv i hver ende, ophængt 3,05 meter over gulvet.</li>
+      <li><strong>Bolden flyttes</strong> ved at drible (studse den i gulvet, mens man går eller løber) eller ved at aflevere til en medspiller. Man må ikke løbe med bolden i hænderne — se <a href="#skridtregler">skridtreglerne</a>.</li>
+      <li><strong>Udskiftninger er frie:</strong> der må skiftes, hver gang spillet er stoppet, og en spiller må gerne komme ind igen senere i kampen.</li>
+      <li><strong>Bolden er ude</strong>, når den — eller spilleren med bolden — rører linjerne eller gulvet uden for banen. Modstanderne får et indkast fra sidelinjen.</li>
+      <li><strong>Kropskontakt er begrænset:</strong> forsvarsspillere må ikke skubbe, holde eller slå — det giver en <a href="#fouls">foul</a>.</li>
+    </ul>
+    <p>
+      Vinderen er holdet med flest point, når tiden er gået. Basketball kan ikke ende uafgjort —
+      står det lige, spilles der forlænget spilletid, indtil et hold vinder.
+    </p>
+
+    <h2 id="point">Point: 1, 2 og 3 point</h2>
+    <p>En scoring giver ét af tre pointtal, afhængigt af hvor og hvordan der scores:</p>
+    <ul>
+      <li><strong>2 point</strong> — et almindeligt skud, der tages inden for 3-pointslinjen (inklusive lay-ups og dunks).</li>
+      <li><strong>3 point</strong> — et skud, hvor skytten har begge fødder bag 3-pointslinjen. Linjen ligger 6,75 meter fra kurven i FIBA (7,24 meter i NBA).</li>
+      <li><strong>1 point</strong> — et straffekast. Straffekast tages uforstyrret fra straffekastlinjen og tildeles efter visse <a href="#fouls">fouls</a>.</li>
+    </ul>
+    <p>
+      Fouls på en skytte giver straffekast: to, hvis skuddet var et 2-pointsforsøg, tre hvis det
+      var et 3-pointsforsøg — og ét ekstra, hvis skuddet gik i kurven trods foulen.
+    </p>
+
+    <h2 id="skridtregler">Skridtregler: hvor mange skridt må man tage?</h2>
+    <p>
+      Den regel, flest spørger om: <strong>du må tage to skridt, efter du har samlet bolden op
+      fra din sidste dribling</strong> — og bruge dem til at stoppe, skyde eller aflevere. Tager
+      du et tredje skridt uden at have afleveret eller skudt, dømmes <em>skridt</em> (på engelsk
+      "travelling"), og modstanderne får bolden.
+    </p>
+    <p>To eksempler gør det konkret:</p>
+    <ul>
+      <li><strong>Lay-up:</strong> en spiller dribler mod kurven, samler bolden op, tager to skridt og lægger bolden op. Helt lovligt — det er præcis, hvad de to skridt er til.</li>
+      <li><strong>Løb uden dribling:</strong> en spiller griber en aflevering på midtbanen og løber tre skridt uden at drible. Skridtfejl — bolden skal i gulvet, før der løbes.</li>
+    </ul>
+    <p>
+      Står du stille med bolden, gælder <strong>pivotreglen</strong>: det ene ben er din
+      pivotfod og skal blive på stedet, mens du frit må dreje og træde omkring dig med det
+      andet. Løfter du pivotfoden og sætter den i gulvet igen uden at have driblet, afleveret
+      eller skudt, er det også skridt.
+    </p>
+    <p>
+      Træner du børn? I minibasket dømmes skridt lempeligt og pædagogisk i de yngste rækker —
+      læs mere i guiden om <a href="/traenerguides/minibasket-regler-for-nye-traenere/">minibasket-reglerne</a>.
+    </p>
+
+    <h2 id="dribling">Dribling og dobbeltdribling</h2>
+    <p>
+      En dribling er én sammenhængende serie af studs med én hånd ad gangen. Reglerne er få,
+      men vigtige:
+    </p>
+    <ul>
+      <li>Du må drible med skiftevis højre og venstre hånd — bare aldrig med begge hænder samtidig.</li>
+      <li>Stopper du din dribling (samler bolden op med én eller to hænder), må du <strong>ikke begynde en ny</strong>. Gør du det alligevel, dømmes <em>dobbeltdribling</em>, og modstanderne får bolden.</li>
+      <li>Du må heller ikke "bære" bolden — altså lade hånden komme under bolden og holde den fast midt i driblingen (på engelsk "carrying").</li>
+    </ul>
+    <p>
+      Konsekvensen af reglen er den vigtigste taktiske lærdom for nye spillere:
+      <strong>brug ikke din dribling, før du ved hvorfor</strong>. En stoppet dribling uden
+      plan efterlader kun to muligheder — skud eller aflevering.
+    </p>
+
+    <h2 id="kamplaengde">Hvor lang tid tager en basketballkamp?</h2>
+    <p>
+      En basketballkamp efter FIBA-reglerne varer <strong>4 perioder à 10 minutter effektiv
+      spilletid</strong> — uret stoppes ved hvert fløjt, ved straffekast og i timeouts. Der er
+      2 minutters pause mellem 1. og 2. periode og mellem 3. og 4., samt 15 minutters pause i
+      halvlegen. Står det lige efter fjerde periode, spilles 5 minutters forlængelse — så mange
+      gange det kræver at finde en vinder.
+    </p>
+    <p>
+      Fordi uret stopper så ofte, er den reelle varighed væsentligt længere end de 40 minutter:
+      <strong>regn med 1½–2 timer</strong> fra første til sidste fløjt.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Format</th><th>Periodelængde</th><th>Samlet spilletid</th><th>Reel varighed</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>FIBA / dansk basketball</td><td>4 × 10 min (effektiv)</td><td>40 min</td><td>ca. 1½–2 timer</td></tr>
+        <tr><td>NBA</td><td>4 × 12 min (effektiv)</td><td>48 min</td><td>ca. 2–2½ timer</td></tr>
+        <tr><td>Minibasket (børn)</td><td>Kortere perioder — varierer pr. årgang</td><td>Typisk 24–32 min</td><td>ofte under en time</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Børnekampe spilles ofte som stævnedage med flere korte kampe samme dag — se guiden om
+      <a href="/traenerguides/kampdag-med-flere-kampe/">kampdag med flere kampe</a>.
+      Træner du børn? <a href={appUrl('regler-kamplaengde')}>Mini Basket-appen</a> fordeler
+      spilletiden i perioderne for dig.
+    </p>
+
+    <h2 id="tidsregler">Tidsregler: 24, 8, 5 og 3 sekunder</h2>
+    <p>Basketball har fire tidsregler, som holder tempoet i spillet oppe:</p>
+    <ul>
+      <li><strong>24 sekunder:</strong> et angreb må højst vare 24 sekunder, før bolden har ramt ringen. Ellers får modstanderne bolden. Efter et offensivt rebound nulstilles uret kun til 14 sekunder.</li>
+      <li><strong>8 sekunder:</strong> holdet med bolden skal have den over midterlinjen inden for 8 sekunder.</li>
+      <li><strong>5 sekunder:</strong> et indkast skal tages inden for 5 sekunder — og en tæt bevogtet spiller må højst holde bolden i 5 sekunder uden at drible, aflevere eller skyde.</li>
+      <li><strong>3 sekunder:</strong> en angriber må højst opholde sig 3 sekunder ad gangen i modstanderens 3-sekundersfelt ("nøglen") under kurven.</li>
+    </ul>
+
+    <h2 id="fouls">Fouls og frikast</h2>
+    <p>
+      En <strong>personlig foul</strong> dømmes ved ulovlig kropskontakt: skub, hold, slag over
+      armene eller at blokere en spiller i bevægelse med kroppen. Konsekvenserne:
+    </p>
+    <ul>
+      <li><strong>5 fouls = færdig i kampen.</strong> En spiller med fem personlige fouls (seks i NBA) skal udskiftes og må ikke spille mere i den kamp.</li>
+      <li><strong>Foul på en skytte</strong> giver straffekast: 2 eller 3 afhængigt af skuddet — og 1 ekstra, hvis skuddet gik i.</li>
+      <li><strong>Holdfouls og bonus:</strong> fra og med et holds 5. foul i samme periode giver alle efterfølgende fouls 2 straffekast — også selvom der ikke blev skudt.</li>
+      <li><strong>Usportslig foul</strong> (hård eller uden reelt forsøg på at spille bolden) giver 2 straffekast plus bolden. To usportslige fouls betyder udvisning.</li>
+      <li><strong>Teknisk foul</strong> dømmes for usportslig opførsel uden kropskontakt — fx brok eller filmede fald — og giver modstanderne 1 straffekast plus bolden.</li>
+    </ul>
+
+    <h2 id="nba-fiba">Forskelle: FIBA, NBA og dansk basketball</h2>
+    <p>
+      Dansk basketball — fra minibasket til ligaen — spilles efter <strong>FIBA's regler</strong>.
+      NBA har sit eget regelsæt, og det er typisk dét, man ser forskelle fra på tv:
+    </p>
+    <table>
+      <thead>
+        <tr><th>Regel</th><th>FIBA / Danmark</th><th>NBA</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Periodelængde</td><td>4 × 10 min</td><td>4 × 12 min</td></tr>
+        <tr><td>3-pointslinje</td><td>6,75 m</td><td>7,24 m</td></tr>
+        <tr><td>Fouls før udvisning</td><td>5</td><td>6</td></tr>
+        <tr><td>Bane</td><td>28 × 15 m</td><td>ca. 28,7 × 15,2 m</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Reglerne på denne side er FIBA-versionen — altså dem, der gælder, når der spilles kamp i
+      en dansk hal.
+    </p>
+
+    <h2 id="boerneregler">Regler for børn: minibasket er anderledes (med vilje)</h2>
+    <p>
+      Dansk børnebasket spilles ikke efter voksenreglerne. Minibasket bruger lavere kurve,
+      mindre bolde, færre spillere på banen og kortere perioder — og børnereglerne kræver, at
+      spilletiden fordeles, så <strong>alle børn kommer på banen</strong>. De præcise regler
+      justeres pr. årgang, så brug altid
+      <a href="https://basket.dk" rel="noopener">basket.dk</a> som den officielle kilde.
+    </p>
+    <a class="linkcard" href="/traenerguides/minibasket-regler-for-nye-traenere/">
+      <strong>Minibasket-reglerne forklaret for trænere</strong>
+      <span>Lavere kurve, mindre bolde og alle skal spille — principperne bag de danske børneregler, uden paragraf-jungle.</span>
+    </a>
+
+    <h2 id="faq">Ofte stillede spørgsmål</h2>
+    {faq.map((f) => (
+      <div class="faq-item">
+        <h3>{f.q}</h3>
+        <p>{f.a}</p>
+      </div>
+    ))}
+
+    <CtaBox
+      campaign="regler"
+      heading="Reglerne siger, at alle skal spille — appen holder styr på det"
+      text="Den sværeste regel at overholde i børnebasket er spilletiden. Mini Basket-appen planlægger perioderne og viser live, hvem der mangler tid på banen. Gratis."
+    />
+
+    <h2>Læs også</h2>
+    <ul>
+      <li><a href="/traenerguides/minibasket-regler-for-nye-traenere/">Minibasket-regler forklaret for nye trænere</a></li>
+      <li><a href="/traenerguides/kampdag-med-flere-kampe/">Sådan planlægger du en kampdag med flere kampe</a></li>
+      <li><a href="/basketoevelser/">Gratis basketball-øvelser til børn</a></li>
+    </ul>
+  </article>
+</Base>

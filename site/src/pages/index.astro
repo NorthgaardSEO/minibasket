@@ -1,0 +1,323 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { appUrl, fmtDato } from '../lib/site';
+
+const guides = (await getCollection('guides'))
+  .sort((a, b) => b.data.publiceret.getTime() - a.data.publiceret.getTime());
+const senesteGuides = guides.slice(0, 3);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Mini Basket',
+  alternateName: 'minibasket.dk',
+  url: 'https://minibasket.dk/',
+  description:
+    'Gratis basketball-øvelser og trænerguides til børnebasket (U6–U12) — og en app der fordeler spilletiden og giver fuldt overblik til kamp.',
+  inLanguage: 'da',
+};
+
+const spillere = [
+  { navn: 'Alma', tid: '14:20', pct: 92, on: true },
+  { navn: 'Noah', tid: '13:05', pct: 84, on: true },
+  { navn: 'Ida', tid: '12:40', pct: 81, on: false },
+  { navn: 'Elias', tid: '10:15', pct: 66, on: true },
+  { navn: 'Liv', tid: '09:30', pct: 61, on: false },
+];
+---
+<Base
+  title="Mini Basket — basketball-øvelser og guides til børnetrænere"
+  description="Gratis basketball-øvelser og trænerguides til børnebasket (U6–U12) — og en app der giver nemt styr på spilletiden, så ingen spiller for meget. Af en træner, til trænere."
+  schema={schema}
+>
+  <!-- 2. Hero -->
+  <section class="hero home-hero">
+    <div class="hero-body">
+      <span class="eyebrow">Børnebasket · U6–U12 · gratis app</span>
+      <h1><span class="grad-text">Nemt styr på spilletiden.</span></h1>
+      <p class="lede">
+        Mini Basket fordeler minutterne, så ingen spiller for meget — og du har fuldt overblik
+        over spilletiden, selv når I spiller flere kampe på én dag. Gratis, og virker på alle telefoner.
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-gold" href={appUrl('forside-hero')}>Åbn appen</a>
+        <a class="btn btn-ghost" href="#saadan-virker-det">Se hvordan det virker</a>
+      </div>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="phone-screen">
+        <div class="app-top">
+          <span class="app-title">Tid &amp; Score</span>
+          <span class="app-period">Periode 3 / 6</span>
+        </div>
+        <div class="app-clock">04:37</div>
+        <div class="app-score">
+          <div class="app-team"><b>24</b><span>SISU</span></div>
+          <div class="app-dash">–</div>
+          <div class="app-team"><b>18</b><span>Gæster</span></div>
+        </div>
+        <div class="app-lbl">Spilletid i dag</div>
+        <div class="app-list">
+          {spillere.map((s) => (
+            <div class="app-row">
+              <span class={`app-dot${s.on ? ' on' : ''}`}></span>
+              <span class="app-name">{s.navn}</span>
+              <span class="app-bar"><i style={`width:${s.pct}%`}></i></span>
+              <span class="app-tid">{s.tid}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Trust-strip -->
+  <div class="trust mono">
+    <span class="trust-lbl">Bruges af børnetrænere i klubber som</span>
+    <span class="trust-names">SISU · Falcon · BMS · Værløse · Hørsholm 79ers</span>
+  </div>
+
+  <!-- 4. Tre trin -->
+  <section id="saadan-virker-det" class="home-sec">
+    <span class="eyebrow">Sådan virker det</span>
+    <h2>Klar på tre trin</h2>
+    <div class="trin-grid">
+      <div class="trin">
+        <span class="trin-nr mono">1</span>
+        <h3>Opret dit hold</h3>
+        <p>Skriv spillerne ind én gang — så er holdet klar til hele sæsonen. Ingen konto-bøvl for børnene.</p>
+      </div>
+      <div class="trin">
+        <span class="trin-nr mono">2</span>
+        <h3>Lad appen fordele</h3>
+        <p>Vælg antal perioder, og appen fordeler pladserne jævnt, så ingen spiller for meget — og ingen bliver glemt.</p>
+      </div>
+      <div class="trin">
+        <span class="trin-nr mono">3</span>
+        <h3>Styr kampen</h3>
+        <p>Ur, score og skift på én skærm. Undervejs kan du altid se, hvem der har spillet hvor meget.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Funktioner -->
+  <section id="funktioner" class="home-sec">
+    <span class="eyebrow">Funktioner</span>
+    <h2>Alt det, du står med til kamp</h2>
+    <div class="feat-grid">
+      <div class="feat">
+        <h3>Spilletid-overblik</h3>
+        <p>Se hvor meget hver spiller har spillet — pr. kamp og samlet. Også når I spiller to eller tre kampe samme dag.</p>
+      </div>
+      <div class="feat">
+        <h3>Rotation &amp; perioder</h3>
+        <p>Planlæg perioderne før kampen med et par tryk. Appen fordeler minutterne jævnt og viser planen tydeligt for alle.</p>
+      </div>
+      <div class="feat">
+        <h3>Tid &amp; score</h3>
+        <p>Kampur, score og periode på samme skærm. Er I flere trænere ved bordet, ser I alle det samme — live.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Øvelser -->
+  <section id="ovelser" class="home-sec">
+    <div class="sec-head" style="margin-top:0;">
+      <div>
+        <span class="eyebrow">Gratis øvelsesbank</span>
+        <h2 style="margin:0 0 .3em;">Basketball-øvelser til børn</h2>
+      </div>
+      <a class="more" href="/basketoevelser/">Alle øvelser →</a>
+    </div>
+    <p class="lede" style="font-size:15px;">
+      Alderssvarende basketball-øvelser og drills til U6–U12 — leg, mange boldberøringer, ingen køer.
+    </p>
+    <div class="kat-grid">
+      <a class="kat-card" href="/basketoevelser/">
+        <span class="badge kat">Dribling</span>
+        <h3>Drible-øvelser</h3>
+        <p>Boldkontrol pakket ind i lege — fra trafiklys til haletagfat.</p>
+      </a>
+      <a class="kat-card" href="/basketoevelser/">
+        <span class="badge kat">Skud</span>
+        <h3>Skud-øvelser</h3>
+        <p>Scoringer med rigtig teknik på kurve i børnehøjde.</p>
+      </a>
+      <a class="kat-card" href="/basketoevelser/">
+        <span class="badge kat">Forsvar</span>
+        <h3>Forsvars-øvelser</h3>
+        <p>Timing og benarbejde — uden elimineringslege.</p>
+      </a>
+    </div>
+
+    <div class="teaser-grid">
+      <a class="linkcard" href="/basketball-regler/">
+        <strong>Nyt: Basketball-reglerne — enkelt forklaret</strong>
+        <span>Skridt, point, kamplængde og fouls. Alle de almindelige basketballregler på dansk.</span>
+      </a>
+      <a class="linkcard" href="/basketball-for-boern/">
+        <strong>Forælder? Sådan kommer jeres barn i gang</strong>
+        <span>Alder, klub, udstyr og hvad I kan forvente — hele guiden til basketball for børn.</span>
+      </a>
+    </div>
+
+    <div class="sec-head">
+      <h2 style="margin:0;">Trænerguides</h2>
+      <a class="more" href="/traenerguides/">Alle guides →</a>
+    </div>
+    <div class="guide-list">
+      {senesteGuides.map((guide) => (
+        <a class="guide-card" href={`/traenerguides/${guide.id}/`}>
+          <span class="dato">{fmtDato(guide.data.publiceret)}</span>
+          <h3>{guide.data.title}</h3>
+          <p>{guide.data.description}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- 7. Galleri -->
+  <section id="galleri" class="home-sec">
+    <span class="eyebrow">Smuk i brug</span>
+    <h2>Ét blik — så ved du det hele</h2>
+    <div class="mock-grid" aria-hidden="true">
+      <div class="mock">
+        <div class="mock-title mono">Spilletid</div>
+        <div class="mock-bars">
+          <div class="mock-bar"><span>Alma</span><i style="width:90%"></i></div>
+          <div class="mock-bar"><span>Noah</span><i style="width:78%"></i></div>
+          <div class="mock-bar"><span>Ida</span><i style="width:74%"></i></div>
+          <div class="mock-bar"><span>Liv</span><i style="width:58%"></i></div>
+        </div>
+        <p class="mock-cap">Hvem har spillet hvor meget — altid opdateret.</p>
+      </div>
+      <div class="mock">
+        <div class="mock-title mono">Perioder</div>
+        <div class="mock-per">
+          {['P1','P2','P3','P4','P5','P6'].map((p, i) => (
+            <div class={`mock-cell${i === 2 ? ' now' : ''}`}>{p}</div>
+          ))}
+        </div>
+        <p class="mock-cap">Planen ligger klar, før kampen fløjtes i gang.</p>
+      </div>
+      <div class="mock">
+        <div class="mock-title mono">Kampdag</div>
+        <div class="mock-games">
+          <div class="mock-game done">Kamp 1 <span>✓</span></div>
+          <div class="mock-game live">Kamp 2 <span>live</span></div>
+          <div class="mock-game">Kamp 3 <span>12:30</span></div>
+        </div>
+        <p class="mock-cap">Fuldt overblik — også over flere kampe samme dag.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Trænerudtalelser -->
+  <section id="traenere" class="home-sec">
+    <span class="eyebrow">Trænere om appen</span>
+    <h2>Fra dommerbordet</h2>
+    <div class="quote-grid">
+      <figure class="quote">
+        <blockquote>Før stod jeg med en papirlap og hovedregning midt i tredje periode. Nu kan jeg se med det samme, hvem der mangler tid på banen.</blockquote>
+        <figcaption class="mono">Mette · U8-træner i SISU</figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>Tre kampe på en stævnedag, og regnestykket gik bare op. Jeg kunne se på kampen i stedet for på et regneark.</blockquote>
+        <figcaption class="mono">Jonas · U10-træner i Falcon</figcaption>
+      </figure>
+      <figure class="quote">
+        <blockquote>Vi er to trænere ved bordet, og vi ser det samme live. Det alene er appen værd.</blockquote>
+        <figcaption class="mono">Camilla · U12-træner i Værløse</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 9. CTA-footer -->
+  <section class="cta-box" style="margin-top:44px;">
+    <div>
+      <span class="cta-eyebrow">Gratis · virker på alle telefoner</span>
+      <strong>Klar til næste kamp?</strong>
+      <p>
+        Opret dit hold på to minutter — så fordeler appen spilletiden, og du kan koncentrere
+        dig om børnene. Bygget og brugt i en rigtig klub gennem en hel sæson.
+      </p>
+    </div>
+    <a class="btn btn-gold" href={appUrl('forside-bund')}>Åbn Mini Basket-appen</a>
+  </section>
+
+  <style>
+    .home-hero{padding-top:44px;}
+    .home-hero h1{font-size:clamp(36px,6vw,58px);letter-spacing:-1px;}
+    .home-sec{margin-top:58px;scroll-margin-top:90px;}
+
+    /* Telefon-mockup (appens champagne-look) */
+    .phone{flex-shrink:0;width:264px;background:#1d1a15;border:1px solid var(--line-2);border-radius:38px;padding:12px;box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 60px rgba(205,168,95,.12);margin:0 auto;}
+    .phone-screen{background:#f6f2ea;border-radius:28px;padding:18px 15px 20px;color:#2a231d;}
+    .app-top{display:flex;justify-content:space-between;align-items:baseline;}
+    .app-title{font-family:var(--serif);font-weight:600;font-size:15px;color:#2a231d;}
+    .app-period{font-family:var(--mono);font-size:8.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#7a6f5c;background:#efe8d8;border:1px solid #d3c6a8;border-radius:999px;padding:2px 7px;}
+    .app-clock{font-family:var(--mono);font-weight:700;font-size:40px;letter-spacing:-1px;text-align:center;margin:10px 0 2px;color:#241d18;}
+    .app-score{display:flex;justify-content:center;align-items:center;gap:14px;padding-bottom:10px;border-bottom:1px solid #e6ddca;}
+    .app-team{text-align:center;}
+    .app-team b{display:block;font-family:var(--mono);font-size:17px;color:#6e1526;}
+    .app-team span{font-family:var(--mono);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:#a89a80;}
+    .app-dash{color:#d3c6a8;font-weight:700;}
+    .app-lbl{font-family:var(--mono);font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#a89a80;margin:11px 0 6px;}
+    .app-row{display:flex;align-items:center;gap:7px;margin:7px 0;}
+    .app-dot{width:7px;height:7px;border-radius:50%;background:#d3c6a8;flex-shrink:0;}
+    .app-dot.on{background:#c39b41;box-shadow:0 0 0 2.5px rgba(195,155,65,.25);}
+    .app-name{font-size:11.5px;font-weight:600;width:38px;color:#2a231d;}
+    .app-bar{flex:1;height:6px;border-radius:999px;background:#eee7d6;overflow:hidden;}
+    .app-bar i{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#e7d5a3,#c39b41);}
+    .app-tid{font-family:var(--mono);font-size:9.5px;font-weight:700;color:#7a6f5c;}
+
+    /* Trust-strip */
+    .trust{display:flex;gap:8px 18px;flex-wrap:wrap;align-items:baseline;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 2px;margin-top:36px;}
+    .trust-lbl{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-dim);}
+    .trust-names{font-size:11px;letter-spacing:1px;color:var(--ink-soft);}
+
+    /* Tre trin */
+    .trin-grid,.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-top:18px;}
+    .trin,.feat{background:linear-gradient(170deg,var(--card-2),var(--card));border:1px solid var(--line-2);border-radius:var(--r-md);padding:20px;}
+    .trin h3,.feat h3{margin:10px 0 6px;}
+    .trin p,.feat p{margin:0;font-size:14px;color:var(--ink-soft);line-height:1.6;}
+    .trin-nr{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--grad-btn);color:var(--on-gold);font-weight:700;font-size:13px;}
+    .feat h3{margin-top:0;}
+    .feat h3::before{content:"";display:block;width:34px;height:3px;border-radius:2px;background:var(--grad-gold);margin-bottom:12px;}
+
+    /* Øvelses-kategorier + teasere */
+    .kat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0;}
+    .kat-card{display:block;background:linear-gradient(170deg,var(--card-2),var(--card));border:1px solid var(--line-2);border-radius:var(--r-md);padding:18px;text-decoration:none;transition:border-color .15s,transform .12s;}
+    .kat-card:hover{border-color:var(--gold-2);transform:translateY(-2px);}
+    .kat-card h3{margin:10px 0 5px;color:var(--ink-strong);}
+    .kat-card p{margin:0;font-size:13.5px;color:var(--ink-soft);}
+    .teaser-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:6px 0 10px;}
+    .teaser-grid .linkcard{margin:0;}
+
+    /* Galleri */
+    .mock-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px;}
+    .mock{background:linear-gradient(170deg,var(--card-2),var(--card));border:1px solid var(--line-2);border-radius:var(--r-md);padding:16px;}
+    .mock-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-2);margin-bottom:12px;}
+    .mock-cap{margin:12px 0 0;font-size:12.5px;color:var(--ink-faint);}
+    .mock-bar{display:flex;align-items:center;gap:8px;margin:7px 0;}
+    .mock-bar span{font-size:11px;font-weight:600;width:38px;color:var(--ink-soft);}
+    .mock-bar i{display:block;height:7px;border-radius:999px;background:var(--grad-gold);}
+    .mock-per{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+    .mock-cell{font-family:var(--mono);font-size:10px;font-weight:700;text-align:center;padding:10px 0;border-radius:8px;border:1px solid var(--line-2);color:var(--ink-soft);background:var(--paper-2);}
+    .mock-cell.now{background:var(--grad-btn);color:var(--on-gold);border-color:#b3924e;}
+    .mock-games{display:flex;flex-direction:column;gap:7px;}
+    .mock-game{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10.5px;font-weight:700;padding:9px 12px;border-radius:8px;border:1px solid var(--line-2);color:var(--ink-soft);background:var(--paper-2);}
+    .mock-game span{color:var(--ink-faint);}
+    .mock-game.done span{color:var(--good);}
+    .mock-game.live{border-color:#b3924e;}
+    .mock-game.live span{color:var(--gold);}
+
+    /* Udtalelser */
+    .quote-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:18px;}
+    .quote{margin:0;background:linear-gradient(170deg,var(--card-2),var(--card));border:1px solid var(--line-2);border-radius:var(--r-md);padding:20px;}
+    .quote blockquote{margin:0 0 14px;font-family:var(--serif);font-size:16.5px;line-height:1.5;color:var(--ink);}
+    .quote blockquote::before{content:"\201C";display:block;font-size:34px;line-height:.6;color:var(--gold-2);margin-bottom:8px;}
+    .quote figcaption{font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-2);}
+  </style>
+</Base>

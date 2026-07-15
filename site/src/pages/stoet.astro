@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { MOBILEPAY_URL } from '../lib/site';
+---
+<Base
+  title="Støt Mini Basket med en kaffe — MobilePay"
+  description="Mini Basket er gratis og reklamefrit. Kan du lide øvelserne, guiderne eller appen, kan du støtte projektet med en kaffe via MobilePay."
+>
+  <article class="prose">
+    <span class="eyebrow">Støt projektet</span>
+    <h1>Giv en kaffe til en frivillig træner</h1>
+    <p class="lede">
+      Mini Basket er gratis, reklamefrit og bygget i fritiden. Hvis øvelserne, guiderne
+      eller appen har gjort din trænerhverdag lettere, kan du sige tak med en kaffe.
+    </p>
+
+    <h2>Hvad går pengene til?</h2>
+    <ul>
+      <li><strong>Drift:</strong> domæne, hosting og den database, der holder appen synkroniseret mellem trænere.</li>
+      <li><strong>Udvikling:</strong> nye funktioner, flere øvelser og flere guides.</li>
+      <li><strong>Kaffe:</strong> bogstaveligt talt — det meste af projektet er bygget efter børnenes sengetid.</li>
+    </ul>
+
+    <p style="margin-top:28px;">
+      <a class="btn btn-wine" href={MOBILEPAY_URL} rel="noopener">Støt med MobilePay</a>
+    </p>
+    <p class="mono" style="font-size:11px;color:var(--ink-soft);">
+      Linket åbner en MobilePay-boks — du vælger selv beløbet. Alt er frivilligt.
+    </p>
+
+    <h2>Andre måder at støtte på</h2>
+    <ul>
+      <li>Fortæl en anden træner om <a href="/app/?utm_source=site&utm_medium=cta&utm_campaign=stoet">appen</a> — mund-til-mund er den bedste hjælp.</li>
+      <li>Del en <a href="/basketoevelser/">øvelse</a> eller <a href="/traenerguides/">guide</a> i din klubs trænergruppe.</li>
+      <li>Send feedback: hvad mangler du som træner? Alle idéer læses.</li>
+    </ul>
+  </article>
+</Base>
