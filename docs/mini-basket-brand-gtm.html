@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini Basket — Brand & Go-to-Market</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#e30613; --accent-dark:#b8050f; --accent-soft:#fbd9dc;
+    --ink:#1a1a1a; --ink-soft:#5a5a5a; --ink-faint:#9a9a9a;
+    --paper:#ffffff; --paper-2:#f4f4f4; --paper-3:#e8e8e8; --paper-4:#dadada;
+    --good:#0e8a51; --over:#fff2dc;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--paper-3);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:860px;margin:0 auto;background:var(--paper);box-shadow:0 0 0 1px rgba(0,0,0,.06);}
+  section{padding:34px 40px;border-bottom:1px solid var(--paper-3);}
+  @media(max-width:640px){section{padding:26px 22px;}}
+  .eyebrow{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);}
+  h1{font-size:34px;font-weight:900;letter-spacing:-1px;margin:.15em 0 .1em;line-height:1.05;}
+  h2{font-size:22px;font-weight:800;letter-spacing:-.5px;margin:0 0 4px;}
+  h3{font-size:15px;font-weight:800;margin:0 0 6px;letter-spacing:-.2px;}
+  p{margin:.5em 0;}
+  .lede{font-size:16px;color:var(--ink-soft);max-width:60ch;}
+  .mono{font-family:var(--mono);}
+  .muted{color:var(--ink-soft);}
+  .sec-num{font-family:var(--mono);font-size:11px;color:var(--ink-faint);font-weight:700;}
+
+  /* ===== HERO / LOGO ===== */
+  .hero{background:var(--paper-2);display:flex;gap:30px;align-items:center;flex-wrap:wrap;}
+  .lockup{display:flex;align-items:center;gap:16px;}
+  .wordmark{font-weight:900;font-size:30px;letter-spacing:-1.2px;line-height:1;}
+  .wordmark .mini{color:var(--ink);}
+  .wordmark .basket{color:var(--accent);}
+  .tagline{font-family:var(--mono);font-size:11px;color:var(--ink-soft);letter-spacing:.3px;margin-top:6px;}
+  .domain-pill{display:inline-block;font-family:var(--mono);font-size:12px;font-weight:700;background:var(--ink);color:#fff;padding:6px 12px;border-radius:999px;margin-top:14px;}
+
+  /* logo mark */
+  .mark{width:82px;height:82px;flex-shrink:0;}
+
+  /* ===== GRID HELPERS ===== */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:640px){.grid2,.grid3{grid-template-columns:1fr;}}
+  .card{border:1.6px solid var(--ink);border-radius:12px;padding:16px 18px;background:var(--paper);box-shadow:3px 3px 0 var(--ink);}
+  .card.soft{box-shadow:none;border-color:var(--paper-4);}
+
+  /* ===== COLOR SWATCHES ===== */
+  .swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  @media(max-width:640px){.swatches{grid-template-columns:repeat(2,1fr);}}
+  .sw{border:1.4px solid var(--ink);border-radius:10px;overflow:hidden;}
+  .sw .chip{height:56px;}
+  .sw .lbl{padding:7px 9px;font-family:var(--mono);font-size:10px;line-height:1.4;}
+  .sw .lbl b{display:block;font-size:11px;color:var(--ink);}
+  .sw .lbl span{color:var(--ink-soft);}
+
+  /* ===== TYPE SPECIMEN ===== */
+  .type-row{display:flex;align-items:baseline;gap:14px;border-bottom:1px dashed var(--paper-4);padding:8px 0;flex-wrap:wrap;}
+  .type-row .k{font-family:var(--mono);font-size:10px;color:var(--ink-faint);width:120px;flex-shrink:0;}
+
+  /* ===== LOGO VARIANTS ===== */
+  .logo-variants{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  @media(max-width:640px){.logo-variants{grid-template-columns:1fr;}}
+  .lv{border:1.4px solid var(--paper-4);border-radius:12px;padding:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:120px;}
+  .lv.dark{background:var(--ink);}
+  .lv.red{background:var(--accent);}
+  .lv .cap{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ink-faint);}
+  .lv.dark .cap,.lv.red .cap{color:rgba(255,255,255,.6);}
+
+  /* ===== GTM PHASES ===== */
+  .phase{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--paper-3);}
+  .phase:last-child{border-bottom:none;}
+  .phase .n{font-family:var(--mono);font-weight:800;font-size:13px;width:34px;height:34px;flex-shrink:0;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;border:1.6px solid var(--ink);}
+  .phase .who{font-family:var(--mono);font-size:10px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:1px;}
+
+  /* ===== PRICING ===== */
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media(max-width:640px){.price-grid{grid-template-columns:1fr;}}
+  .tier{border:1.6px solid var(--ink);border-radius:12px;padding:18px;background:var(--paper);}
+  .tier.pro{background:var(--ink);color:#fff;box-shadow:4px 4px 0 var(--accent);}
+  .tier .amt{font-family:var(--mono);font-size:26px;font-weight:800;letter-spacing:-1px;margin:6px 0;}
+  .tier ul{margin:10px 0 0;padding-left:18px;font-size:13.5px;}
+  .tier li{margin:4px 0;}
+  .tier.pro .muted{color:rgba(255,255,255,.7);}
+
+  /* checklist */
+  .check li{list-style:none;position:relative;padding-left:26px;margin:8px 0;font-size:14px;}
+  .check{padding:0;margin:0;}
+  .check li::before{content:'';position:absolute;left:0;top:2px;width:16px;height:16px;border:1.6px solid var(--ink);border-radius:4px;}
+  .tag{display:inline-block;font-family:var(--mono);font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:4px;background:var(--paper-2);border:1px solid var(--paper-4);color:var(--ink-soft);letter-spacing:.5px;text-transform:uppercase;}
+  .tag.win{background:var(--accent-soft);border-color:var(--accent);color:var(--accent-dark);}
+  .footer{padding:22px 40px;background:var(--ink);color:rgba(255,255,255,.7);font-family:var(--mono);font-size:10.5px;letter-spacing:.3px;}
+  @media(max-width:640px){.footer{padding:20px 22px;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="mark" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-label="Mini Basket logo">
+      <!-- rotation arrows -->
+      <path d="M50 6 a44 44 0 0 1 38 22" fill="none" stroke="#1a1a1a" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M88 28 l1.5 -14 l-13 6 z" fill="#1a1a1a"/>
+      <path d="M50 94 a44 44 0 0 1 -38 -22" fill="none" stroke="#1a1a1a" stroke-width="5.5" stroke-linecap="round"/>
+      <path d="M12 72 l-1.5 14 l13 -6 z" fill="#1a1a1a"/>
+      <!-- ball -->
+      <circle cx="50" cy="50" r="30" fill="#e30613" stroke="#1a1a1a" stroke-width="4"/>
+      <path d="M50 20 v60 M20 50 h60" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+      <path d="M28 29 q22 21 0 42 M72 29 q-22 21 0 42" stroke="#1a1a1a" stroke-width="3" fill="none"/>
+    </svg>
+    <div>
+      <div class="eyebrow">Brand &amp; Go-to-Market · v1</div>
+      <div class="lockup" style="margin-top:6px;">
+        <div class="wordmark"><span class="mini">Mini</span> <span class="basket">Basket</span></div>
+      </div>
+      <div class="tagline">Fair spilletid, planlagt fra lommen.</div>
+      <div class="domain-pill">mini-basket.dk</div>
+    </div>
+  </section>
+
+  <!-- 01 NAVN -->
+  <section>
+    <div class="sec-num">01 — NAVN &amp; RATIONALE</div>
+    <h2>Hvorfor Mini Basket</h2>
+    <p class="lede">"Minibasket" er Danmarks Basketball Forbunds officielle betegnelse for børnebasket (U10 4-mod-4, U12 4v4/5v5). Trænerne kender ordet — du starter med indbygget genkendelse, ikke fra nul.</p>
+    <div class="grid2" style="margin-top:16px;">
+      <div class="card">
+        <h3>Styrker</h3>
+        <p class="muted" style="font-size:14px;margin:0;">Kendt DBBF-kategoriord → nem genkendelse og god SEO. Beskriver præcist hvem det er til (de yngste hold). Kort, konkret, dansk. Ingen eksisterende dansk rotations-app bærer navnet.</p>
+      </div>
+      <div class="card soft">
+        <h3>Afvejninger at kende</h3>
+        <p class="muted" style="font-size:14px;margin:0;">Ordet er <b>beskrivende</b> → svært at varemærkebeskytte som eneret. Det binder brandet til <b>basket</b>, mens roadmap-visionen er al breddeidræt. Løsning: brug "Mini Basket" som produktnavn nu, hold en bredere paraply i baghovedet hvis I senere åbner for håndbold/fodbold.</p>
+      </div>
+    </div>
+    <p style="margin-top:14px;"><span class="tag win">Anbefaling</span> &nbsp;Kør med Mini Basket / mini-basket.dk til v1. Sikr også <span class="mono">minibasket.dk</span> (uden bindestreg) hvis ledigt, og <span class="mono">.com</span> defensivt.</p>
+  </section>
+
+  <!-- 02 POSITIONERING -->
+  <section>
+    <div class="sec-num">02 — POSITIONERING</div>
+    <h2>Én sætning, én følelse</h2>
+    <div class="card" style="margin-top:14px;background:var(--paper-2);box-shadow:3px 3px 0 var(--accent);">
+      <div class="eyebrow">Tagline</div>
+      <p style="font-size:22px;font-weight:800;letter-spacing:-.5px;margin:4px 0;">Fair spilletid, planlagt fra lommen.</p>
+      <p class="muted" style="margin:0;font-size:14px;">Positionering: <b>af en træner, til trænere.</b> Ikke endnu et administrationssystem — ét skarpt værktøj til den ene svære opgave: at fordele spilletid retfærdigt under kampen, synkront mellem flere trænere ved bordet.</p>
+    </div>
+    <div class="grid3" style="margin-top:14px;">
+      <div class="card soft"><h3>Smerten</h3><p class="muted" style="font-size:13px;margin:0;">"Hvem har spillet for lidt?" — regnet i hovedet, midt i en kamp, mens forældre kigger.</p></div>
+      <div class="card soft"><h3>Løftet</h3><p class="muted" style="font-size:13px;margin:0;">Live-overblik på telefonen. Alle trænere ser det samme. Ingen bliver glemt på bænken.</p></div>
+      <div class="card soft"><h3>Beviset</h3><p class="muted" style="font-size:13px;margin:0;">Bygget og brugt i en rigtig klub (SISU) i en hel sæson — ikke en PowerPoint-idé.</p></div>
+    </div>
+  </section>
+
+  <!-- 03 LOGO -->
+  <section>
+    <div class="sec-num">03 — LOGO</div>
+    <h2>Mærket</h2>
+    <p class="lede">En basketball, hvori de to buede pile danner rotation — navnet (basket) og funktionen (rotation) i samme mærke. Neo-brutalistisk: tyk sort kontur, rød flade, hårde streger — samme sprog som selve appen.</p>
+    <div class="logo-variants" style="margin-top:16px;">
+      <div class="lv">
+        <svg width="58" height="58" viewBox="0 0 100 100"><path d="M50 6 a44 44 0 0 1 38 22" fill="none" stroke="#1a1a1a" stroke-width="5.5" stroke-linecap="round"/><path d="M88 28 l1.5 -14 l-13 6 z" fill="#1a1a1a"/><path d="M50 94 a44 44 0 0 1 -38 -22" fill="none" stroke="#1a1a1a" stroke-width="5.5" stroke-linecap="round"/><path d="M12 72 l-1.5 14 l13 -6 z" fill="#1a1a1a"/><circle cx="50" cy="50" r="30" fill="#e30613" stroke="#1a1a1a" stroke-width="4"/><path d="M50 20 v60 M20 50 h60" stroke="#1a1a1a" stroke-width="3" fill="none"/><path d="M28 29 q22 21 0 42 M72 29 q-22 21 0 42" stroke="#1a1a1a" stroke-width="3" fill="none"/></svg>
+        <div class="cap">Primær</div>
+      </div>
+      <div class="lv dark">
+        <svg width="58" height="58" viewBox="0 0 100 100"><path d="M50 6 a44 44 0 0 1 38 22" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/><path d="M88 28 l1.5 -14 l-13 6 z" fill="#ffffff"/><path d="M50 94 a44 44 0 0 1 -38 -22" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/><path d="M12 72 l-1.5 14 l13 -6 z" fill="#ffffff"/><circle cx="50" cy="50" r="30" fill="#e30613" stroke="#ffffff" stroke-width="4"/><path d="M50 20 v60 M20 50 h60" stroke="#ffffff" stroke-width="3" fill="none"/><path d="M28 29 q22 21 0 42 M72 29 q-22 21 0 42" stroke="#ffffff" stroke-width="3" fill="none"/></svg>
+        <div class="cap">På mørk</div>
+      </div>
+      <div class="lv red">
+        <svg width="58" height="58" viewBox="0 0 100 100"><path d="M50 6 a44 44 0 0 1 38 22" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/><path d="M88 28 l1.5 -14 l-13 6 z" fill="#ffffff"/><path d="M50 94 a44 44 0 0 1 -38 -22" fill="none" stroke="#ffffff" stroke-width="5.5" stroke-linecap="round"/><path d="M12 72 l-1.5 14 l13 -6 z" fill="#ffffff"/><circle cx="50" cy="50" r="30" fill="#1a1a1a" stroke="#ffffff" stroke-width="4"/><path d="M50 20 v60 M20 50 h60" stroke="#ffffff" stroke-width="3" fill="none"/><path d="M28 29 q22 21 0 42 M72 29 q-22 21 0 42" stroke="#ffffff" stroke-width="3" fill="none"/></svg>
+        <div class="cap">Mono / app-ikon</div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:13px;margin-top:12px;">Brug mærket alene som app-ikon (192/512 px). Brug lockup (mærke + ordmærke) på landingsside og materialer. Frizone rundt om mærket = mindst halvdelen af boldens diameter.</p>
+  </section>
+
+  <!-- 04 FARVER -->
+  <section>
+    <div class="sec-num">04 — FARVEPALET</div>
+    <h2>Farver</h2>
+    <p class="lede">Arvet direkte fra appen, så brand og produkt er ét. Rød til handling, sort til struktur, papir-gråtoner til flader.</p>
+    <div class="swatches" style="margin-top:16px;">
+      <div class="sw"><div class="chip" style="background:#e30613;"></div><div class="lbl"><b>Signalrød</b><span>#e30613 · accent</span></div></div>
+      <div class="sw"><div class="chip" style="background:#1a1a1a;"></div><div class="lbl"><b>Blæk-sort</b><span>#1a1a1a · tekst/kontur</span></div></div>
+      <div class="sw"><div class="chip" style="background:#ffffff;border-bottom:1px solid #dadada;"></div><div class="lbl"><b>Papir</b><span>#ffffff · baggrund</span></div></div>
+      <div class="sw"><div class="chip" style="background:#0e8a51;"></div><div class="lbl"><b>Grøn</b><span>#0e8a51 · ok/live</span></div></div>
+    </div>
+    <div class="swatches" style="margin-top:10px;">
+      <div class="sw"><div class="chip" style="background:#fbd9dc;"></div><div class="lbl"><b>Rød blød</b><span>#fbd9dc</span></div></div>
+      <div class="sw"><div class="chip" style="background:#fff2dc;"></div><div class="lbl"><b>Advarsel</b><span>#fff2dc</span></div></div>
+      <div class="sw"><div class="chip" style="background:#f4f4f4;"></div><div class="lbl"><b>Papir 2</b><span>#f4f4f4</span></div></div>
+      <div class="sw"><div class="chip" style="background:#e8e8e8;"></div><div class="lbl"><b>Papir 3</b><span>#e8e8e8</span></div></div>
+    </div>
+  </section>
+
+  <!-- 05 TYPOGRAFI -->
+  <section>
+    <div class="sec-num">05 — TYPOGRAFI</div>
+    <h2>Skrift</h2>
+    <div class="type-row"><div class="k">Inter · 900</div><div style="font-weight:900;font-size:26px;letter-spacing:-1px;">Overskrifter</div></div>
+    <div class="type-row"><div class="k">Inter · 600–700</div><div style="font-weight:700;font-size:17px;">Brødtekst og knapper</div></div>
+    <div class="type-row"><div class="k">JetBrains Mono</div><div class="mono" style="font-size:14px;font-weight:600;">TAL · TID · LABELS · 12:00</div></div>
+    <p class="muted" style="font-size:13px;margin-top:12px;">Inter til alt læsbart; JetBrains Mono til tid, tal og små etiketter — det giver "værktøj/stopur"-følelsen der passer til kampsituationen.</p>
+  </section>
+
+  <!-- 06 GTM -->
+  <section>
+    <div class="sec-num">06 — GO-TO-MARKET</div>
+    <h2>Spredning i fire faser</h2>
+    <p class="lede">Gratis kanaler, trænermund-til-mund, ingen ad-spend. Turneringer er det naturlige spredningsmiljø — folk ser dig bruge den ved bordet.</p>
+    <div style="margin-top:12px;">
+      <div class="phase"><div class="n">1</div><div><div class="who">Nu · egen klub</div><h3 style="margin:2px 0;">Beviset står fast</h3><p class="muted" style="font-size:13.5px;margin:0;">SISU kører videre som reference og testbed. Saml 3–5 korte trænercitater og ét screen-recording fra en rigtig kamp.</p></div></div>
+      <div class="phase"><div class="n">2</div><div><div class="who">Kvartal 1 · klub-til-klub</div><h3 style="margin:2px 0;">Vis den ved bordet</h3><p class="muted" style="font-size:13.5px;margin:0;">Brug den synligt til stævner. Lav et lille A6-kort med mini-basket.dk + QR, som en modstander-træner kan scanne på 5 sekunder.</p></div></div>
+      <div class="phase"><div class="n">3</div><div><div class="who">Kvartal 1–2 · forbund &amp; grupper</div><h3 style="margin:2px 0;">Del gratis, byg ry</h3><p class="muted" style="font-size:13.5px;margin:0;">Del i DBBF-netværk og Facebook-trænergrupper ("Basketballtrænere i DK"). Tilbyd DBBF at nævne værktøjet i deres minibasket-materiale.</p></div></div>
+      <div class="phase"><div class="n">4</div><div><div class="who">Kvartal 2 · landingsside</div><h3 style="margin:2px 0;">30-sekunders demo</h3><p class="muted" style="font-size:13.5px;margin:0;">mini-basket.dk med én tydelig video fra en kamp, ét CTA ("Prøv gratis med dit hold"), og manuel Signal/SMS-onboarding — behold det enkle.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 07 MODEL -->
+  <section>
+    <div class="sec-num">07 — FORRETNINGSMODEL</div>
+    <h2>Gratis kerne, klub-abonnement ovenpå</h2>
+    <div class="price-grid" style="margin-top:14px;">
+      <div class="tier">
+        <div class="eyebrow" style="color:var(--ink-soft);">Gratis</div>
+        <div class="amt">0 kr</div>
+        <p class="muted" style="font-size:13px;margin:0;">Drivkraften bag udbredelse</p>
+        <ul>
+          <li>Rotation til ét hold</li>
+          <li>Live-fordeling, timer, log</li>
+          <li>Én træner</li>
+        </ul>
+      </div>
+      <div class="tier pro">
+        <div class="eyebrow" style="color:#fff;">Klub</div>
+        <div class="amt">200–500 kr/år</div>
+        <p class="muted" style="font-size:13px;margin:0;">Pr. klub — lavt nok til et ja uden bestyrelsesmøde</p>
+        <ul>
+          <li>Flere hold &amp; trænere</li>
+          <li>Admin, roller &amp; invitationer</li>
+          <li>Realtime-presence &amp; historik</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted" style="font-size:13px;margin-top:14px;"><b>Gør ikke nu:</b> ingen reklamer, ingen tung email-onboarding. Prisen skal ramme "kasserer siger ja med det samme", ikke "kræver budgetgodkendelse".</p>
+  </section>
+
+  <!-- 08 NEXT -->
+  <section>
+    <div class="sec-num">08 — DINE NÆSTE HANDLINGER</div>
+    <h2>Tjekliste</h2>
+    <ul class="check" style="margin-top:12px;">
+      <li>Sikr <b>mini-basket.dk</b> (samt minibasket.dk + .com defensivt) hos DK Hostmaster/registrar.</li>
+      <li>Tjek navnekollision i DK-varemærkeregister (Patent- og Varemærkestyrelsen) — forvent at "minibasket" ikke kan eneretsbeskyttes; det er ok for v1.</li>
+      <li>Eksportér logo-mærket til icon-192.png og icon-512.png og opdatér manifest.json (navn → "Mini Basket").</li>
+      <li>Optag ét 30-sek. kamp-klip til demo.</li>
+      <li>Byg landingsside på mini-basket.dk (næste skridt — sig til, så bygger jeg den).</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    MINI BASKET · BRAND &amp; GO-TO-MARKET · V1 · FUNDAMENT: SISU ROTATION-SNAPSHOT V19 · FAIR SPILLETID, PLANLAGT FRA LOMMEN
+  </div>
+
+</div>
+</body>
+</html>
