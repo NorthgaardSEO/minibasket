@@ -5,8 +5,9 @@ const MOBILEPAY_LINK = "https://qr.mobilepay.dk/box/1ebdcc50-6d0b-4969-884c-9589
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 const $ = (id) => document.getElementById(id);
-const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(m){ const t=$("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1800); }
+function todayLocal(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
 function vibrate(x){ if(navigator.vibrate) try{navigator.vibrate(x);}catch(e){} }
 
 const ONCOURT = [3,4,5], PERIODS = [4,5,6], LENGTHS = [4,5,6,8,10];
@@ -14,7 +15,7 @@ const ONCOURT = [3,4,5], PERIODS = [4,5,6], LENGTHS = [4,5,6,8,10];
 let me = null;               // {id,email,name,role}
 let teams = [], players = [], sessions = [], rot = {}; // rot[playerId] = {period: 'D'|'S'}
 let curTeam = null, curSession = null, view = "kamp";
-let timer = { remaining:0, running:false, iv:null, lenMin:5, period:0 };
+let timer = { remaining:0, endAt:0, running:false, iv:null, lenMin:5, period:0 };
 let poll = null;
 let lastWrite = 0; // guards polling from clobbering in-progress local edits
 
@@ -79,17 +80,22 @@ function translateErr(m){
   if(/already registered/i.test(m)) return "Den email er allerede oprettet — log ind i stedet.";
   if(/password should be at least/i.test(m)) return "Adgangskoden skal være mindst 6 tegn.";
   if(/email not confirmed/i.test(m)) return "Bekræft din email først (tjek indbakken).";
-  return m;
+  if(/rate limit|too many requests/i.test(m)) return "For mange forsøg — vent lidt og prøv igen.";
+  if(/network|fetch/i.test(m)) return "Ingen forbindelse — tjek dit netværk og prøv igen.";
+  return "Noget gik galt — prøv igen.";
 }
 
 sb.auth.onAuthStateChange((event, session)=>{
   if(event==="PASSWORD_RECOVERY"){ $("auth").classList.add("hidden"); $("reset").classList.remove("hidden"); return; }
-  if(session && session.user){ if(!me) boot(session.user); }
+  if(session && session.user){ boot(session.user); }
   else { $("app").classList.add("hidden"); $("auth").classList.remove("hidden"); }
 });
 
 /* ---------------- BOOT ---------------- */
+let booting=false; // synkront flag — forhindrer dobbelt boot (INITIAL_SESSION + SIGNED_IN)
 async function boot(user){
+  if(booting || me) return;
+  booting=true;
   $("auth").classList.add("hidden"); $("reset").classList.add("hidden");
   // ensure coach row
   const name = (user.user_metadata && user.user_metadata.name) || (user.email||"").split("@")[0];
@@ -116,7 +122,7 @@ async function loadTeams(){
     // First-run onboarding: give a brand-new admin a working team + game immediately
     const { data:t } = await sb.from("mb_teams").insert({ name:"Mit hold", sort:0 }).select().single();
     if(t){
-      await sb.from("mb_sessions").insert({ team_id:t.id, name:"Kamp 1", sort:0 });
+      await sb.from("mb_sessions").insert({ team_id:t.id, name:"Kamp 1", sort:0, game_date:todayLocal() });
       teams=[t]; renderTeamTabs(); await selectTeam(t.id);
       toast("Velkommen! Dit hold er klar — tilføj spillere under Trup ✨");
     } else {
@@ -148,7 +154,7 @@ async function selectTeam(teamId){
 
 async function selectSession(sid){
   curSession = sid;
-  timer.running=false; if(timer.iv) clearInterval(timer.iv); timer.remaining=0; timer.period=0;
+  timer.running=false; if(timer.iv) clearInterval(timer.iv); timer.iv=null; timer.remaining=0; timer.endAt=0; timer.period=0; releaseWakeLock();
   await loadDayRotations();
   renderSessionTabs(); renderAll();
 }
@@ -158,7 +164,7 @@ function activePlayers(){ return players.filter(p=>!p.injured); }
 
 /* ---------------- DAY (flere kampe samme dag) ---------------- */
 let dayRot = {}; // dayRot[sessionId][playerId][period] = role
-function dayGames(){ const s=curSess(); if(!s) return []; const d=s.game_date; return sessions.filter(x=>x.team_id===s.team_id && x.game_date===d).sort((a,b)=>(a.sort-b.sort)||(((a.created_at||"")<(b.created_at||""))?-1:1)); }
+function dayGames(){ const s=curSess(); if(!s) return []; const d=s.game_date; if(!d) return [s]; /* sessioner uden dato må aldrig klumpes sammen */ return sessions.filter(x=>x.team_id===s.team_id && x.game_date===d).sort((a,b)=>(a.sort-b.sort)||(((a.created_at||"")<(b.created_at||""))?-1:1)); }
 function dayCellRole(gid,pid,per){ return dayRot[gid] && dayRot[gid][pid] && dayRot[gid][pid][per]; }
 function dayPlayerTotal(pid){ let t=0; dayGames().forEach(g=>{ for(let i=0;i<g.periods;i++) if(dayCellRole(g.id,pid,i)) t++; }); return t; }
 function dayTotalSlots(){ return dayGames().reduce((a,g)=>a+g.oncourt*g.periods,0); }
@@ -176,15 +182,23 @@ async function balanceDay(){
   if(!day.length) return; if(!ps.length){ toast("Ingen aktive spillere"); return; }
   if(day.some(g=>g.locked)){ toast("Lås kampene op først"); return; }
   lastWrite=Date.now();
-  await sb.from("mb_rotations").delete().in("session_id", day.map(g=>g.id));
-  dayRot={}; day.forEach(g=>dayRot[g.id]={});
+  const newRot={}; day.forEach(g=>newRot[g.id]={});
   const counts={}; ps.forEach(p=>counts[p.id]=0); const rows=[];
   day.forEach(g=>{ for(let per=0;per<g.periods;per++){
     const order=ps.slice().sort((a,b)=>counts[a.id]-counts[b.id]||Math.random()-0.5);
-    order.slice(0,Math.min(g.oncourt,order.length)).forEach(p=>{ const role=p.role==="S"?"S":"D"; (dayRot[g.id][p.id]=dayRot[g.id][p.id]||{})[per]=role; counts[p.id]++; rows.push({session_id:g.id,player_id:p.id,period:per,role}); });
+    order.slice(0,Math.min(g.oncourt,order.length)).forEach(p=>{ const role=p.role==="S"?"S":"D"; (newRot[g.id][p.id]=newRot[g.id][p.id]||{})[per]=role; counts[p.id]++; rows.push({session_id:g.id,player_id:p.id,period:per,role}); });
   }});
-  rot = dayRot[curSession]||{}; renderGrid();
-  try{ if(rows.length) await sb.from("mb_rotations").insert(rows); logEvent("balance","Balancerede dagen ("+day.length+" kampe)"); toast(day.length>1?"Dagen balanceret ⚡ ("+day.length+" kampe)":"Balanceret ⚡"); }catch(e){ toast("Fejl ved gem"); }
+  try{
+    // Atomisk delete+insert på serveren — enten lykkes det hele, eller intet ændres
+    const { error } = await sb.rpc("mb_apply_rotations", { p_session_ids: day.map(g=>g.id), p_rows: rows });
+    if(error) throw error;
+    dayRot=newRot; rot=dayRot[curSession]||(dayRot[curSession]={}); renderGrid();
+    logEvent("balance","Balancerede dagen ("+day.length+" kampe)"); toast(day.length>1?"Dagen balanceret ⚡ ("+day.length+" kampe)":"Balanceret ⚡");
+  }catch(e){
+    toast("Kunne ikke gemme — henter data igen");
+    try{ await loadDayRotations(); }catch(_){}
+    renderGrid();
+  }
 }
 async function lockAllDay(){
   const day=dayGames(); if(!day.length) return; const lock = day.some(g=>!g.locked);
@@ -347,25 +361,6 @@ async function cycleCell(pid,per){
   }catch(e){ toast("Kunne ikke gemme"); }
 }
 
-async function autoBalance(){
-  const s=curSess(); if(!s){ return; } if(s.locked){ toast("Kampen er låst"); return; }
-  const ps=activePlayers(); if(!ps.length){ toast("Ingen spillere"); return; }
-  await sb.from("mb_rotations").delete().eq("session_id",s.id);
-  rot={};
-  const counts={}; ps.forEach(p=>counts[p.id]=0);
-  const rows=[];
-  for(let per=0;per<s.periods;per++){
-    const order=ps.slice().sort((a,b)=> counts[a.id]-counts[b.id] || Math.random()-0.5);
-    order.slice(0,Math.min(s.oncourt,order.length)).forEach(p=>{
-      const role = p.role==="S" ? "S" : "D";
-      (rot[p.id]=rot[p.id]||{})[per]=role; counts[p.id]++;
-      rows.push({ session_id:s.id, player_id:p.id, period:per, role });
-    });
-  }
-  renderGrid();
-  try{ if(rows.length) await sb.from("mb_rotations").insert(rows); logEvent("balance","Auto-balancerede "+s.name); toast("Balanceret ⚡"); }catch(e){ toast("Fejl ved gem"); }
-}
-
 async function clearPeriod(){
   const s=curSess(); if(!s||s.locked) return; const per=timer.period||0;
   activePlayers().forEach(p=>{ if(rot[p.id]) delete rot[p.id][per]; });
@@ -381,11 +376,12 @@ async function updateSession(patch){
 }
 $("btn-lock").addEventListener("click", async ()=>{ const s=curSess(); if(!s) return; await updateSession({locked:!s.locked}); $("btn-lock").textContent=s.locked?"🔒":"🔓"; $("btn-lock").classList.toggle("on",s.locked); logEvent("lock",(s.locked?"Låste ":"Åbnede ")+s.name); renderGrid(); });
 
-function openNewSession(){ $("ms-name").value=""; $("modal-session").classList.add("open"); }
+function openNewSession(){ $("ms-name").value=""; $("ms-date").value=todayLocal(); $("modal-session").classList.add("open"); }
 $("ms-cancel").onclick=()=>$("modal-session").classList.remove("open");
 $("ms-save").onclick=async ()=>{
   const name=$("ms-name").value.trim()||("Kamp "+(sessions.length+1));
-  const { data, error } = await sb.from("mb_sessions").insert({ team_id:curTeam, name, sort:sessions.length }).select().single();
+  const game_date=$("ms-date").value||todayLocal();
+  const { data, error } = await sb.from("mb_sessions").insert({ team_id:curTeam, name, sort:sessions.length, game_date }).select().single();
   if(error){ toast("Fejl: "+error.message); return; }
   sessions.push(data); $("modal-session").classList.remove("open"); logEvent("session","Oprettede kamp "+name); await selectSession(data.id);
 };
@@ -457,9 +453,38 @@ function renderTid(){
   const pr=$("tid-per"); const np=s?s.periods:6; pr.style.gridTemplateColumns="repeat("+np+",1fr)"; pr.innerHTML="";
   for(let i=0;i<np;i++){ (function(i){ const b=document.createElement("button"); b.className="segbtn"+(i===(timer.period||0)?" cur":""); b.textContent=(i+1); b.onclick=()=>{ timer.period=i; renderTid(); }; pr.appendChild(b); })(i); }
 }
-function tick(){ if(timer.remaining<=0){ stopT(); vibrate([200,100,200]); toast("Tiden er gået ⏱"); return; } timer.remaining--; $("tid-clock").textContent=fmt(timer.remaining); if(timer.remaining===0){ stopT(); vibrate([200,100,200]); toast("Tiden er gået ⏱"); } }
-function startT(){ if(timer.running) return; if(timer.remaining===0) timer.remaining=timer.lenMin*60; timer.running=true; timer.iv=setInterval(tick,1000); renderTid(); }
-function stopT(){ timer.running=false; if(timer.iv) clearInterval(timer.iv); renderTid(); }
+/* Uret beregnes ud fra et endAt-timestamp, så det ikke driver/fryser når skærmen låses eller iOS throttler setInterval */
+let wakeLock=null;
+async function acquireWakeLock(){
+  if(!("wakeLock" in navigator)) return;
+  try{ wakeLock=await navigator.wakeLock.request("screen"); wakeLock.addEventListener("release",()=>{ wakeLock=null; }); }catch(e){ wakeLock=null; }
+}
+function releaseWakeLock(){ if(wakeLock){ try{ wakeLock.release(); }catch(e){} wakeLock=null; } }
+function tick(){
+  if(!timer.running) return;
+  timer.remaining=Math.max(0, Math.ceil((timer.endAt-Date.now())/1000));
+  $("tid-clock").textContent=fmt(timer.remaining);
+  if(timer.remaining<=0){ stopT(); vibrate([200,100,200]); toast("Tiden er gået ⏱"); }
+}
+function startT(){
+  if(timer.running) return;
+  if(timer.remaining<=0) timer.remaining=timer.lenMin*60;
+  timer.endAt=Date.now()+timer.remaining*1000;
+  timer.running=true; timer.iv=setInterval(tick,250);
+  acquireWakeLock();
+  renderTid();
+}
+function stopT(){
+  if(timer.running) timer.remaining=Math.max(0, Math.ceil((timer.endAt-Date.now())/1000));
+  timer.running=false; if(timer.iv) clearInterval(timer.iv); timer.iv=null;
+  releaseWakeLock();
+  renderTid();
+}
+document.addEventListener("visibilitychange", ()=>{
+  if(document.hidden || !timer.running) return;
+  tick(); // genberegn resterende tid straks
+  if(!wakeLock) acquireWakeLock(); // wake lock frigives af OS ved tab-skift — tag den igen
+});
 $("tid-card").addEventListener("click", ()=>{ if(timer.running) stopT(); else startT(); });
 $("tid-card").addEventListener("dblclick", ()=>{ stopT(); timer.remaining=timer.lenMin*60; renderTid(); });
 
@@ -553,10 +578,8 @@ document.body.addEventListener("click", e=>{
 async function toggleInjure(id){ const p=players.find(x=>x.id===id); if(!p) return; p.injured=!p.injured; renderTrup(); if(view==="kamp") renderGrid(); try{ await sb.from("mb_players").update({injured:p.injured}).eq("id",id); }catch(e){} }
 
 /* ---------------- COFFEE ---------------- */
-let coffeeAmt=50;
 $("coffee-open").addEventListener("click", ()=>$("modal-coffee").classList.add("open"));
 $("coffee-cancel").addEventListener("click", ()=>$("modal-coffee").classList.remove("open"));
-$("coffee-amts").addEventListener("click", e=>{ const b=e.target.closest("[data-amt]"); if(!b) return; coffeeAmt=+b.dataset.amt; document.querySelectorAll(".coffee-amt").forEach(x=>x.classList.toggle("sel",x===b)); });
 $("coffee-send").addEventListener("click", ()=>{ window.open(MOBILEPAY_LINK,"_blank"); toast("Åbner MobilePay…"); });
 
 /* ---------------- COFFEE (ekstra knap i Links-visning) ---------------- */
@@ -565,10 +588,6 @@ const _co2=$("coffee-open2"); if(_co2) _co2.addEventListener("click", ()=>$("mod
 document.querySelectorAll(".backdrop").forEach(b=> b.addEventListener("click", e=>{ if(e.target===b) b.classList.remove("open"); }));
 
 /* ---------------- INIT ---------------- */
-(async ()=>{
-  const { data } = await sb.auth.getSession();
-  if(data.session && data.session.user){ boot(data.session.user); }
-  else { $("auth").classList.remove("hidden"); }
-})();
+/* Boot styres udelukkende af onAuthStateChange (INITIAL_SESSION / SIGNED_IN) — ingen parallel getSession()-boot */
 
 if("serviceWorker" in navigator){ window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{})); }
