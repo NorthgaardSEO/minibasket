@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import OvelseCard from '../../components/OvelseCard.astro';
+import CtaBox from '../../components/CtaBox.astro';
+import { KATEGORI_LABELS, ALDERSGRUPPER } from '../../lib/site';
+
+const ovelser = (await getCollection('ovelser'))
+  .sort((a, b) => b.data.publiceret.getTime() - a.data.publiceret.getTime());
+
+const kategorier = Object.entries(KATEGORI_LABELS);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Basketball-øvelser til børn (U6–U12)',
+  url: 'https://minibasket.dk/basketoevelser/',
+  inLanguage: 'da',
+  description:
+    'Gratis basketball-øvelser og drills til børnetræning: dribling, skud, pasning, forsvar, lege og opvarmning — sorteret efter aldersgruppe.',
+};
+---
+<Base
+  title="Basketball-øvelser til børn (U6–U12) — gratis øvelsesbank"
+  description="Gratis basketball-øvelser og drills til børnetræning: dribling, skud, pasning, forsvar, lege og opvarmning. Filtrér efter alder U6–U12."
+  schema={schema}
+>
+  <span class="eyebrow">Øvelsesbank · børnebasket</span>
+  <h1>Basketball-øvelser til børn</h1>
+  <p class="lede">
+    Gennemprøvede basketball-øvelser og drills til U6–U12 med fokus på det, der virker for
+    børn: leg, mange boldberøringer og ingen køer. Hver øvelse har trin-for-trin-instruktion,
+    variationer og en forklaring på, hvad børnene lærer.
+  </p>
+
+  <div class="filterbar">
+    <div class="frow">
+      <span class="flbl">Alder</span>
+      <button class="chip active" data-filter="alder" data-value="alle" type="button">Alle</button>
+      {ALDERSGRUPPER.map((a) => (
+        <button class="chip" data-filter="alder" data-value={a} type="button">{a}</button>
+      ))}
+    </div>
+    <div class="frow">
+      <span class="flbl">Kategori</span>
+      <button class="chip active" data-filter="kategori" data-value="alle" type="button">Alle</button>
+      {kategorier.map(([key, label]) => (
+        <button class="chip" data-filter="kategori" data-value={key} type="button">{label}</button>
+      ))}
+    </div>
+    <div class="fcount"><span id="antal">{ovelser.length}</span> øvelser vist</div>
+  </div>
+
+  <p class="mono" style="font-size:11px;color:var(--ink-faint);margin:8px 2px 0;">
+    Idrætslærer? Se <a href="/boldspil-idraet/">10 boldspil til idræt</a> →
+  </p>
+
+  <div class="card-grid" id="ovelse-grid">
+    {ovelser.map((ovelse) => <OvelseCard ovelse={ovelse} />)}
+  </div>
+
+  <div class="fempty" id="fempty">
+    <div class="big">Ingen øvelser matcher filtret</div>
+    <p>Prøv en anden kombination af alder og kategori.</p>
+  </div>
+
+  <CtaBox
+    campaign="ovelser-hub"
+    heading="Træningen er på plads — hvad med kampen?"
+    text="Mini Basket-appen fordeler spilletiden, så ingen spiller for meget, og viser live hvem der mangler tid på banen. Gratis, og virker på alle telefoner."
+  />
+
+  <script>
+    const cards = Array.from(document.querySelectorAll('[data-ovelse]'));
+    const knapper = Array.from(document.querySelectorAll('.filterbar [data-filter]'));
+    const antalEl = document.getElementById('antal');
+    const emptyEl = document.getElementById('fempty');
+    const state = { alder: 'alle', kategori: 'alle' };
+
+    function opdater() {
+      let synlige = 0;
+      for (const card of cards) {
+        const aldre = (card.getAttribute('data-alder') || '').split(' ');
+        const kat = card.getAttribute('data-kategori');
+        const ok =
+          (state.alder === 'alle' || aldre.includes(state.alder)) &&
+          (state.kategori === 'alle' || kat === state.kategori);
+        card.style.display = ok ? '' : 'none';
+        if (ok) synlige++;
+      }
+      if (antalEl) antalEl.textContent = String(synlige);
+      if (emptyEl) emptyEl.style.display = synlige === 0 ? 'block' : 'none';
+    }
+
+    for (const knap of knapper) {
+      knap.addEventListener('click', () => {
+        const filter = knap.getAttribute('data-filter');
+        const value = knap.getAttribute('data-value');
+        if (!filter || !value) return;
+        state[filter] = value;
+        for (const anden of knapper) {
+          if (anden.getAttribute('data-filter') === filter) {
+            anden.classList.toggle('active', anden === knap);
+          }
+        }
+        opdater();
+      });
+    }
+  </script>
+</Base>

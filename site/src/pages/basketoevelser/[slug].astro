@@ -1,0 +1,95 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CtaBox from '../../components/CtaBox.astro';
+import OvelseCard from '../../components/OvelseCard.astro';
+import { KATEGORI_LABELS, GUIDE_FOR_KATEGORI, REGEL_LINK, fmtDato } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const ovelser = await getCollection('ovelser');
+  return ovelser.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const alle = await getCollection('ovelser');
+const relaterede = alle
+  .filter((o) => o.id !== entry.id && o.data.kategori === d.kategori)
+  .slice(0, 3);
+const guide = GUIDE_FOR_KATEGORI[d.kategori];
+const visRegelLink = ['skud', 'forsvar'].includes(d.kategori);
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: d.title,
+  description: d.description,
+  inLanguage: 'da',
+  totalTime: `PT${d.varighed}M`,
+  datePublished: d.publiceret.toISOString().slice(0, 10),
+  audience: {
+    '@type': 'Audience',
+    audienceType: `Børnebasket-trænere (${d.aldersgruppe.join(', ')})`,
+  },
+  tool: d.rekvisitter.map((r) => ({ '@type': 'HowToTool', name: r })),
+  step: d.trin.map((t, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    text: t,
+  })),
+};
+---
+<Base
+  title={`${d.title} — basketball-øvelse til ${d.aldersgruppe.join('/')} | Mini Basket`}
+  description={d.description}
+  ogType="article"
+  schema={schema}
+>
+  <article class="prose">
+    <nav class="mono" style="font-size:11px;color:var(--ink-soft);" aria-label="Brødkrumme">
+      <a href="/basketoevelser/">Basketball-øvelser</a> / {KATEGORI_LABELS[d.kategori]}
+    </nav>
+    <h1>{d.title}</h1>
+
+    <div class="fakta">
+      <div class="fakta-item"><span class="lbl">Alder</span><span class="val">{d.aldersgruppe.join(' · ')}</span></div>
+      <div class="fakta-item"><span class="lbl">Kategori</span><span class="val">{KATEGORI_LABELS[d.kategori]}</span></div>
+      <div class="fakta-item"><span class="lbl">Spillere</span><span class="val">{d.spillere}</span></div>
+      <div class="fakta-item"><span class="lbl">Varighed</span><span class="val">{d.varighed} min</span></div>
+      <div class="fakta-item"><span class="lbl">Rekvisitter</span><span class="val">{d.rekvisitter.join(', ')}</span></div>
+    </div>
+
+    <Content />
+
+    <CtaBox campaign={entry.id} />
+
+    {guide && (
+      <p>
+        <strong>Læs også:</strong>{' '}
+        <a href={`/traenerguides/${guide.slug}/`}>{guide.title}</a>
+      </p>
+    )}
+
+    {visRegelLink && (
+      <p>
+        <strong>Til kamp:</strong>{' '}
+        <a href={REGEL_LINK.href}>{REGEL_LINK.title}</a>
+      </p>
+    )}
+
+    <p class="mono" style="font-size:10px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:1px;">
+      Publiceret {fmtDato(d.publiceret)}
+    </p>
+  </article>
+
+  {relaterede.length > 0 && (
+    <section>
+      <h2>Flere øvelser i kategorien {KATEGORI_LABELS[d.kategori].toLowerCase()}</h2>
+      <div class="card-grid">
+        {relaterede.map((o) => <OvelseCard ovelse={o} />)}
+      </div>
+    </section>
+  )}
+</Base>
