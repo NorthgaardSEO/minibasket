@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CtaBox from '../../components/CtaBox.astro';
+import { fmtDato } from '../../lib/site';
+
+const guides = (await getCollection('guides'))
+  .sort((a, b) => b.data.publiceret.getTime() - a.data.publiceret.getTime());
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Trænerguides til børnebasket',
+  url: 'https://minibasket.dk/traenerguides/',
+  inLanguage: 'da',
+  description:
+    'Praktiske guides til børnebasket-trænere: fair spilletid, minibasket-regler, din første træning, forældresamarbejde og kampdage.',
+};
+---
+<Base
+  title="Trænerguides til børnebasket — fra træner til træner | Mini Basket"
+  description="Praktiske guides til nye og erfarne børnetrænere: fair spilletid, minibasket-regler, din første træning, forældresamarbejde og kampdage."
+  schema={schema}
+>
+  <span class="eyebrow">Guides · af en træner, til trænere</span>
+  <h1>Trænerguides til børnebasket</h1>
+  <p class="lede">
+    Ingen teori-tunge kompendier — bare det, du faktisk får brug for som træner for børn:
+    hvordan du fordeler spilletiden fair, hvad minibasket-reglerne betyder i praksis, og
+    hvordan du kommer godt igennem din første træning og kampdag.
+  </p>
+
+  <div class="guide-list">
+    {guides.map((guide) => (
+      <a class="guide-card" href={`/traenerguides/${guide.id}/`}>
+        <span class="dato">{fmtDato(guide.data.publiceret)}</span>
+        <h3>{guide.data.title}</h3>
+        <p>{guide.data.description}</p>
+      </a>
+    ))}
+  </div>
+
+  <CtaBox
+    campaign="guides-hub"
+    heading="Guiden i praksis: fair spilletid uden hovedregning"
+    text="Mini Basket-appen gør fair spilletid konkret — planlæg perioderne, følg med live og lad alle trænere se det samme. Gratis at bruge."
+  />
+</Base>
