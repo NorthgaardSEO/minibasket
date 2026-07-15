@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://minibasket.dk/sitemap-index.xml
