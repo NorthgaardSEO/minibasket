@@ -1,0 +1,23 @@
+---
+import { appUrl } from '../lib/site';
+
+interface Props {
+  campaign: string;
+  heading?: string;
+  text?: string;
+}
+
+const {
+  campaign,
+  heading = 'Nemt styr på spilletiden til kamp?',
+  text = 'Prøv den gratis Mini Basket-app — planlæg perioderne på forhånd, og se live hvem der har spillet hvor meget. Alle trænere ved bordet ser det samme.',
+} = Astro.props;
+---
+<aside class="cta-box">
+  <div>
+    <span class="cta-eyebrow">Mini Basket-appen · gratis</span>
+    <strong>{heading}</strong>
+    <p>{text}</p>
+  </div>
+  <a class="btn btn-gold" href={appUrl(campaign)}>Prøv appen gratis</a>
+</aside>

@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { KATEGORI_LABELS } from '../lib/site';
+
+interface Props {
+  ovelse: CollectionEntry<'ovelser'>;
+}
+
+const { ovelse } = Astro.props;
+const d = ovelse.data;
+---
+<article
+  class="ov-card"
+  data-ovelse
+  data-alder={d.aldersgruppe.join(' ')}
+  data-kategori={d.kategori}
+>
+  <a href={`/basketoevelser/${ovelse.id}/`}>
+    <div class="ov-top">
+      <span class="badge kat">{KATEGORI_LABELS[d.kategori]}</span>
+      <span class="badge">{d.aldersgruppe.join(' · ')}</span>
+    </div>
+    <h3>{d.title}</h3>
+    <p>{d.description}</p>
+    <div class="ov-meta mono">{d.spillere} spillere · {d.varighed} min</div>
+  </a>
+</article>
