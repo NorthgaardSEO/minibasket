@@ -2,25 +2,38 @@
 import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import CtaBox from '../../components/CtaBox.astro';
-import { fmtDato } from '../../lib/site';
+import { fmtDato, SITE_ID } from '../../lib/site';
 
 const guides = (await getCollection('guides'))
   .sort((a, b) => b.data.publiceret.getTime() - a.data.publiceret.getTime());
 
 const schema = {
-  '@context': 'https://schema.org',
   '@type': 'CollectionPage',
+  '@id': 'https://minibasket.dk/traenerguides/#collection',
   name: 'Trænerguides til børnebasket',
   url: 'https://minibasket.dk/traenerguides/',
   inLanguage: 'da',
   description:
     'Praktiske guides til børnebasket-trænere: fair spilletid, minibasket-regler, din første træning, forældresamarbejde og kampdage.',
+  isPartOf: { '@id': SITE_ID },
+  mainEntity: {
+    '@type': 'ItemList',
+    '@id': 'https://minibasket.dk/traenerguides/#liste',
+    name: 'Trænerguides til børnebasket',
+    itemListElement: guides.map((g, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: g.data.title,
+      url: `https://minibasket.dk/traenerguides/${g.id}/`,
+    })),
+  },
 };
 ---
 <Base
   title="Trænerguides til børnebasket — fra træner til træner | Mini Basket"
   description="Praktiske guides til nye og erfarne børnetrænere: fair spilletid, minibasket-regler, din første træning, forældresamarbejde og kampdage."
   schema={schema}
+  breadcrumbs={[{ name: 'Trænerguides', href: '/traenerguides/' }]}
 >
   <span class="eyebrow">Guides · af en træner, til trænere</span>
   <h1>Trænerguides til børnebasket</h1>

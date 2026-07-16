@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import CtaBox from '../../components/CtaBox.astro';
-import { fmtDato } from '../../lib/site';
+import { fmtDato, ORG_ID, SITE_ID, PERSON_ID } from '../../lib/site';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -19,16 +19,20 @@ const andreGuides = alleGuides
   .sort((a, b) => b.data.publiceret.getTime() - a.data.publiceret.getTime())
   .slice(0, 3);
 
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
 const schema = {
-  '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': `${canonical}#article`,
   headline: d.title,
   description: d.description,
   inLanguage: 'da',
   datePublished: d.publiceret.toISOString().slice(0, 10),
-  author: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
-  publisher: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
-  mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
+  dateModified: (d.opdateret ?? d.publiceret).toISOString().slice(0, 10),
+  author: { '@id': PERSON_ID },
+  publisher: { '@id': ORG_ID },
+  isPartOf: { '@id': SITE_ID },
+  mainEntityOfPage: canonical,
 };
 ---
 <Base
@@ -36,14 +40,16 @@ const schema = {
   description={d.description}
   ogType="article"
   schema={schema}
+  breadcrumbs={[
+    { name: 'Trænerguides', href: '/traenerguides/' },
+    { name: d.title, href: `/traenerguides/${entry.id}/` },
+  ]}
 >
   <article class="prose">
-    <nav class="mono" style="font-size:11px;color:var(--ink-soft);" aria-label="Brødkrumme">
-      <a href="/traenerguides/">Trænerguides</a>
-    </nav>
     <h1>{d.title}</h1>
-    <p class="mono" style="font-size:10px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:1px;">
-      Publiceret {fmtDato(d.publiceret)}
+    <p class="updated">
+      Af <a href="/om/" style="color:inherit;">Frederik Nørgaard</a>, børnebasket-træner
+      {d.opdateret ? ` · Opdateret ${fmtDato(d.opdateret)}` : ` · Publiceret ${fmtDato(d.publiceret)}`}
     </p>
 
     <Content />
