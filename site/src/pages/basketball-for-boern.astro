@@ -1,6 +1,10 @@
 ---
 import Base from '../layouts/Base.astro';
+import NoegleFakta from '../components/NoegleFakta.astro';
 import { appUrl, ORG_ID, SITE_ID, PERSON_ID } from '../lib/site';
+
+// Bump KUN ved reel indholdsændring (nye/rettede fakta eller sektioner) — aldrig ved typo/styling.
+const OPDATERET = '2026-07-16';
 
 const faq = [
   {
@@ -29,7 +33,7 @@ const articleSchema = {
     'Forældreguide til basketball for børn: hvilken alder man kan starte, hvad minibasket er, hvordan I finder en klub, hvad det koster, og hvad I kan forvente.',
   inLanguage: 'da',
   datePublished: '2026-07-15',
-  dateModified: '2026-07-15',
+  dateModified: OPDATERET,
   author: { '@id': PERSON_ID },
   publisher: { '@id': ORG_ID },
   isPartOf: { '@id': SITE_ID },
@@ -63,6 +67,17 @@ const faqSchema = {
       alder, klub, pris, udstyr og hvad I kan forvente af træning og kampe.
     </p>
 
+    <NoegleFakta
+      fakta={[
+        { label: 'Startalder', value: 'typisk 5–6 år (U6)' },
+        { label: 'Aldersgrupper', value: 'U6, U8, U10 og U12' },
+        { label: 'Boldstørrelse', value: '4 (U6–U10) · 5 (U12)' },
+        { label: 'Kurvhøjde', value: 'lavere end voksnes 3,05 m' },
+        { label: 'Pris', value: 'ca. 300–1.000 kr. pr. halvsæson' },
+        { label: 'Krav for at starte', value: 'ingen forudsætninger' },
+      ]}
+    />
+
     <h2 id="alder">Hvornår kan børn starte til basketball?</h2>
     <p>
       De fleste klubber tager imod børn fra <strong>5–6-årsalderen</strong>, og børnebasket er
@@ -91,6 +106,25 @@ const faqSchema = {
       <a href="/basketball-regler/">basketball-reglerne enkelt forklaret</a>.
     </p>
 
+    <h3>Alder, boldstørrelse og kurvhøjde — overblik</h3>
+    <table>
+      <thead>
+        <tr><th>Alder</th><th>Årgang</th><th>Boldstørrelse</th><th>Kurvhøjde (typisk)</th><th>Kampe</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>5–6 år</td><td>U6</td><td>Str. 4</td><td>Sænket kurv, ca. 2,60 m</td><td>Korte kampe, ofte som stævner</td></tr>
+        <tr><td>7–8 år</td><td>U8</td><td>Str. 4</td><td>Sænket kurv, ca. 2,60 m</td><td>Korte perioder — alle skal spille</td></tr>
+        <tr><td>9–10 år</td><td>U10</td><td>Str. 4</td><td>Sænket kurv, ca. 2,60 m</td><td>Typisk 24–32 min samlet spilletid</td></tr>
+        <tr><td>11–12 år</td><td>U12</td><td>Str. 5</td><td>Op mod voksenhøjden 3,05 m</td><td>Typisk 24–32 min samlet spilletid</td></tr>
+      </tbody>
+    </table>
+    <p>
+      Detaljerne (antal spillere, periodelængder og kurvhøjder) justeres løbende pr. årgang og
+      række — de gældende børneregler står hos Danmarks Basketball Forbund på
+      <a href="https://basket.dk" rel="noopener">basket.dk</a>, og jeres klub kender dem for
+      netop jeres hold.
+    </p>
+
     <h2 id="klub">Sådan finder I en klub</h2>
     <p>
       Danmarks Basketball Forbund har en klubfinder på
@@ -107,6 +141,12 @@ const faqSchema = {
     </p>
 
     <h2 id="pris">Hvad koster det, og hvad skal barnet have med?</h2>
+    <p>
+      Basketball er en af de billigste holdsport at starte til: kontingentet ligger typisk på
+      <strong>nogle få hundrede til omkring tusind kroner pr. halvsæson</strong>, og det eneste
+      nødvendige udstyr er <strong>indendørssko og almindeligt idrætstøj</strong> — klubben
+      stiller bolde til rådighed. Her er hele listen:
+    </p>
     <ul>
       <li><strong>Kontingent:</strong> typisk fra nogle få hundrede kroner til omkring tusind kroner pr. halvsæson — spørg klubben.</li>
       <li><strong>Indendørssko:</strong> det eneste udstyr, der betyder noget. Almindelige indendørs idrætssko er fint til at starte med; deciderede basketsko kan vente.</li>

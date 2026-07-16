@@ -2,6 +2,9 @@
 import Base from '../layouts/Base.astro';
 import { appUrl, ORG_ID, SITE_ID, PERSON_ID } from '../lib/site';
 
+// Bump KUN ved reel indholdsændring (nye/rettede fakta eller sektioner) — aldrig ved typo/styling.
+const OPDATERET = '2026-07-16';
+
 const lege = [
   { id: 'haletagfat', navn: 'Haletagfat med bold', trin: '0.–3. klasse', rekvisitter: 'Bolde + veste', tid: '8 min' },
   { id: 'trafiklys', navn: 'Trafiklys-dribling', trin: '0.–3. klasse', rekvisitter: 'Bolde', tid: '8 min' },
@@ -23,7 +26,7 @@ const articleSchema = {
     '10 sjove boldspil og boldlege til idrætsundervisningen — klar til brug uden forberedelse, med klassetrin, rekvisitter og trin-for-trin.',
   inLanguage: 'da',
   datePublished: '2026-07-15',
-  dateModified: '2026-07-15',
+  dateModified: OPDATERET,
   author: { '@id': PERSON_ID },
   publisher: { '@id': ORG_ID },
   isPartOf: { '@id': SITE_ID },
@@ -61,6 +64,10 @@ const listSchema = {
     </p>
 
     <h2>Hurtig-vælgeren</h2>
+    <p>
+      Tabellen viser alle 10 boldlege med klassetrin, rekvisitter og tidsforbrug — vælg en leg,
+      der passer til din klasse, og hop direkte til instruktionen.
+    </p>
     <table>
       <thead>
         <tr><th>Leg</th><th>Klassetrin</th><th>Rekvisitter</th><th>Tid</th></tr>
@@ -78,6 +85,11 @@ const listSchema = {
     </table>
 
     <h2 id="haletagfat">1. Haletagfat med bold</h2>
+    <p>
+      Haletagfat med bold er en tagfat-leg, hvor alle børn dribler og jagter hinandens haler
+      samtidig — <strong>ingen ryger ud</strong>, alle er aktive hele tiden, og boldkontrollen
+      træner sig selv, mens der grines.
+    </p>
     <p><em>0.–3. klasse · 1 bold + 1 vest pr. barn · 8 min</em></p>
     <ol>
       <li>Alle børn sætter en vest i bukselinningen som hale og har hver deres bold. Markér et felt, så legen ikke breder sig over hele salen.</li>
@@ -89,6 +101,10 @@ const listSchema = {
     <p>Fuld instruktion med variationer: <a href="/basketoevelser/haletagfat-med-bold/">Haletagfat med bold</a>.</p>
 
     <h2 id="trafiklys">2. Trafiklys-dribling</h2>
+    <p>
+      Trafiklys-dribling er en styret drible-leg, hvor grønt, gult og rødt lys bestemmer tempoet
+      — læreren styrer intensiteten, alle børn har egen bold, og ingen kan gøre noget "forkert".
+    </p>
     <p><em>0.–3. klasse · 1 bold pr. barn · 8 min</em></p>
     <ol>
       <li>Alle børn har en bold og står spredt med front mod læreren.</li>
@@ -100,6 +116,11 @@ const listSchema = {
     <p>Fuld instruktion med variationer: <a href="/basketoevelser/trafiklys-dribling/">Trafiklys-dribling</a>.</p>
 
     <h2 id="skattejagten">3. Skattejagten</h2>
+    <p>
+      Skattejagten er en holdleg, hvor børnene henter bolde ("skatte") hjem til deres ø én ad
+      gangen — løb, samarbejde og taktik i børnehøjde, og den mest efterspurgte leg i mange
+      idrætstimer.
+    </p>
     <p><em>0.–3. klasse · mange bolde + 4 hulahopringe · 10 min</em></p>
     <ol>
       <li>Læg alle bolde i midten (skattekisten) og placér en ø (hulahopring) i hvert hjørne. Del klassen i 3–4 hold — ét pr. ø.</li>
@@ -111,6 +132,10 @@ const listSchema = {
     <p>Fuld instruktion med variationer: <a href="/basketoevelser/skattejagten/">Skattejagten</a>.</p>
 
     <h2 id="boldgymnastik">4. Boldgymnastik</h2>
+    <p>
+      Boldgymnastik er fem minutters koordinations-opvarmning med én bold pr. barn: bolden rundt
+      om kroppen, ottetaller og kast-og-grib — den perfekte faste start på enhver boldtime.
+    </p>
     <p><em>0.–4. klasse · 1 bold pr. barn · 5 min</em></p>
     <ol>
       <li>Alle står spredt med front mod læreren, hver med sin bold.</li>
@@ -122,6 +147,10 @@ const listSchema = {
     <p>Fuld instruktion med variationer: <a href="/basketoevelser/boldgymnastik/">Boldgymnastik</a>.</p>
 
     <h2 id="foelg-lederen">5. Følg lederen</h2>
+    <p>
+      Følg lederen er en kopieringsleg i små grupper, hvor børnene skiftes til at bestemme
+      bevægelserne — alle rører bolden hele tiden, og selv de stille børn får lov at styre.
+    </p>
     <p><em>0.–3. klasse · 1 bold pr. barn · 6 min</em></p>
     <ol>
       <li>Del klassen i grupper på 3–4. Alle har egen bold og stiller sig i række bag deres "leder".</li>
@@ -133,6 +162,10 @@ const listSchema = {
     <p>Fuld instruktion med variationer: <a href="/basketoevelser/foelg-lederen/">Følg lederen</a>.</p>
 
     <h2 id="boldstafet">6. Boldstafet over/under</h2>
+    <p>
+      Boldstafet over/under er en klassisk rækkestafet, hvor bolden sendes skiftevis over hovedet
+      og mellem benene — nem at forklare på 20 sekunder og med indbygget holdånd og tempo.
+    </p>
     <p><em>0.–4. klasse · 1 bold pr. hold · 8 min</em></p>
     <ol>
       <li>Del klassen i hold på 5–6, som stiller sig i rækker med en armslængde mellem hvert barn.</li>
@@ -143,6 +176,11 @@ const listSchema = {
     <p><strong>Variation:</strong> kun over hovedet, kun mellem benene — eller sidelæns med rotation i overkroppen. <strong>Det træner:</strong> boldhåndtering, samarbejde og tempo — uden at nogen står stille længe.</p>
 
     <h2 id="boldtyven">7. Boldtyven</h2>
+    <p>
+      Boldtyven er en drible-duel, hvor alle prøver at prikke de andres bold ud af feltet uden at
+      miste deres egen — høj puls, boldbeskyttelse og overblik i én leg, uden at nogen ryger
+      permanent ud.
+    </p>
     <p><em>2.–6. klasse · 1 bold pr. barn + kegler · 8 min</em></p>
     <ol>
       <li>Markér et felt med kegler — cirka en halv sal til 8–10 børn. Alle har en bold.</li>
@@ -154,6 +192,10 @@ const listSchema = {
     <p>Fuld instruktion med variationer: <a href="/basketoevelser/boldtyven/">Boldtyven</a>.</p>
 
     <h2 id="stikbold">8. Stikbold med frikøb</h2>
+    <p>
+      Stikbold med frikøb er den klassiske stikbold — men med en frikøbsregel, der gør, at ramte
+      børn hurtigt er med igen, i stedet for at sidde resten af legen og se på.
+    </p>
     <p><em>2.–6. klasse · 2–3 skumbolde · 10 min</em></p>
     <ol>
       <li>Afgræns et felt og send 2–3 skumbolde i spil. Alle er mod alle.</li>
@@ -164,6 +206,11 @@ const listSchema = {
     <p><strong>Variation:</strong> flere bolde = mere fart og kortere ventetid. <strong>Det træner:</strong> kast, gribning og undvigelser — og frikøbs-reglen holder alle mentalt med, selv når de sidder.</p>
 
     <h2 id="ti-pasninger">9. Ti pasninger</h2>
+    <p>
+      Ti pasninger er et småspil, hvor holdet med bolden skal nå <strong>ti pasninger i træk</strong>
+      uden at miste den — frigørelse, pasningsvalg og forsvar på én gang, og fundamentet under
+      næsten alle boldspil.
+    </p>
     <p><em>4.–6. klasse · 1 bold + veste + kegler · 10 min</em></p>
     <ol>
       <li>Del børnene i to hold (3v3 eller 4v4) i et afgrænset felt. Det ene hold har veste.</li>
@@ -175,6 +222,10 @@ const listSchema = {
     <p>Fuld instruktion med variationer: <a href="/basketoevelser/ti-pasninger/">Ti pasninger</a>.</p>
 
     <h2 id="cirkelbold">10. Cirkelbold-stafet</h2>
+    <p>
+      Cirkelbold-stafet er en kapleg mellem et løbehold og et pasningshold — rundbold-energi
+      uden ventetid i kø, fordi begge hold arbejder på fuld tid hele runden.
+    </p>
     <p><em>3.–6. klasse · 1 bold + 4 kegler · 10 min</em></p>
     <ol>
       <li>Del klassen i to hold: et løbehold og et pasningshold. Sæt fire kegler i en stor firkant.</li>
