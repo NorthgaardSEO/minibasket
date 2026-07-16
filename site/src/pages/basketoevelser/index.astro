@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import OvelseCard from '../../components/OvelseCard.astro';
 import CtaBox from '../../components/CtaBox.astro';
-import { KATEGORI_LABELS, ALDERSGRUPPER } from '../../lib/site';
+import { KATEGORI_LABELS, ALDERSGRUPPER, SITE_ID } from '../../lib/site';
 
 const ovelser = (await getCollection('ovelser'))
   .sort((a, b) => b.data.publiceret.getTime() - a.data.publiceret.getTime());
@@ -11,19 +11,32 @@ const ovelser = (await getCollection('ovelser'))
 const kategorier = Object.entries(KATEGORI_LABELS);
 
 const schema = {
-  '@context': 'https://schema.org',
   '@type': 'CollectionPage',
+  '@id': 'https://minibasket.dk/basketoevelser/#collection',
   name: 'Basketball-øvelser til børn (U6–U12)',
   url: 'https://minibasket.dk/basketoevelser/',
   inLanguage: 'da',
   description:
     'Gratis basketball-øvelser og drills til børnetræning: dribling, skud, pasning, forsvar, lege og opvarmning — sorteret efter aldersgruppe.',
+  isPartOf: { '@id': SITE_ID },
+  mainEntity: {
+    '@type': 'ItemList',
+    '@id': 'https://minibasket.dk/basketoevelser/#liste',
+    name: 'Basketball-øvelser til børn',
+    itemListElement: ovelser.map((o, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: o.data.title,
+      url: `https://minibasket.dk/basketoevelser/${o.id}/`,
+    })),
+  },
 };
 ---
 <Base
   title="Basketball-øvelser til børn (U6–U12) — gratis øvelsesbank"
   description="Gratis basketball-øvelser og drills til børnetræning: dribling, skud, pasning, forsvar, lege og opvarmning. Filtrér efter alder U6–U12."
   schema={schema}
+  breadcrumbs={[{ name: 'Basketball-øvelser', href: '/basketoevelser/' }]}
 >
   <span class="eyebrow">Øvelsesbank · børnebasket</span>
   <h1>Basketball-øvelser til børn</h1>

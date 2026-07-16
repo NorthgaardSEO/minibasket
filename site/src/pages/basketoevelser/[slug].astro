@@ -3,7 +3,7 @@ import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import CtaBox from '../../components/CtaBox.astro';
 import OvelseCard from '../../components/OvelseCard.astro';
-import { KATEGORI_LABELS, GUIDE_FOR_KATEGORI, REGEL_LINK, fmtDato } from '../../lib/site';
+import { KATEGORI_LABELS, GUIDE_FOR_KATEGORI, REGEL_LINK, fmtDato, ORG_ID, SITE_ID, PERSON_ID } from '../../lib/site';
 
 export async function getStaticPaths() {
   const ovelser = await getCollection('ovelser');
@@ -21,14 +21,21 @@ const relaterede = alle
 const guide = GUIDE_FOR_KATEGORI[d.kategori];
 const visRegelLink = ['skud', 'forsvar'].includes(d.kategori);
 
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
 const schema = {
-  '@context': 'https://schema.org',
   '@type': 'HowTo',
+  '@id': `${canonical}#howto`,
   name: d.title,
   description: d.description,
   inLanguage: 'da',
   totalTime: `PT${d.varighed}M`,
   datePublished: d.publiceret.toISOString().slice(0, 10),
+  dateModified: (d.opdateret ?? d.publiceret).toISOString().slice(0, 10),
+  author: { '@id': PERSON_ID },
+  publisher: { '@id': ORG_ID },
+  isPartOf: { '@id': SITE_ID },
+  mainEntityOfPage: canonical,
   audience: {
     '@type': 'Audience',
     audienceType: `Børnebasket-trænere (${d.aldersgruppe.join(', ')})`,
@@ -46,12 +53,18 @@ const schema = {
   description={d.description}
   ogType="article"
   schema={schema}
+  breadcrumbs={[
+    { name: 'Basketball-øvelser', href: '/basketoevelser/' },
+    { name: KATEGORI_LABELS[d.kategori] },
+    { name: d.title, href: `/basketoevelser/${entry.id}/` },
+  ]}
 >
   <article class="prose">
-    <nav class="mono" style="font-size:11px;color:var(--ink-soft);" aria-label="Brødkrumme">
-      <a href="/basketoevelser/">Basketball-øvelser</a> / {KATEGORI_LABELS[d.kategori]}
-    </nav>
     <h1>{d.title}</h1>
+    <p class="updated">
+      Af <a href="/om/" style="color:inherit;">Frederik Nørgaard</a>, børnebasket-træner
+      {d.opdateret ? ` · Opdateret ${fmtDato(d.opdateret)}` : ` · Publiceret ${fmtDato(d.publiceret)}`}
+    </p>
 
     <div class="fakta">
       <div class="fakta-item"><span class="lbl">Alder</span><span class="val">{d.aldersgruppe.join(' · ')}</span></div>
