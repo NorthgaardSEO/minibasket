@@ -1,0 +1,30 @@
+---
+/**
+ * Nøglefakta-boks: citerbare tal samlet ét sted øverst på landingssider —
+ * det format AI-modeller og featured snippets foretrækker at løfte.
+ * Styling genbruger .toc-kortets udseende.
+ */
+interface Props {
+  fakta: { label: string; value: string }[];
+}
+const { fakta } = Astro.props;
+---
+<aside class="noeglefakta toc" aria-label="Nøglefakta">
+  <span class="toc-title">Nøglefakta</span>
+  <dl>
+    {fakta.map((f) => (
+      <div class="nf-row">
+        <dt>{f.label}</dt>
+        <dd>{f.value}</dd>
+      </div>
+    ))}
+  </dl>
+</aside>
+
+<style>
+  .noeglefakta dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px 24px;}
+  .nf-row{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding:5px 0;}
+  .nf-row:last-child{border-bottom:none;}
+  .noeglefakta dt{font-size:13.5px;color:var(--ink-soft);}
+  .noeglefakta dd{margin:0;font-size:13.5px;font-weight:700;color:var(--ink-strong);text-align:right;white-space:nowrap;}
+</style>
