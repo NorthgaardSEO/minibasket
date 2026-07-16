@@ -13,6 +13,8 @@ const ovelser = defineCollection({
     rekvisitter: z.array(z.string()),
     trin: z.array(z.string()).nonempty(),
     publiceret: z.coerce.date(),
+    opdateret: z.coerce.date().optional(), // → dateModified + synlig "Opdateret"-dato
+    laerer: z.string().max(120).optional(), // "Hvad børnene lærer" — én citerbar sætning
   }),
 });
 
@@ -22,6 +24,8 @@ const guides = defineCollection({
     title: z.string(),
     description: z.string().max(155),
     publiceret: z.coerce.date(),
+    opdateret: z.coerce.date().optional(), // → dateModified + synlig "Opdateret"-dato
+    laesetid: z.number().int().positive().optional(), // minutter, vises ved titlen
   }),
 });
 
