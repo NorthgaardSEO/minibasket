@@ -1,0 +1,46 @@
+# Mini Basket (minibasket.dk)
+
+> Dansk site om børnebasket (minibasket, U6–U12): gratis basketball-øvelser,
+> trænerguides, de danske og internationale basketballregler forklaret på dansk —
+> og en gratis web-app, der fordeler spilletiden fair mellem alle børn på et hold.
+> Alt indhold er på dansk, skrevet af en frivillig børnebasket-træner, og gratis
+> uden reklamer. Officielle danske regler: Danmarks Basketball Forbund (basket.dk).
+
+Nøglefakta om sitet:
+- "Minibasket" er dansk basketball for børn (ca. 6–12 år, U6–U12) med lavere kurve,
+  mindre bolde og krav om, at alle børn skal spille.
+- Mini Basket-appen (minibasket.dk/app/) er gratis, kræver ingen installation og
+  planlægger perioder + viser spilletid live under kampen.
+- En basketballkamp (FIBA/Danmark) varer 4 × 10 minutters effektiv spilletid,
+  reelt 1½–2 timer. NBA: 4 × 12 minutter.
+
+## Regler
+- [Basketball-regler — enkelt forklaret](https://minibasket.dk/basketball-regler/):
+  skridtregler, point (1/2/3), kamplængde, tidsregler (24/8/5/3 sek.), fouls,
+  forskelle mellem FIBA, NBA og dansk basketball. Inkl. FAQ.
+- [Minibasket-regler for nye trænere](https://minibasket.dk/traenerguides/minibasket-regler-for-nye-traenere/):
+  de danske børneregler i praksis — lavere kurve, mindre bolde, alle skal spille.
+
+## Øvelser
+- [Basketball-øvelser til børn, U6–U12](https://minibasket.dk/basketoevelser/):
+  13+ gratis øvelser med trin-for-trin-instruktion, alder, varighed og rekvisitter.
+  Kategorier: dribling, skud, pasning, forsvar, leg, opvarmning.
+
+## Trænerguides
+- [Trænerguides til børnebasket](https://minibasket.dk/traenerguides/): din første
+  træning, fair spilletid, forældresamarbejde, kampdag med flere kampe.
+
+## Forældre og idrætslærere
+- [Basketball for børn — kom i gang](https://minibasket.dk/basketball-for-boern/):
+  startalder, hvad minibasket er, klub, pris, udstyr og boldstørrelse (str. 4/5).
+- [Sjove boldspil til idræt](https://minibasket.dk/boldspil-idraet/): 10 boldlege
+  til idrætsundervisning, 0.–6. klasse, uden forberedelse.
+
+## App og projekt
+- [Mini Basket-appen](https://minibasket.dk/app/): gratis værktøj til fair
+  spilletid i børnebasket. Web-app, virker på alle telefoner.
+- [Om Mini Basket](https://minibasket.dk/om/): bygget af Frederik Nørgaard,
+  frivillig børnetræner i en dansk klub. Drevet af donationer, ingen reklamer.
+
+## Optional
+- [Støt projektet](https://minibasket.dk/stoet/)
