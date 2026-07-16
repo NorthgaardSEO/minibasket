@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { appUrl } from '../lib/site';
+import { appUrl, ORG_ID, SITE_ID, PERSON_ID } from '../lib/site';
 
 const faq = [
   {
@@ -22,22 +22,23 @@ const faq = [
 ];
 
 const articleSchema = {
-  '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': 'https://minibasket.dk/basketball-for-boern/#article',
   headline: 'Basketball for børn — sådan kommer I i gang',
   description:
     'Forældreguide til basketball for børn: hvilken alder man kan starte, hvad minibasket er, hvordan I finder en klub, hvad det koster, og hvad I kan forvente.',
   inLanguage: 'da',
   datePublished: '2026-07-15',
   dateModified: '2026-07-15',
-  author: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
-  publisher: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
+  author: { '@id': PERSON_ID },
+  publisher: { '@id': ORG_ID },
+  isPartOf: { '@id': SITE_ID },
   mainEntityOfPage: 'https://minibasket.dk/basketball-for-boern/',
 };
 
 const faqSchema = {
-  '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  '@id': 'https://minibasket.dk/basketball-for-boern/#faq',
   mainEntity: faq.map((f) => ({
     '@type': 'Question',
     name: f.q,
@@ -50,6 +51,7 @@ const faqSchema = {
   description="Vil dit barn spille basketball? Her er forældreguiden: hvilken alder man kan starte, hvad minibasket er, hvordan I finder en klub, og hvad det kræver."
   ogType="article"
   schema={[articleSchema, faqSchema]}
+  breadcrumbs={[{ name: 'Basketball for børn', href: '/basketball-for-boern/' }]}
 >
   <article class="prose">
     <span class="eyebrow">Forældreguide · børnebasket</span>

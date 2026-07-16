@@ -1,7 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaBox from '../components/CtaBox.astro';
-import { appUrl } from '../lib/site';
+import NoegleFakta from '../components/NoegleFakta.astro';
+import { appUrl, ORG_ID, SITE_ID, PERSON_ID } from '../lib/site';
+
+// Bump KUN ved reel indholdsændring (nye/rettede fakta eller sektioner) — aldrig ved typo/styling.
+const OPDATERET = '2026-07-15';
 
 const faq = [
   {
@@ -31,22 +35,23 @@ const faq = [
 ];
 
 const articleSchema = {
-  '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': 'https://minibasket.dk/basketball-regler/#article',
   headline: 'Basketball-regler — enkelt forklaret',
   description:
     'Alle basketballregler forklaret på dansk: skridtregler, point, kamplængde, tidsregler og fouls — og forskellen på FIBA, NBA og børnebasket.',
   inLanguage: 'da',
   datePublished: '2026-07-15',
-  dateModified: '2026-07-15',
-  author: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
-  publisher: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
+  dateModified: OPDATERET,
+  author: { '@id': PERSON_ID },
+  publisher: { '@id': ORG_ID },
+  isPartOf: { '@id': SITE_ID },
   mainEntityOfPage: 'https://minibasket.dk/basketball-regler/',
 };
 
 const faqSchema = {
-  '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  '@id': 'https://minibasket.dk/basketball-regler/#faq',
   mainEntity: faq.map((f) => ({
     '@type': 'Question',
     name: f.q,
@@ -59,6 +64,7 @@ const faqSchema = {
   description="Alle basketballregler forklaret på dansk: skridtregler, point, hvor lang en kamp er, fouls — og forskellen på FIBA, NBA og børnebasket. Opdateret 2026."
   ogType="article"
   schema={[articleSchema, faqSchema]}
+  breadcrumbs={[{ name: 'Basketball-regler', href: '/basketball-regler/' }]}
 >
   <article class="prose">
     <span class="eyebrow">Regler · forklaret på dansk</span>
@@ -72,6 +78,17 @@ const faqSchema = {
       finder du hos Danmarks Basketball Forbund på
       <a href="https://basket.dk" rel="noopener">basket.dk</a>.
     </p>
+
+    <NoegleFakta
+      fakta={[
+        { label: 'Spillere på banen', value: '5 mod 5' },
+        { label: 'Kamplængde (FIBA)', value: '4 × 10 min' },
+        { label: 'Kurvhøjde', value: '3,05 m' },
+        { label: 'Point pr. scoring', value: '1 / 2 / 3' },
+        { label: 'Fouls før udvisning', value: '5' },
+        { label: '3-pointslinje', value: '6,75 m' },
+      ]}
+    />
 
     <nav class="toc" aria-label="Indhold">
       <span class="toc-title">På denne side</span>

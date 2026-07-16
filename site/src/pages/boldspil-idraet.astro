@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { appUrl } from '../lib/site';
+import { appUrl, ORG_ID, SITE_ID, PERSON_ID } from '../lib/site';
 
 const lege = [
   { id: 'haletagfat', navn: 'Haletagfat med bold', trin: '0.–3. klasse', rekvisitter: 'Bolde + veste', tid: '8 min' },
@@ -16,22 +16,23 @@ const lege = [
 ];
 
 const articleSchema = {
-  '@context': 'https://schema.org',
   '@type': 'Article',
+  '@id': 'https://minibasket.dk/boldspil-idraet/#article',
   headline: 'Sjove boldspil til idræt: 10 lege der bare virker',
   description:
     '10 sjove boldspil og boldlege til idrætsundervisningen — klar til brug uden forberedelse, med klassetrin, rekvisitter og trin-for-trin.',
   inLanguage: 'da',
   datePublished: '2026-07-15',
   dateModified: '2026-07-15',
-  author: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
-  publisher: { '@type': 'Organization', name: 'Mini Basket', url: 'https://minibasket.dk/' },
+  author: { '@id': PERSON_ID },
+  publisher: { '@id': ORG_ID },
+  isPartOf: { '@id': SITE_ID },
   mainEntityOfPage: 'https://minibasket.dk/boldspil-idraet/',
 };
 
 const listSchema = {
-  '@context': 'https://schema.org',
   '@type': 'ItemList',
+  '@id': 'https://minibasket.dk/boldspil-idraet/#liste',
   name: 'Sjove boldspil til idræt',
   itemListElement: lege.map((l, i) => ({
     '@type': 'ListItem',
@@ -46,6 +47,7 @@ const listSchema = {
   description="10 sjove boldspil til idrætsundervisningen — klar til brug uden forberedelse. Med alderstrin, rekvisitter og trin-for-trin, samlet af en børnetræner."
   ogType="article"
   schema={[articleSchema, listSchema]}
+  breadcrumbs={[{ name: 'Sjove boldspil til idræt', href: '/boldspil-idraet/' }]}
 >
   <article class="prose">
     <span class="eyebrow">Til idrætslærere og pædagoger</span>

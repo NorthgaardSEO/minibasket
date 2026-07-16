@@ -1,10 +1,33 @@
 ---
 import Base from '../layouts/Base.astro';
 import CtaBox from '../components/CtaBox.astro';
+import { PERSON_ID, ORG_ID } from '../lib/site';
+
+// AboutPage-schema: Person-noden bor kanonisk her — beriget udgave af den globale node.
+const schema = [
+  {
+    '@type': 'AboutPage',
+    '@id': 'https://minibasket.dk/om/#about',
+    url: 'https://minibasket.dk/om/',
+    name: 'Om Mini Basket',
+    inLanguage: 'da',
+    mainEntity: { '@id': PERSON_ID },
+    about: { '@id': ORG_ID },
+  },
+  {
+    // Beriger den globale Person-node (samme @id → flettes i grafen)
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    description:
+      'Frivillig børnebasket-træner i en dansk klub. Byggede Mini Basket-appen til sit eget hold og skriver sitets øvelser og trænerguides.',
+  },
+];
 ---
 <Base
   title="Om Mini Basket — af en børnetræner, til trænere"
   description="Mini Basket er et gratis værktøj til børnebasket-trænere, bygget af en frivillig træner. Styr på spilletiden, øvelser og guides — uden reklamer."
+  schema={schema}
+  breadcrumbs={[{ name: 'Om Mini Basket', href: '/om/' }]}
 >
   <article class="prose">
     <span class="eyebrow">Om projektet</span>
@@ -26,6 +49,13 @@ import CtaBox from '../components/CtaBox.astro';
       mellem alle børn, viser live hvem der mangler tid på banen, og holder alle trænere
       synkroniseret. Den er blevet brugt i en rigtig klub gennem en hel sæson — kamp efter kamp,
       ikke som en PowerPoint-idé.
+    </p>
+
+    <h2 id="hvem-staar-bag">Hvem står bag?</h2>
+    <p>
+      Mini Basket er bygget og skrevet af <strong>Frederik Nørgaard</strong>, frivillig
+      børnebasket-træner i en dansk klub. Appen er udviklet til hans eget hold og brugt gennem
+      en fuld sæson — øvelserne og guiderne er de samme, som bruges til holdets træninger.
     </p>
 
     <h2>Hvorfor fair spilletid?</h2>

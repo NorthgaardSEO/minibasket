@@ -7,17 +7,7 @@ const guides = (await getCollection('guides'))
   .sort((a, b) => b.data.publiceret.getTime() - a.data.publiceret.getTime());
 const senesteGuides = guides.slice(0, 3);
 
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Mini Basket',
-  alternateName: 'minibasket.dk',
-  url: 'https://minibasket.dk/',
-  description:
-    'Gratis basketball-øvelser og trænerguides til børnebasket (U6–U12) — og en app der fordeler spilletiden og giver fuldt overblik til kamp.',
-  inLanguage: 'da',
-};
-
+// WebSite-schemaet kommer fra den globale @graph i Base.astro — intet sidespecifikt schema her.
 const spillere = [
   { navn: 'Alma', tid: '14:20', pct: 92, on: true },
   { navn: 'Noah', tid: '13:05', pct: 84, on: true },
@@ -29,7 +19,6 @@ const spillere = [
 <Base
   title="Mini Basket — basketball-øvelser og guides til børnetrænere"
   description="Gratis basketball-øvelser og trænerguides til børnebasket (U6–U12) — og en app der giver nemt styr på spilletiden, så ingen spiller for meget. Af en træner, til trænere."
-  schema={schema}
 >
   <!-- 2. Hero -->
   <section class="hero home-hero">
