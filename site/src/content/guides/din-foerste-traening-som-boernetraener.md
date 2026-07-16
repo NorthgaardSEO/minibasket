@@ -2,9 +2,10 @@
 title: "Din første træning som børnetræner"
 description: "Konkret drejebog til din første børnebasket-træning: struktur, færdige øvelser og de fem fejl, alle nye trænere laver — og hvordan du undgår dem."
 publiceret: 2026-07-07
+opdateret: 2026-07-16
 ---
 
-Du har sagt ja til at træne et børnehold — måske fordi dit eget barn spiller, måske fordi ingen andre meldte sig. Nu står du om tre dage i en hal med tolv børn og en boldvogn. Her er drejebogen.
+Du har sagt ja til at træne et børnehold — måske fordi dit eget barn spiller, måske fordi ingen andre meldte sig. Nu står du om tre dage i en hal med tolv børn og en boldvogn. Her er drejebogen til din første børnebasket-træning: en gennemprøvet 60-minutters struktur, færdige øvelser fra øvelsesbanken og de fem begynderfejl, du skal undgå.
 
 ## Den vigtigste regel først
 
@@ -28,6 +29,8 @@ En gennemprøvet struktur til de første mange træninger — udskift øvelserne
 6. **Fælles afslutning (3 min).** Saml flokken, fremhæv to-tre konkrete ting, der var gode ("Ida, dit stop i balance!"), og send dem hjem med et ritual — et kampråb virker hver gang.
 
 ## De fem klassiske begynderfejl
+
+De fem hyppigste fejl hos nye børnetrænere er: **for meget snak, elimineringslege, voksenøvelser, for lidt planlægning og glemte forældre**. Sådan undgår du dem:
 
 1. **For meget snak.** Du kan mærke det på børnene: efter 30 sekunder kigger de på loftet. Vis, start legen, ret undervejs.
 2. **Elimineringslege.** Lege, hvor man "ryger ud", sætter de svageste børn til at se på — altså dem, der har mest brug for at være med. Vælg lege, hvor alle er med hele tiden, som [Haletagfat med bold](/basketoevelser/haletagfat-med-bold/).

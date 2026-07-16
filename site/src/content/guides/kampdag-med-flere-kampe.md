@@ -2,11 +2,14 @@
 title: "Sådan planlægger du en kampdag med flere kampe"
 description: "Stævnedag med to-tre kampe? Sådan holder du styr på spilletid på tværs af kampene, pauser, mad og energi — uden at drukne i regneark."
 publiceret: 2026-07-12
+opdateret: 2026-07-16
 ---
 
 Minibasket-kampe kommer sjældent én ad gangen. De kommer som stævnedage: to-tre kampe samme formiddag, i en hal en halv time hjemmefra, med ti børn, to trænere og en madpakke-logistik, der ville imponere et cateringfirma. Her er drejebogen til at få det til at glide.
 
 ## Ugen før: det praktiske
+
+En god stævnedag afgøres ugen før: **meld tiderne ud ét sted, få afbud på plads senest to dage før, og pak efter en fast liste**. Tjeklisten:
 
 - **Meld tiderne ud tidligt og ét sted.** Mødetid (ikke kamptid!), adresse, forventet sluttid og hvem der kører. Sæt mødetiden 30-40 minutter før første kamp — og er du i tvivl om, [hvor lang tid en basketballkamp tager](/basketball-regler/#kamplaengde), så regn med god margin i børnerækkerne.
 - **Få styr på afbud nu.** Antallet af spillere afgør hele din spilletidsplan. Jag de sidste svar senest to dage før.
@@ -27,6 +30,8 @@ Det regnestykke kan ikke laves i hovedet mellem to kampe, mens børnene skal hav
 Er princippet bag fordelingen nyt for dig, så start med guiden om [fair spilletid i børnebasket](/traenerguides/fair-spilletid-boernebasket/).
 
 ## På dagen: rytmen mellem kampene
+
+Rytmen på en stævnedag er enkel: **fælles start, kort opvarmning, mad og ro mellem kampene og én fælles afslutning** — og aldrig taktiktavler mellem kampene:
 
 1. **Ankomst og fælles start.** Saml holdet, find omklædning, gå banen rundt. Tryghed først, bold bagefter.
 2. **Kort opvarmning før første kamp (10 min).** [Boldgymnastik](/basketoevelser/boldgymnastik/) og skud på kurven er nok. Gem energien — dagen er lang.

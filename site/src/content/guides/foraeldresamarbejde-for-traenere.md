@@ -2,6 +2,7 @@
 title: "Forældresamarbejde for børnetrænere"
 description: "Sådan gør du forældrene til medspillere i stedet for modspillere: forventningsafstemning, kommunikation og håndtering af de svære samtaler."
 publiceret: 2026-07-03
+opdateret: 2026-07-16
 ---
 
 Spørg en erfaren børnetræner, hvad der er sværest ved jobbet, og svaret er sjældent "øvelserne". Det er forældrene. Men det behøver det ikke at være: De samme forældre, der kan gøre en sæson udmattende, er også din største ressource — kørsel, kage, hepning og hjælpetrænere kommer alt sammen fra tribunen. Forskellen ligger i forventningsafstemning.
@@ -23,6 +24,8 @@ Langt de fleste forældrekonflikter i børnebasket handler om spilletid — ople
 - **Indrøm skæve dage.** En enkelt kamp kan blive ujævn (afbud, skader, kaos). Sig det selv, før nogen spørger: "I dag blev skæv — det retter vi op i næste kamp."
 
 ## Den løbende kommunikation
+
+God forældrekommunikation kræver kun tre ting: **én kanal, en fast rytme — og ros i plenum, problemer i enrum**:
 
 - **Én kanal.** Vælg ét sted (holdets gruppe/app) til al information, og hold dig til det. Beskeder tre steder betyder, at nogen altid har misset noget.
 - **Fast rytme.** En kort besked søndag aften med ugens tider slår ti ad hoc-beskeder.

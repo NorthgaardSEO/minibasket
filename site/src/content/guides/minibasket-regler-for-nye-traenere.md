@@ -2,11 +2,12 @@
 title: "Minibasket-regler forklaret for nye trænere"
 description: "Ny børnebasket-træner? Her er principperne bag de danske minibasket-regler: lavere kurve, mindre bolde og alle skal spille — uden paragraf-jungle."
 publiceret: 2026-07-10
+opdateret: 2026-07-16
 ---
 
 > Leder du efter de almindelige [basketball-regler — skridt, point og kamplængde](/basketball-regler/)? Så er du bedre hjulpet dér. Denne guide handler om de særlige danske børneregler i minibasket.
 
-Står du som ny træner for et børnehold, er reglerne noget af det første, der forvirrer: minibasket spilles nemlig **ikke** efter de samme regler som voksenbasket — med vilje. Denne guide forklarer principperne, så du forstår *hvorfor* reglerne ser ud, som de gør. De præcise og opdaterede regler for hver årgang finder du altid hos Danmarks Basketball Forbund på [basket.dk/boerneregler](https://basket.dk/boerneregler/) — brug dem som din autoritative kilde, da detaljerne justeres løbende.
+**Minibasket** er dansk basketball for børn (op til og med U12), spillet efter særlige børneregler: lavere kurve, mindre bolde, færre spillere på banen — og et krav om, at **alle børn skal spille**. Står du som ny træner for et børnehold, er reglerne noget af det første, der forvirrer: minibasket spilles nemlig **ikke** efter de samme regler som voksenbasket — med vilje. Denne guide forklarer principperne, så du forstår *hvorfor* reglerne ser ud, som de gør. De præcise og opdaterede regler for hver årgang finder du altid hos Danmarks Basketball Forbund på [basket.dk/boerneregler](https://basket.dk/boerneregler/) — brug dem som din autoritative kilde, da detaljerne justeres løbende.
 
 ## Princippet: banen tilpasses børnene — ikke omvendt
 
@@ -19,6 +20,8 @@ Al børnebasket i Danmark bygger på en enkel idé: Spillet skal skaleres til b�
 - **Forenklet dømning og nedtonede resultater.** Dommerne dømmer pædagogisk i de yngste rækker og forklarer frem for at straffe. Fokus er på spillet, ikke på stillingen.
 
 ## Hvad betyder det for dig som træner?
+
+Som børnetræner behøver du ikke kunne paragrafferne udenad — du skal **kende principperne, kende din egen årgangs regler og træne i samme ånd**. Fire konkrete råd:
 
 1. **Lær principperne, ikke paragrafferne, udenad.** Du behøver ikke kunne hver detalje på rygraden — men du skal forstå, at systemet er bygget til udvikling og deltagelse, og træffe dine valg i samme ånd.
 2. **Tjek din egen årgangs regler før sæsonen.** Antal spillere, boldstørrelse, kurvehøjde og periodelængde afhænger af årgangen. Slå det op på [basket.dk/boerneregler](https://basket.dk/boerneregler/), og gem siden som bogmærke.
