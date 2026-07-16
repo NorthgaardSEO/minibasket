@@ -13,6 +13,7 @@ trin:
   - "Næste barn starter, når det foranstående barn er nået til tredje kegle — så er der aldrig kø."
   - "Kør 3-4 runder. Skift håndregel undervejs: første runde valgfri hånd, anden runde højre, tredje runde venstre."
 publiceret: 2026-06-18
+opdateret: 2026-07-16
 ---
 
 Dribleslalom er en af de mest brugte drible-øvelser i børnebasket — af en god grund. Den træner boldkontrol i bevægelse, den er nem at forklare, og alle børn er i gang samtidig. Nøglen er at lave nok baner: står børnene i kø, mister øvelsen sin værdi.

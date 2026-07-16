@@ -13,6 +13,7 @@ trin:
   - "Afslut med kast-og-grib: kast bolden op, klap én gang, grib. Øg til to, tre, fire klap."
   - "Hold hver delelement i 20-30 sekunder og hele serien under fem minutter — tempoet skal være højt og legende."
 publiceret: 2026-07-12
+opdateret: 2026-07-16
 ---
 
 Boldgymnastik er den bedste faste start på enhver børnetræning: børnene får en bold i hænderne fra første minut, og hundredvis af boldberøringer bygger den boldvanthed, som al senere teknik står på. Serien er den samme hver gang — det giver tryghed, og børnene kan se deres egen fremgang uge for uge.

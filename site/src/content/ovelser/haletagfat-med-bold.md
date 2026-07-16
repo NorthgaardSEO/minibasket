@@ -13,6 +13,7 @@ trin:
   - "Tæl point: én nappet hale = ét point. Spil runder af 1-2 minutter."
   - "Mellem runderne: 30 sekunders 'stille dribling', hvor pulsen kommer ned og teknikken op."
 publiceret: 2026-07-09
+opdateret: 2026-07-16
 ---
 
 Haletagfat er alle børns yndlingsleg — og med en bold i hånden bliver den til førsteklasses drible-træning, uden at børnene opdager det. De orienterer sig, skifter retning, accelererer og beskytter bolden, alt sammen fordi legen kræver det. Det er sådan, U6 og U8 lærer bedst: gennem leg, ikke instruktion.

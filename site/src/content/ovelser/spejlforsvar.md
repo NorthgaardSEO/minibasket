@@ -13,6 +13,7 @@ trin:
   - "Kør 30-40 sekunder ad gangen, så byttes roller. Intensiteten skal være høj i korte intervaller."
   - "Kør 3-4 runder pr. barn med korte pauser, hvor du retter én ting ad gangen: hofter, fødder eller hænder."
 publiceret: 2026-06-29
+opdateret: 2026-07-16
 ---
 
 Godt forsvar starter med fødderne, og fodarbejde kan trænes uden bold og uden kurve — derfor er spejlforsvar perfekt, når hallen er fuld, eller kurvene er optaget. Øvelsen er en ren parøvelse: alle arbejder samtidig, og du kan gå rundt og rette detaljer.

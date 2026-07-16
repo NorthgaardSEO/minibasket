@@ -13,6 +13,7 @@ trin:
   - "Kort pause, hvor parret prøver at slå deres egen rekord i næste runde."
   - "Skift pasningstype pr. runde: brystpasning, studspasning, pasning med én hånd (U10). Kør 5-6 runder."
 publiceret: 2026-07-05
+opdateret: 2026-07-16
 ---
 
 Pasninger er børnebaskets mest oversete færdighed — og den letteste at træne uden køer. Makkerpasning på tid forvandler tørre gentagelser til en konkurrence mod parrets egen rekord. Alle par arbejder samtidig, og du kan justere afstanden pr. par, så både de stærkeste og de nyeste udfordres.

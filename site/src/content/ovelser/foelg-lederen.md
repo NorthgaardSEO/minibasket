@@ -13,6 +13,7 @@ trin:
   - "Fortsæt til alle i gruppen har været leder mindst én gang."
   - "Afslut med at træneren er leder for hele flokken i ét stort tog med sjove indslag."
 publiceret: 2026-07-14
+opdateret: 2026-07-16
 ---
 
 Følg lederen varmer op, træner dribling og giver hvert barn noget, der er sjældent i børneidræt: retten til at bestemme. Selv det mest stille barn får 60 sekunder som leder, hvor alle andre gør, som det viser. Det bygger selvtillid — og fordi alle har egen bold, er aktiviteten maksimal fra første sekund.

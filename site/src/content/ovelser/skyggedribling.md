@@ -13,6 +13,7 @@ trin:
   - "Efter 45-60 sekunder bytter parret roller."
   - "Kør 3-4 runder pr. barn. Udnævn til sidst et par, der viser en flot sekvens for resten."
 publiceret: 2026-06-22
+opdateret: 2026-07-16
 ---
 
 Skyggedribling er en fantastisk øvelse, fordi begge børn arbejder hele tiden — der er ingen venten og ingen kø. Føreren øver kreativitet og retningsskift, skyggen øver at drible med hovedet oppe, for ellers mister den føreren af syne.

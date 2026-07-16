@@ -13,6 +13,7 @@ trin:
   - "Scorer man fra alle tre pletter, er man 'kurvekonge' og starter forfra med en ny runde — man samler kroner."
   - "Spil 8-10 minutter. Alle tæller deres egne kroner; slå din egen rekord næste gang."
 publiceret: 2026-07-01
+opdateret: 2026-07-16
 ---
 
 Skudtræning for børn handler om én ting: mange skud fra kort afstand med god teknik — ikke lange skud, der aldrig går ind. Kurvekongen giver hvert barn 30-50 skud på ti minutter, og fordi pletterne er tæt på kurven, får alle succesoplevelser. Sænk kurven, hvis I kan: det er præcis derfor, minibasket spiller på lave kurve.

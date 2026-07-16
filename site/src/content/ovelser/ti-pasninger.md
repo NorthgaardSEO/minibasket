@@ -13,6 +13,7 @@ trin:
   - "Tæl højt sammen for hver pasning. Ti pasninger giver ét point, og modstanderne får bolden."
   - "Mistes bolden undervejs, starter det nye hold fra nul. Spil først til tre point, eller sæt tid på."
 publiceret: 2026-07-07
+opdateret: 2026-07-16
 ---
 
 Ti pasninger er et lille holdspil, der føles som en leg men indeholder næsten alt: frigørelse, pasningsvalg, timing og forsvar. Uden dribling tvinges børnene til at bevæge sig uden bold — den færdighed, der adskiller hold, der spiller sammen, fra hold, hvor én spiller dribler alene.

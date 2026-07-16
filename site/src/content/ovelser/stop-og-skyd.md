@@ -13,6 +13,7 @@ trin:
   - "Skytten henter sin egen rebound og dribler tilbage uden om banen. Næste barn starter, når skytten har sat af mod kurven."
   - "Kør 4-5 minutter fra hver side, så børnene prøver både højre og venstre vinkel."
 publiceret: 2026-07-03
+opdateret: 2026-07-16
 ---
 
 I kamp kommer skuddet næsten aldrig fra stilstand — det kommer efter en dribling. Stop og skyd træner præcis den kobling: fart, kontrolleret stop, balance, skud. For U10 og U12 er det en af de mest kamp-overførbare øvelser overhovedet, og med egen bold og to baner er der næsten ingen ventetid.

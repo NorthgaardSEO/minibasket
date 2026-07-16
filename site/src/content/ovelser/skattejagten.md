@@ -13,6 +13,7 @@ trin:
   - "Stop legen efter 2-3 minutter med et tydeligt signal, og tæl hvert holds skatte sammen."
   - "Spil 2-3 runder. Byt holdsammensætning mellem runderne, så det aldrig bliver de samme, der vinder."
 publiceret: 2026-07-10
+opdateret: 2026-07-16
 ---
 
 Skattejagten er den perfekte afslutning på en børnetræning: høj puls, taktik i børnehøjde ("skal vi hente fra kisten eller stjæle fra naboen?") og en regel-struktur, der er nem at forstå. Fordi der kun må hentes én skat ad gangen, arbejder alle hold konstant — og driblekravet gør legen til boldtræning i forklædning.

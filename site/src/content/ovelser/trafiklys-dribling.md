@@ -13,6 +13,7 @@ trin:
   - "Mister et barn kontrollen over bolden, henter det den bare og fortsætter — ingen ryger ud."
   - "Kør 5-8 minutter og afslut med en 'myldretid', hvor alle dribler mellem hinanden på grønt lys."
 publiceret: 2026-06-25
+opdateret: 2026-07-16
 ---
 
 Trafiklys-dribling pakker drible-træning ind i en leg, alle børn kender. De mindste elsker at reagere på signaler, og du kan som træner styre intensiteten præcist: mere grønt lys, når der skal fart på — mere rødt, når der skal ro på.

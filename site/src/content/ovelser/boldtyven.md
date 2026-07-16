@@ -13,6 +13,7 @@ trin:
   - "Tæl point: ét point pr. bold man prikker væk. Spil 2-3 runder af cirka to minutter."
   - "Gør feltet mindre for hver runde, så presset stiger."
 publiceret: 2026-06-27
+opdateret: 2026-07-16
 ---
 
 Boldtyven er en klassiker, der træner to ting på én gang: at beskytte sin egen dribling under pres og at time et stjålent — kernen i alt forsvarsspil. Den vigtigste regel er, at ingen ryger ud: børn, der mister bolden, er med igen efter tre driblinger. Elimineringslege, hvor de svageste sidder over, træner præcis de forkerte.
