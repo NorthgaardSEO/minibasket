@@ -1,17 +1,109 @@
 ---
-import { SITE_NAME, TAGLINE, appUrl } from '../lib/site';
+import { SITE_NAME, TAGLINE, appUrl, ORG_ID, SITE_ID, PERSON_ID, APP_ID } from '../lib/site';
+
+interface Crumb {
+  name: string;
+  /** Udelades for rene tekst-led (fx kategori) — de vises visuelt, men indgår ikke i schema */
+  href?: string;
+}
 
 interface Props {
   title: string;
   description: string;
   ogType?: string;
   schema?: object | object[];
+  breadcrumbs?: Crumb[]; // udelades på forsiden
 }
 
-const { title, description, ogType = 'website', schema } = Astro.props;
+const { title, description, ogType = 'website', schema, breadcrumbs } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/icon.svg', Astro.site);
 const path = Astro.url.pathname;
+
+// --- JSON-LD entitetsgraf: faste @id-noder + breadcrumbs + sidens egne schemas ---
+const globale = [
+  {
+    '@type': 'Organization',
+    '@id': ORG_ID,
+    name: 'Mini Basket',
+    alternateName: 'minibasket.dk',
+    url: 'https://minibasket.dk/',
+    logo: { '@type': 'ImageObject', url: 'https://minibasket.dk/icon.svg' },
+    description:
+      'Gratis basketball-øvelser, trænerguides og en app til fair spilletid i dansk børnebasket (U6–U12).',
+    founder: { '@id': PERSON_ID },
+  },
+  {
+    '@type': 'WebSite',
+    '@id': SITE_ID,
+    name: 'Mini Basket',
+    url: 'https://minibasket.dk/',
+    inLanguage: 'da',
+    description:
+      'Basketball-øvelser og trænerguides til børnebasket — og en gratis app der giver nemt styr på spilletiden.',
+    publisher: { '@id': ORG_ID },
+  },
+  {
+    '@type': 'Person',
+    '@id': PERSON_ID,
+    name: 'Frederik Nørgaard',
+    jobTitle: 'Frivillig børnebasket-træner',
+    url: 'https://minibasket.dk/om/',
+    worksFor: { '@id': ORG_ID },
+    knowsAbout: ['minibasket', 'børnebasket', 'basketballtræning for børn', 'fair spilletid'],
+  },
+  {
+    '@type': ['SoftwareApplication', 'WebApplication'],
+    '@id': APP_ID,
+    name: 'Mini Basket-appen',
+    url: 'https://minibasket.dk/app/',
+    description:
+      'Gratis app til børnebasket-trænere: planlæg perioderne før kampen, følg spilletiden live og giv alle børn fair tid på banen. Virker på alle telefoner.',
+    applicationCategory: 'SportsApplication',
+    operatingSystem: 'Web (alle telefoner og browsere)',
+    browserRequirements: 'Kræver en moderne browser. Kan installeres som app (PWA).',
+    inLanguage: 'da',
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'DKK' },
+    isAccessibleForFree: true,
+    author: { '@id': ORG_ID },
+    featureList: [
+      'Automatisk fordeling af spilletid i perioder',
+      'Live-overblik over hver spillers spilletid',
+      'Kampur, score og periode på én skærm',
+      'Flere kampe på samme dag (stævnedage)',
+      'Synkronisering mellem flere trænere',
+    ],
+  },
+];
+
+const crumbSchema = breadcrumbs && {
+  '@type': 'BreadcrumbList',
+  '@id': `${canonical}#breadcrumb`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Forside', item: 'https://minibasket.dk/' },
+    ...breadcrumbs
+      .filter((c) => c.href)
+      .map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 2,
+        name: c.name,
+        item: new URL(c.href!, Astro.site).toString(),
+      })),
+  ],
+};
+
+// Sidens egne schemas — @context strippes (grafen har én fælles)
+const sideSchemas = (schema ? (Array.isArray(schema) ? schema : [schema]) : []).map(
+  (s) => {
+    const { '@context': _ctx, ...rest } = s as Record<string, unknown>;
+    return rest;
+  }
+);
+
+const graf = {
+  '@context': 'https://schema.org',
+  '@graph': [...globale, ...(crumbSchema ? [crumbSchema] : []), ...sideSchemas],
+};
 ---
 <!doctype html>
 <html lang="da">
@@ -36,7 +128,7 @@ const path = Astro.url.pathname;
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
-  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
+  <script type="application/ld+json" set:html={JSON.stringify(graf)} />
 </head>
 <body>
   <header class="site-header">
@@ -60,6 +152,21 @@ const path = Astro.url.pathname;
   </header>
 
   <main class="wrap">
+    {breadcrumbs && (
+      <nav class="crumbs mono" aria-label="Brødkrumme">
+        <a href="/">Forside</a>
+        {breadcrumbs.map((c, i) => (
+          <>
+            <span class="crumb-sep" aria-hidden="true">/</span>
+            {c.href && i < breadcrumbs.length - 1 ? (
+              <a href={c.href}>{c.name}</a>
+            ) : (
+              <span aria-current={i === breadcrumbs.length - 1 ? 'page' : undefined}>{c.name}</span>
+            )}
+          </>
+        ))}
+      </nav>
+    )}
     <slot />
   </main>
 
@@ -153,6 +260,13 @@ const path = Astro.url.pathname;
     }
 
     main{min-height:60vh;padding-top:28px;padding-bottom:56px;}
+
+    /* Brødkrumme (synlig sti over H1) */
+    .crumbs{font-size:11px;color:var(--ink-soft);margin-bottom:14px;}
+    .crumbs a{color:var(--ink-soft);text-decoration:none;}
+    .crumbs a:hover{color:var(--gold);text-decoration:underline;}
+    .crumbs .crumb-sep{margin:0 6px;color:var(--ink-dim);}
+    .crumbs span[aria-current="page"]{color:var(--ink-faint);}
 
     /* Chips (filtre + metadata) */
     .chip{display:inline-block;padding:7px 14px;border-radius:var(--r-pill);border:1.4px solid var(--line-2);background:var(--card);color:var(--ink-soft);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:var(--sans);}
