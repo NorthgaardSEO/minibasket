@@ -1,6 +1,12 @@
 export const SITE_NAME = 'Mini Basket';
 export const TAGLINE = 'Nemt styr på spilletiden.';
 
+/** Faste @id-noder i sitets JSON-LD-entitetsgraf (udsendes globalt fra Base.astro) */
+export const ORG_ID = 'https://minibasket.dk/#organization';
+export const SITE_ID = 'https://minibasket.dk/#website';
+export const PERSON_ID = 'https://minibasket.dk/om/#frederik';
+export const APP_ID = 'https://minibasket.dk/app/#app';
+
 export const KATEGORI_LABELS: Record<string, string> = {
   drible: 'Dribling',
   skud: 'Skud',
