@@ -14,6 +14,7 @@ trin:
   - "Kør 3-4 runder pr. barn. Udnævn til sidst et par, der viser en flot sekvens for resten."
 publiceret: 2026-06-22
 opdateret: 2026-07-16
+laerer: "Børnene lærer at drible med hovedet oppe og aflæse en anden spillers bevægelser"
 ---
 
 Skyggedribling er en fantastisk øvelse, fordi begge børn arbejder hele tiden — der er ingen venten og ingen kø. Føreren øver kreativitet og retningsskift, skyggen øver at drible med hovedet oppe, for ellers mister den føreren af syne.
@@ -32,10 +33,11 @@ Skyggedribling er en fantastisk øvelse, fordi begge børn arbejder hele tiden �
 
 **Sværere:** Kræv at skyggen dribler med den "svage" hånd, eller giv føreren opgaver: mindst tre håndskifter, ét spin, én gang baglæns. For U12 kan skyggen forsøge at prikke førerens bold væk, uden at miste sin egen.
 
-## Det lærer børnene
-
-- At drible med hovedet oppe og orientere sig
-- Retningsskift, temposkift og håndskifte
-- At aflæse en anden spillers bevægelser — en tidlig forsvarsfærdighed
-
 Tip: Skift parrene undervejs, så børnene prøver at skygge én, der er hurtigere eller langsommere end dem selv. Begge dele udvikler.
+
+## Hvad børnene lærer
+
+- Børnene lærer at drible med hovedet oppe og aflæse en anden spillers bevægelser
+- Retningsskift, temposkift og håndskifte, mens driblingen holdes i gang
+- Kreativitet i rollen som fører: at finde på og turde vise det
+- En tidlig forsvarsfærdighed: at følge en modspiller uden at tabe den af syne

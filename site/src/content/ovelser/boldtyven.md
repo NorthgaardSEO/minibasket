@@ -14,6 +14,7 @@ trin:
   - "Gør feltet mindre for hver runde, så presset stiger."
 publiceret: 2026-06-27
 opdateret: 2026-07-16
+laerer: "Børnene lærer at beskytte deres egen dribling under pres og at time et stjålent uden at lave fejl"
 ---
 
 Boldtyven er en klassiker, der træner to ting på én gang: at beskytte sin egen dribling under pres og at time et stjålent — kernen i alt forsvarsspil. Den vigtigste regel er, at ingen ryger ud: børn, der mister bolden, er med igen efter tre driblinger. Elimineringslege, hvor de svageste sidder over, træner præcis de forkerte.
@@ -32,10 +33,11 @@ Boldtyven er en klassiker, der træner to ting på én gang: at beskytte sin ege
 
 **Sværere:** Kræv dribling med svag hånd, eller spil to og to sammen som makkerpar, der dækker hinandens ryg. For U10 kan du lave "kongefeltet": et lille felt i midten, hvor kun de modigste dribler ind.
 
-## Det lærer børnene
-
-- At beskytte bolden med kroppen og drible med lav tyngdepunkt
-- At orientere sig konstant — hvor er truslerne?
-- Timing i at gå efter bolden uden at lave fejl
-
 Tip: Ros de rigtige ting: "flot, du holdt kroppen mellem bolden og tyven!" — ikke kun antallet af stjålne bolde.
+
+## Hvad børnene lærer
+
+- Børnene lærer at beskytte deres egen dribling under pres og at time et stjålent uden at lave fejl
+- At holde kroppen mellem bolden og tyven og drible med lavt tyngdepunkt
+- Konstant orientering: hvor er truslerne lige nu?
+- At komme hurtigt videre efter en mistet bold, fordi ingen ryger permanent ud

@@ -14,6 +14,7 @@ trin:
   - "Mistes bolden undervejs, starter det nye hold fra nul. Spil først til tre point, eller sæt tid på."
 publiceret: 2026-07-07
 opdateret: 2026-07-16
+laerer: "Børnene lærer at gøre sig fri uden bold og vælge den rigtige pasning under pres"
 ---
 
 Ti pasninger er et lille holdspil, der føles som en leg men indeholder næsten alt: frigørelse, pasningsvalg, timing og forsvar. Uden dribling tvinges børnene til at bevæge sig uden bold — den færdighed, der adskiller hold, der spiller sammen, fra hold, hvor én spiller dribler alene.
@@ -32,10 +33,11 @@ Ti pasninger er et lille holdspil, der føles som en leg men indeholder næsten 
 
 **Sværere:** Mindre felt, krav om at alle på holdet skal røre bolden inden for de ti pasninger, eller maks tre sekunder med bolden pr. spiller. For U12: tillad tre driblinger pr. besiddelse som "nødventil".
 
-## Det lærer børnene
-
-- At bevæge sig og gøre sig fri, når man ikke har bolden
-- Pasningsvalg under pres: hvem er faktisk fri?
-- Forsvar med aflæsning og timing i stedet for at rive og flå
-
 Tip: Spil med små hold. 3v3 giver hvert barn tre gange så mange boldberøringer som 6v6 — og det er berøringerne, der udvikler.
+
+## Hvad børnene lærer
+
+- Børnene lærer at gøre sig fri uden bold og vælge den rigtige pasning under pres
+- At bevæge sig hele tiden, fordi driblingen ikke er en udvej
+- Forsvar med aflæsning og timing i stedet for at rive og flå
+- At tælle højt og arbejde mod et fælles mål som ét hold

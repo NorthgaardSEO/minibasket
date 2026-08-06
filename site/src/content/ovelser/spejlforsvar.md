@@ -14,6 +14,7 @@ trin:
   - "Kør 3-4 runder pr. barn med korte pauser, hvor du retter én ting ad gangen: hofter, fødder eller hænder."
 publiceret: 2026-06-29
 opdateret: 2026-07-16
+laerer: "Børnene lærer forsvarets fodarbejde: lave hofter, bred base og sidelæns glidetrin uden at krydse benene"
 ---
 
 Godt forsvar starter med fødderne, og fodarbejde kan trænes uden bold og uden kurve — derfor er spejlforsvar perfekt, når hallen er fuld, eller kurvene er optaget. Øvelsen er en ren parøvelse: alle arbejder samtidig, og du kan gå rundt og rette detaljer.
@@ -32,10 +33,11 @@ Godt forsvar starter med fødderne, og fodarbejde kan trænes uden bold og uden 
 
 **Sværere:** Giv angriberen en bold, så forsvareren spejler en rigtig dribling. Eller spil "hale-versionen": forsvareren har en vest i bukselinningen, som angriberen prøver at nappe.
 
-## Det lærer børnene
-
-- Forsvarsposition: lave hofter, bred base, vægt på forfoden
-- Sidelæns glidetrin uden at krydse ben
-- At reagere på modstanderens bevægelse i stedet for at gætte
-
 Tip: Korte intervaller er afgørende. 30 sekunder med fuld intensitet lærer børnene mere end tre minutter i halvt tempo — og det er sjovere.
+
+## Hvad børnene lærer
+
+- Børnene lærer forsvarets fodarbejde: lave hofter, bred base og sidelæns glidetrin uden at krydse benene
+- At reagere på modstanderens bevægelse i stedet for at gætte
+- Balance og kropskontrol i sidelæns bevægelse med vægten på forfoden
+- At holde fuld intensitet i korte, fokuserede intervaller

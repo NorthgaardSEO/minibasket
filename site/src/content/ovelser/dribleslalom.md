@@ -14,6 +14,7 @@ trin:
   - "Kør 3-4 runder. Skift håndregel undervejs: første runde valgfri hånd, anden runde højre, tredje runde venstre."
 publiceret: 2026-06-18
 opdateret: 2026-07-16
+laerer: "Børnene lærer at styre bolden i bevægelse med begge hænder uden at kigge ned på den"
 ---
 
 Dribleslalom er en af de mest brugte drible-øvelser i børnebasket — af en god grund. Den træner boldkontrol i bevægelse, den er nem at forklare, og alle børn er i gang samtidig. Nøglen er at lave nok baner: står børnene i kø, mister øvelsen sin værdi.
@@ -32,10 +33,11 @@ Dribleslalom er en af de mest brugte drible-øvelser i børnebasket — af en go
 
 **Sværere:** Kræv håndskifte ved hver kegle (bolden skal krydse foran kroppen), sæt keglerne tættere, eller gør det til en stafet mellem to hold — men kun hvis holdene er små nok til, at ingen venter længe.
 
-## Det lærer børnene
-
-- Boldkontrol i bevægelse uden at kigge ned på bolden
-- At drible med begge hænder
-- Retningsskift og tempo-kontrol
-
 Tip: Sig "kig på mig, ikke på bolden" og hold en hånd i vejret med et tal — børnene skal råbe tallet, mens de dribler. Det tvinger blikket op på en legende måde.
+
+## Hvad børnene lærer
+
+- Børnene lærer at styre bolden i bevægelse med begge hænder uden at kigge ned på den
+- Retningsskift og tempokontrol omkring forhindringer
+- Håndskifte foran kroppen, når håndreglerne kræver det
+- At holde blikket oppe, mens driblingen kører

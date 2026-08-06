@@ -14,6 +14,7 @@ trin:
   - "Spil 8-10 minutter. Alle tæller deres egne kroner; slå din egen rekord næste gang."
 publiceret: 2026-07-01
 opdateret: 2026-07-16
+laerer: "Børnene lærer skudteknik fra kort afstand: kraft fra benene, albuen under bolden og blødt håndled"
 ---
 
 Skudtræning for børn handler om én ting: mange skud fra kort afstand med god teknik — ikke lange skud, der aldrig går ind. Kurvekongen giver hvert barn 30-50 skud på ti minutter, og fordi pletterne er tæt på kurven, får alle succesoplevelser. Sænk kurven, hvis I kan: det er præcis derfor, minibasket spiller på lave kurve.
@@ -32,10 +33,11 @@ Skudtræning for børn handler om én ting: mange skud fra kort afstand med god 
 
 **Sværere:** Tilføj en fjerde og femte plet lidt længere ude, kræv et drible-stop før skuddet (to skridt ind, stop, skyd), eller lad børnene konkurrere i par om flest kroner tilsammen — det holder fokus på samarbejde.
 
-## Det lærer børnene
-
-- Skudteknik fra kort afstand: ben, albue under bolden, blødt håndled
-- At følge sit eget skud og tage rebound
-- At konkurrere med sig selv frem for at sammenligne med andre
-
 Tip: Ret én ting ad gangen. "Skyd med benene" er den vigtigste besked til børn — kraften kommer nedefra, ikke fra armene.
+
+## Hvad børnene lærer
+
+- Børnene lærer skudteknik fra kort afstand: kraft fra benene, albuen under bolden og blødt håndled
+- At følge sit eget skud og selv tage rebounden
+- Skud fra forskellige vinkler rundt om kurven
+- At konkurrere med deres egen rekord i stedet for at måle sig med de andre

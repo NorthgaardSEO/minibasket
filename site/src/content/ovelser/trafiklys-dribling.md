@@ -14,6 +14,7 @@ trin:
   - "Kør 5-8 minutter og afslut med en 'myldretid', hvor alle dribler mellem hinanden på grønt lys."
 publiceret: 2026-06-25
 opdateret: 2026-07-16
+laerer: "Børnene lærer at skifte tempo i driblingen og stoppe med bolden under fuld kontrol"
 ---
 
 Trafiklys-dribling pakker drible-træning ind i en leg, alle børn kender. De mindste elsker at reagere på signaler, og du kan som træner styre intensiteten præcist: mere grønt lys, når der skal fart på — mere rødt, når der skal ro på.
@@ -32,10 +33,11 @@ Trafiklys-dribling pakker drible-træning ind i en leg, alle børn kender. De mi
 
 **Sværere:** Tilføj flere signaler: "blåt lys" = skift hånd, "blinklys" = dribl baglæns, "fodgængerfelt" = otte hurtige, lave driblinger. Lad et barn være trafiklys i stedet for træneren.
 
-## Det lærer børnene
-
-- Boldkontrol i forskellige tempi
-- At stoppe med bolden under kontrol ("triple threat" i børnehøjde)
-- At lytte og reagere, mens de dribler — blikket væk fra bolden
-
 Tip: Vær selv med i legen med en bold i hånden. Når træneren griner og laver fejl, tør børnene også.
+
+## Hvad børnene lærer
+
+- Børnene lærer at skifte tempo i driblingen og stoppe med bolden under fuld kontrol
+- At lytte og reagere på signaler, mens driblingen kører
+- Et tidligt "triple threat"-stop: bolden i begge hænder, helt i ro
+- At løfte blikket fra bolden, fordi de skal holde øje med trafiklyset

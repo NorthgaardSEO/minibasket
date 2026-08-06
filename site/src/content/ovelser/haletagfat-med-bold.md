@@ -14,6 +14,7 @@ trin:
   - "Mellem runderne: 30 sekunders 'stille dribling', hvor pulsen kommer ned og teknikken op."
 publiceret: 2026-07-09
 opdateret: 2026-07-16
+laerer: "Børnene lærer retningsskift og acceleration med bold, fordi jagten på haler tvinger blikket op"
 ---
 
 Haletagfat er alle børns yndlingsleg — og med en bold i hånden bliver den til førsteklasses drible-træning, uden at børnene opdager det. De orienterer sig, skifter retning, accelererer og beskytter bolden, alt sammen fordi legen kræver det. Det er sådan, U6 og U8 lærer bedst: gennem leg, ikke instruktion.
@@ -32,10 +33,11 @@ Haletagfat er alle børns yndlingsleg — og med en bold i hånden bliver den ti
 
 **Sværere:** Kræv dribling med svag hånd, gør feltet mindre, eller lav "trænerjagten": alle børn jagter kun trænerens hale, mens træneren dribler for livet. Garanteret grin.
 
-## Det lærer børnene
-
-- Dribling med hovedet oppe — man kan ikke jagte haler med blikket på bolden
-- Retningsskift og acceleration med bold
-- At turde noget: gå efter halen, selvom man kan miste sin egen
-
 Tip: Spil selv med. En træner, der bliver jagtet og griner, er det bedste, en U6-træning kan indeholde.
+
+## Hvad børnene lærer
+
+- Børnene lærer retningsskift og acceleration med bold, fordi jagten på haler tvinger blikket op
+- At holde driblingen i gang, mens de både jagter og beskytter deres egen hale
+- Mod: at gå efter halen, selvom man kan miste sin egen
+- Puls og hurtige fødder, uden at det føles som træning

@@ -14,6 +14,7 @@ trin:
   - "Kør 4-5 minutter fra hver side, så børnene prøver både højre og venstre vinkel."
 publiceret: 2026-07-03
 opdateret: 2026-07-16
+laerer: "Børnene lærer at stoppe i balance efter en dribling og gå direkte op i skuddet"
 ---
 
 I kamp kommer skuddet næsten aldrig fra stilstand — det kommer efter en dribling. Stop og skyd træner præcis den kobling: fart, kontrolleret stop, balance, skud. For U10 og U12 er det en af de mest kamp-overførbare øvelser overhovedet, og med egen bold og to baner er der næsten ingen ventetid.
@@ -32,10 +33,11 @@ I kamp kommer skuddet næsten aldrig fra stilstand — det kommer efter en dribl
 
 **Sværere:** Tilføj et retningsskift ved en ekstra kegle før stoppet, sæt en passiv forsvarer (træner med hænderne oppe) ved skudpletten, eller gør det til en konkurrence: første bane med 10 scoringer.
 
-## Det lærer børnene
-
-- At stoppe i balance efter dribling — fundamentet for alt skud i fart
-- Overgangen fra dribling til skud uden ekstra skridt
-- At skyde med benene, ikke armene, når pulsen er høj
-
 Tip: Kig på fødderne, ikke på bolden, når du retter. Ni ud af ti skæve skud hos børn starter med et stop i ubalance.
+
+## Hvad børnene lærer
+
+- Børnene lærer at stoppe i balance efter en dribling og gå direkte op i skuddet
+- To-takts stop i fart: hop-stop og ét-to-stop uden ekstra skridt
+- At skyde med benene, ikke armene, når pulsen er høj
+- Afslutninger fra både højre og venstre vinkel, som de kommer i kamp

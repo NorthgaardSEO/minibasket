@@ -14,6 +14,7 @@ trin:
   - "Spil 2-3 runder. Byt holdsammensætning mellem runderne, så det aldrig bliver de samme, der vinder."
 publiceret: 2026-07-10
 opdateret: 2026-07-16
+laerer: "Børnene lærer at drible i fuld fart, når det gælder, og at vente på tur som en del af holdet"
 ---
 
 Skattejagten er den perfekte afslutning på en børnetræning: høj puls, taktik i børnehøjde ("skal vi hente fra kisten eller stjæle fra naboen?") og en regel-struktur, der er nem at forstå. Fordi der kun må hentes én skat ad gangen, arbejder alle hold konstant — og driblekravet gør legen til boldtræning i forklædning.
@@ -32,10 +33,11 @@ Skattejagten er den perfekte afslutning på en børnetræning: høj puls, taktik
 
 **Sværere:** Krav om dribling med svag hånd på hjemturen, længere afstand til øerne, eller en "vogter" (træneren!), der ved berøring sender skattejægeren tilbage uden skat.
 
-## Det lærer børnene
-
-- Dribling i fart, når det gælder
-- At vente på tur og heppe på holdkammeraterne
-- Taktiske valg: hvor kan vi hente skatte hurtigst?
-
 Tip: Lad børnene selv tælle skattene højt til sidst — det er halvdelen af fornøjelsen, og de små øver oven i købet at tælle.
+
+## Hvad børnene lærer
+
+- Børnene lærer at drible i fuld fart, når det gælder, og at vente på tur som en del af holdet
+- Taktiske valg i børnehøjde: hente fra kisten eller stjæle fra naboens ø?
+- At heppe på holdkammeraterne, mens de selv venter
+- At tælle op og gøre status sammen, når runden er slut

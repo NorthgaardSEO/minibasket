@@ -14,6 +14,7 @@ trin:
   - "Hold hver delelement i 20-30 sekunder og hele serien under fem minutter — tempoet skal være højt og legende."
 publiceret: 2026-07-12
 opdateret: 2026-07-16
+laerer: "Børnene opbygger boldvanthed gennem hundredvis af boldberøringer, så hænderne kender bolden uden at kigge"
 ---
 
 Boldgymnastik er den bedste faste start på enhver børnetræning: børnene får en bold i hænderne fra første minut, og hundredvis af boldberøringer bygger den boldvanthed, som al senere teknik står på. Serien er den samme hver gang — det giver tryghed, og børnene kan se deres egen fremgang uge for uge.
@@ -32,10 +33,11 @@ Boldgymnastik er den bedste faste start på enhver børnetræning: børnene får
 
 **Sværere:** Ottetaller i høj fart, bolden rundt om ét ben ad gangen, kast-og-grib bag ryggen, eller hele serien med lukkede øjne på de nemmeste elementer. U10 kan lave serien med to bolde i dele af den.
 
-## Det lærer børnene
-
-- Boldvanthed: hænder, der kender bolden uden at kigge
-- Koordination og fingerstyring — fundamentet under dribling og pasning
-- En fast rutine, der gør starten på træningen tryg og effektiv
-
 Tip: Sæt musik på. Fem minutters boldgymnastik til børnenes yndlingssang er den letteste "kultur-byggesten", en børnetræner kan indføre.
+
+## Hvad børnene lærer
+
+- Børnene opbygger boldvanthed gennem hundredvis af boldberøringer, så hænderne kender bolden uden at kigge
+- Koordination og fingerstyring, som al senere dribling og pasning bygger på
+- Kast-og-grib med klap skærper øje-hånd-koordinationen trin for trin
+- En fast rutine, der gør starten på træningen tryg og lader dem se deres egen fremgang uge for uge

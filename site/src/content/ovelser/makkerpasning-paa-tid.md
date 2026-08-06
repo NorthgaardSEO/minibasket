@@ -14,6 +14,7 @@ trin:
   - "Skift pasningstype pr. runde: brystpasning, studspasning, pasning med én hånd (U10). Kør 5-6 runder."
 publiceret: 2026-07-05
 opdateret: 2026-07-16
+laerer: "Børnene lærer at aflevere præcise brystpasninger og gribe med to hænder, selv når tempoet er højt"
 ---
 
 Pasninger er børnebaskets mest oversete færdighed — og den letteste at træne uden køer. Makkerpasning på tid forvandler tørre gentagelser til en konkurrence mod parrets egen rekord. Alle par arbejder samtidig, og du kan justere afstanden pr. par, så både de stærkeste og de nyeste udfordres.
@@ -32,10 +33,11 @@ Pasninger er børnebaskets mest oversete færdighed — og den letteste at træn
 
 **Sværere:** Længere afstand, krav om "vis mål" (modtageren viser to hænder som mål før pasningen), eller bevægelse: modtageren tager to sidelæns skridt mellem hver pasning, så pasningen skal rammes i fart.
 
-## Det lærer børnene
-
-- Præcise to-hånds pasninger med tommelfingrene bag bolden
-- At gribe med to hænder og blikket på bolden
-- At kommunikere: vis mål, sig navnet, aflevér når makkeren er klar
-
 Tip: Tæl point som par, aldrig som enkeltperson. Pasning er samarbejde — også når man tæller.
+
+## Hvad børnene lærer
+
+- Børnene lærer at aflevere præcise brystpasninger og gribe med to hænder, selv når tempoet er højt
+- Teknikken bag flere pasningstyper: brystpasning, studspasning og pasning med én hånd
+- At kommunikere med makkeren: vis mål, sig navnet, aflevér når der er kontakt
+- At jagte en fælles rekord som par i stedet for at tælle hver for sig
