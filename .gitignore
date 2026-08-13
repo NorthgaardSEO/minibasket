@@ -1,9 +1,12 @@
 node_modules/
 dist/
 .astro/
-.vercel/
 .DS_Store
 *.local
+
+# Vercel CLI (projekt-link + OIDC-token)
+.vercel
+.env*
 
 # Kildemateriale, ikke kode
 *.zip
