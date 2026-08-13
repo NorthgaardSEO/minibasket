@@ -8,8 +8,7 @@ Gratis værktøj til børnebasket-trænere (U6–U12): content-site på **miniba
   - `site/src/content/ovelser/` — 13 basketøvelser (markdown)
   - `site/src/content/guides/` — 5 trænerguides (markdown)
   - `site/public/app/` — **PWA'en der faktisk serveres** (app.js, index.html, sw.js)
-- `minibasket-app/` — kilde-kopi af PWA'en. **Hold altid i sync med `site/public/app/`**
-- Repo-RODENS app.js/index.html/sw.js er forældede rester — ignorér/ryd op
+- `site/public/app/` er **den eneste** kopi af PWA'en. Dubletterne i repo-roden og i `minibasket-app/` er slettet (13/8-26) — de drev ud af sync. Ældre dokumenter i `docs/` nævner dem stadig; det er historik
 - `docs/` — `HANDOFF.md`, `SEO-PLAN.md`, `SEO-GEO-STRUKTUR.md`, `REVIEW-*.md`, `DESIGN-BRIEF.md`
 - `supabase/migrations/` — mb-skemaet versioneret (se `supabase/README.md`)
 
@@ -22,7 +21,7 @@ Windows Credential Manager ellers rammer den forkerte GitHub-konto (`belimaapp`)
 ## Deploy
 - GitHub: `NorthgaardSEO/minibasket` (main) → Vercel auto-deploy (~30-60 s)
 - Vercel: team **Freds** (northgaard@gmail.com), projekt `minibasket`, Root Directory = `site`
-- **Ved ændringer i appen:** ret filer i `site/public/app/`, bump cache-version i `sw.js` (`minibasket-vN` → vN+1), synk til `minibasket-app/`, commit + push
+- **Ved ændringer i appen:** ret filer i `site/public/app/`, bump cache-version i `sw.js` (`minibasket-vN` → vN+1), commit + push
 - Verificér efter deploy: `curl -s https://minibasket.dk/app/sw.js | grep minibasket-v`
 - Test lokalt: `cd site && npm install && npx astro build`
 
