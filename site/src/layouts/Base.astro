@@ -1,5 +1,5 @@
 ---
-import { SITE_NAME, TAGLINE, appUrl, ORG_ID, SITE_ID, PERSON_ID, APP_ID } from '../lib/site';
+import { SITE_NAME, TAGLINE, appUrl, ORG_ID, SITE_ID, PERSON_ID, APP_ID, GOOGLE_SITE_VERIFICATION } from '../lib/site';
 
 interface Crumb {
   name: string;
@@ -114,6 +114,7 @@ const graf = {
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
+  {GOOGLE_SITE_VERIFICATION && <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />}
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="sitemap" href="/sitemap-index.xml" />

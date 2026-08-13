@@ -41,3 +41,11 @@ export function fmtDato(d: Date): string {
 }
 
 export const MOBILEPAY_URL = 'https://qr.mobilepay.dk/box/1ebdcc50-6d0b-4969-884c-9589e199e3c1/pay-in';
+
+/**
+ * Google Search Console — verifikations-token fra "HTML tag"-metoden.
+ * Indsæt kun selve content-værdien (fx 'AbC123...'), ikke hele <meta>-tagget.
+ * Tom streng = intet tag udsendes. Tagget skal blive liggende efter verifikation,
+ * ellers mister propertyen sin verificering igen.
+ */
+export const GOOGLE_SITE_VERIFICATION = '';
