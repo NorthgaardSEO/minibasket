@@ -1,5 +1,5 @@
 /* Mini Basket service worker — network-first for egne assets, offline fallback kun for navigationer */
-const CACHE = 'minibasket-v12';
+const CACHE = 'minibasket-v13';
 const ASSETS = ['./', './app.js', './manifest.json', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', (e) => {

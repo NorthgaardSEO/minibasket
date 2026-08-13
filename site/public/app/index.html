@@ -226,6 +226,8 @@
   .tb span{font-family:var(--mono);font-size:8.5px;letter-spacing:.6px;text-transform:uppercase;font-weight:700;}
   .tb.admin-only{display:none;}
   body.is-admin .tb.admin-only{display:flex;}
+  .admin-section{display:none;}
+  body.is-admin .admin-section{display:block;}
 
   .action-bar{position:fixed;bottom:calc(60px + env(safe-area-inset-bottom));left:0;right:0;padding:16px 15px 8px;z-index:50;pointer-events:none;background:linear-gradient(180deg,rgba(239,231,214,0),var(--paper) 42%);}
   .action-inner{max-width:600px;margin:0 auto;display:flex;gap:8px;pointer-events:auto;}
@@ -425,15 +427,17 @@
 
   <!-- ADMIN -->
   <div class="view" id="view-admin">
-    <div class="secbar"><div class="title">Admin</div></div>
+    <div class="secbar"><div class="title">Hold</div></div>
     <div class="addbox" style="margin-bottom:14px">
       <span class="eyebrow">Opret hold</span>
       <div class="addrow"><input class="name" id="add-team" placeholder="Holdnavn, fx SISU 2016" maxlength="40"><button id="add-team-btn">+</button></div>
     </div>
     <span class="eyebrow">Hold &amp; farver</span>
     <div id="admin-teams" style="margin-bottom:16px"></div>
-    <span class="eyebrow">Trænere</span>
-    <div id="admin-coaches"><div class="loading">Henter…</div></div>
+    <div class="admin-section">
+      <span class="eyebrow">Trænere</span>
+      <div id="admin-coaches"><div class="loading">Henter…</div></div>
+    </div>
   </div>
 
   <!-- LINKS -->
@@ -470,7 +474,7 @@
     <button class="tb" data-view="tid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2M9 2h6"/></svg><span>Tid</span></button>
     <button class="tb" data-view="links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span>Links</span></button>
     <button class="tb admin-only" data-view="log"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg><span>Log</span></button>
-    <button class="tb admin-only" data-view="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1M18 8l2 2 3-3"/></svg><span>Admin</span></button>
+    <button class="tb" data-view="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1M18 8l2 2 3-3"/></svg><span>Hold</span></button>
   </div>
 </div>
 

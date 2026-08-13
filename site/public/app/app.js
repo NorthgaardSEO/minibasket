@@ -118,21 +118,17 @@ async function loadTeams(){
   if(teams.length){
     if(!curTeam || !teams.find(t=>t.id===curTeam)) curTeam = teams[0].id;
     await selectTeam(curTeam);
-  } else if(me.role==="admin"){
-    // First-run onboarding: give a brand-new admin a working team + game immediately
+  } else {
+    // First-run onboarding: give every brand-new coach a working team + game immediately
     const { data:t } = await sb.from("mb_teams").insert({ name:"Mit hold", sort:0 }).select().single();
     if(t){
       await sb.from("mb_sessions").insert({ team_id:t.id, name:"Kamp 1", sort:0, game_date:todayLocal() });
       teams=[t]; renderTeamTabs(); await selectTeam(t.id);
       toast("Velkommen! Dit hold er klar — tilføj spillere under Trup ✨");
     } else {
-      $("team-title").textContent="Mini Basket"; $("team-sub").textContent="opret et hold under Admin";
-      $("session-tabs").innerHTML=""; $("grid-wrap").innerHTML='<div class="empty"><div class="big">Intet hold</div><div class="mono">Gå til Admin og opret et hold</div></div>';
+      $("team-title").textContent="Mini Basket"; $("team-sub").textContent="opret et hold under Hold";
+      $("session-tabs").innerHTML=""; $("grid-wrap").innerHTML='<div class="empty"><div class="big">Intet hold</div><div class="mono">Gå til Hold-fanen og opret et hold</div></div>';
     }
-  } else {
-    $("team-title").textContent = "Mini Basket";
-    $("team-sub").textContent = "du er ikke tildelt et hold endnu";
-    $("session-tabs").innerHTML=""; $("grid-wrap").innerHTML='<div class="empty"><div class="big">Intet hold</div><div class="mono">Bed din admin om at tildele dig et hold</div></div>';
   }
 }
 
