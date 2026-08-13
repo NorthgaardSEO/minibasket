@@ -37,6 +37,12 @@ Forretningsmål: organisk trafik fra danske trænere → app-brugere.
 - **Supabase-skemaet versioneret**: de 9 mb-migrationer hentet fra produktion til
   `supabase/migrations/`. Se `supabase/README.md`.
 - **README.md** skrevet om til at beskrive det faktiske repo.
+- **Sikkerhedshul lukket** (migration `20260813133857_mb_harden_function_grants`):
+  `mb_team_autoassign()`, `mb_protect_role()`, `mb_create_team()` og `mb_apply_rotations()`
+  kunne alle kaldes af `anon` via `/rest/v1/rpc/`. Årsagen var, at de tidligere
+  `revoke ... from anon` ikke virkede — rettigheden lå også på `PUBLIC`, som aldrig blev
+  revoked. Nu revokes fra `public` først, og der grantes eksplicit til `authenticated`.
+  Trigger-affyring er verificeret uændret bagefter.
 
 ## Historik
 - **15/7-26**: site + /app/ gik live. Onyx Gold-design (se `DESIGN-BRIEF.md`).
@@ -61,12 +67,10 @@ Forretningsmål: organisk trafik fra danske trænere → app-brugere.
    additional = `https://minibasket.vercel.app/**`. Bekræft at det er sat.
 
 ## Åbne punkter
-- **Sikkerhed (nyt fund 13/8)**: `mb_team_autoassign()` og `mb_create_team()` er
-  RPC-kaldbare for `anon`, fordi de aldrig fik den hærdning som migrationen
-  `minibasket_harden_functions` gav de ældre funktioner. Praktisk risiko er lav
-  (trigger-funktioner fejler uden trigger-kontekst, og `mb_create_team` afviser
-  uautentificerede kald internt), men de bør revokes for konsistens.
 - **Leaked password protection** er stadig slået fra i Supabase Auth — gratis gevinst.
+- `mb_create_team()` og `mb_create_own_team()` er **død kode** — appen opretter hold via
+  direkte insert på `mb_teams` (RLS-policy + trigger), ikke via RPC. De er nu låst til
+  `authenticated`, men kunne droppes helt.
 - **Supabase-projektet deles med flere ubeslægtede apps** (sisu-rotation, madplan,
   dashboard, vault/DMS). Kun `mb_`-objekter er vores. Kør ALDRIG `supabase db reset`.
   `sisu_`-tabellerne har helt åbne RLS-policies (`USING true`) — accepteret risiko,
