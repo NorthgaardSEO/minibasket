@@ -53,12 +53,18 @@ Forretningsmål: organisk trafik fra danske trænere → app-brugere.
   (`REVIEW-ARKITEKTUR.md`, `REVIEW-KODE.md`); DB-trigger mod rolle-eskalering.
 
 ## Næste skridt — vigtigst først
-1. **Google Search Console**: opret property for minibasket.dk og indsend
-   `https://minibasket.dk/sitemap-index.xml`. Ikke gjort endnu — og intet SEO-arbejde
-   kan måles før det er på plads.
+1. **Google Search Console**: property er endnu ikke oprettet. Planen er at verificere
+   via metoden **"Google Analytics"**, som nu er mulig fordi GA4 (`G-D0DGSKQYCW`) er
+   installeret på alle 26 sider. Kræver at samme Google-konto har Edit-adgang til
+   GA4-propertyen. Derefter indsendes `https://minibasket.dk/sitemap-index.xml`.
+   Intet SEO-arbejde kan måles før det er på plads.
+   Alternativ hvis GA-metoden driller: `GOOGLE_SITE_VERIFICATION` i `site/src/lib/site.ts`
+   er klar til HTML-tag-metoden — indsæt token, push, verificér.
 2. **Første backlinks (0 pt. i dag)**. Den største vækstbegrænsning. Oplagte: DBBF/
    lokale klubber, trænerfora, Facebook-grupper for børnetrænere.
-3. **Analytics** — stadig ikke installeret. Vercel Analytics eller Plausible (cookieless).
+3. **Cookie-banner** — GA4 er nu installeret (se nedenfor), og det sætter cookies.
+   Et samtykke-banner er påkrævet efter GDPR/ePrivacy. Dette er en åben juridisk
+   forpligtelse, ikke en nice-to-have.
 4. **Resend-mails**: opret domæne i Resend (EU) → DNS-records **hos Simply.com**
    (ikke Vercel, som tidligere planlagt) → Supabase Auth → SMTP (host smtp.resend.com,
    port 465, user `resend`, pass = API-nøgle, afsender noreply@minibasket.dk) →

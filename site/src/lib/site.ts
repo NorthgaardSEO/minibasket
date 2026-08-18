@@ -49,3 +49,13 @@ export const MOBILEPAY_URL = 'https://qr.mobilepay.dk/box/1ebdcc50-6d0b-4969-884
  * ellers mister propertyen sin verificering igen.
  */
 export const GOOGLE_SITE_VERIFICATION = '';
+
+/**
+ * Google Analytics 4 measurement-ID. Tom streng = ingen tracking indlæses.
+ * Bruges også til at verificere Search Console via metoden "Google Analytics"
+ * (kræver at samme Google-konto har Edit-adgang til GA4-propertyen).
+ *
+ * OBS: GA4 sætter cookies. Et samtykke-banner er påkrævet efter GDPR/ePrivacy
+ * — se åbne punkter i docs/HANDOFF.md.
+ */
+export const GA_MEASUREMENT_ID = 'G-D0DGSKQYCW';
